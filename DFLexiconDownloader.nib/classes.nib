@@ -1,0 +1,12 @@
+{
+    IBClasses = (
+        {
+            CLASS = DFLexiconDownloader; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {progressBar = id; statusText = id; }; 
+            SUPERCLASS = NSWindowController; 
+        }, 
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }
+    ); 
+    IBVersion = 1; 
+}

@@ -1,0 +1,1 @@
+perl sinphony.pl > dict/dict8ipa.xml

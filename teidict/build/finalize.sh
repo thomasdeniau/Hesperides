@@ -1,0 +1,1 @@
+perl finalweb.pl > dict/entries.cgi
