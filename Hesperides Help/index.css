@@ -1,0 +1,42 @@
+body
+{
+    font: Lucida Sans Unicode;
+    font-size: 12pt;
+    color: black;
+    background-color: white;
+}
+
+
+p.text {
+    padding-top: 1pt;
+    padding-bottom: 1pt;
+    text-align: justify;
+}
+p.sindict {
+	margin-top: 2pt;
+    margin-left: 1.5em;
+    text-indent: -1.5em;
+    text-align: justify;
+}
+small {
+   font-size: 8pt;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    clear: left;
+    margin: 0;
+    padding-top: 0.5em;
+    border-bottom: 1px solid #8CACBB;
+}
+
+h1 {
+    text-align:center;
+    font-size: 18pt;
+}
+
+h2, li {
+    font-size: 14pt;
+}
+
+a { text-decoration: underline; color: inherit; }
+a:hover { text-decoration: none; };

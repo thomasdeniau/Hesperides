@@ -60,8 +60,8 @@
 			children = (
 				E9C8AE6106D69B900075AE8B,
 				E9C8AE6206D69B900075AE8B,
-				E9C8AD8C06D69B110075AE8B,
 				E9FA53E00646D8710027A64B,
+				E910254C06E4F32500902A10,
 				1058C7A1FEA54F0111CA2CBB,
 			);
 			isa = PBXGroup;
@@ -167,12 +167,12 @@
 		};
 		29B97317FDCFA39411CA2CEA = {
 			children = (
+				E910270C06E4FDDE00902A10,
 				E9EECBE20685B59600C5843E,
 				E9282E3306498D3D0045C0B1,
 				E9CB13B30654F9E8008B9774,
 				E9282F62064998B70045C0B1,
 				E9282BFD064912A30045C0B1,
-				E9282BEE06490EBA0045C0B1,
 				E9FA55D40647E3330027A64B,
 				E9FA53990646BB6B0027A64B,
 				E9FA53A10646C9A70027A64B,
@@ -301,11 +301,12 @@
 				8D11072C0486CEB800E47090,
 				8D11072E0486CEB800E47090,
 				E99A06F10646A17F004036FF,
+				E910273806E5004E00902A10,
 			);
 			buildRules = (
 			);
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = "/Users/thomas/Documents/Dev/Hesperides /Users/thomas/hesperides/trunk";
+				FRAMEWORK_SEARCH_PATHS = "/Users/thomas/Documents/Dev/Hesperides /Users/thomas/hesperides/trunk /Users/thomas/Documents/Dev/Hesperides/trunk";
 				GCC_ENABLE_TRIGRAPHS = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -424,9 +425,9 @@
 			files = (
 				8D11072F0486CEB800E47090,
 				E9FA53E10646D8710027A64B,
-				E9C8AD8D06D69B110075AE8B,
 				E9C8AE6306D69B900075AE8B,
 				E9C8AE6406D69B900075AE8B,
+				E910254D06E4F32500902A10,
 			);
 			isa = PBXFrameworksBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -463,6 +464,192 @@
 //E92
 //E93
 //E94
+		E910254C06E4F32500902A10 = {
+			isa = PBXFileReference;
+			lastKnownFileType = wrapper.framework;
+			path = libxml.framework;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		E910254D06E4F32500902A10 = {
+			fileRef = E910254C06E4F32500902A10;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		E910262206E4F36800902A10 = {
+			fileRef = E910254C06E4F32500902A10;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		E910270C06E4FDDE00902A10 = {
+			children = (
+				E910270D06E4FDDE00902A10,
+				E910270E06E4FDDE00902A10,
+				E910270F06E4FDDE00902A10,
+				E910271006E4FDDE00902A10,
+				E910271106E4FDDF00902A10,
+				E910271206E4FDDF00902A10,
+				E910271306E4FDDF00902A10,
+				E910271406E4FDDF00902A10,
+				E910271506E4FDDF00902A10,
+			);
+			isa = PBXGroup;
+			path = "Hesperides Help";
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		E910270D06E4FDDE00902A10 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = text.html;
+			name = entries.html;
+			path = "Hesperides Help/entries.html";
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		E910270E06E4FDDE00902A10 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file;
+			name = "Hesperides Help idx";
+			path = "Hesperides Help/Hesperides Help idx";
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		E910270F06E4FDDE00902A10 = {
+			isa = PBXFileReference;
+			lastKnownFileType = image.png;
+			name = hesperides.png;
+			path = "Hesperides Help/hesperides.png";
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		E910271006E4FDDE00902A10 = {
+			isa = PBXFileReference;
+			lastKnownFileType = image.png;
+			name = hesperides16.png;
+			path = "Hesperides Help/hesperides16.png";
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		E910271106E4FDDF00902A10 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = text;
+			name = index.css;
+			path = "Hesperides Help/index.css";
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		E910271206E4FDDF00902A10 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = text.html;
+			name = index.html;
+			path = "Hesperides Help/index.html";
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		E910271306E4FDDF00902A10 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = text.html;
+			name = modes.html;
+			path = "Hesperides Help/modes.html";
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		E910271406E4FDDF00902A10 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = text.html;
+			name = sindarin.html;
+			path = "Hesperides Help/sindarin.html";
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		E910271506E4FDDF00902A10 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = text.html;
+			name = transcription.html;
+			path = "Hesperides Help/transcription.html";
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		E910273806E5004E00902A10 = {
+			buildActionMask = 2147483647;
+			dstPath = "Hesperides Help";
+			dstSubfolderSpec = 7;
+			files = (
+				E910273906E5008200902A10,
+				E910273A06E5008200902A10,
+				E910273B06E5008200902A10,
+				E910273C06E5008200902A10,
+				E910273D06E5008200902A10,
+				E910273E06E5008200902A10,
+				E910273F06E5008200902A10,
+				E910274006E5008200902A10,
+				E910274106E5008200902A10,
+			);
+			isa = PBXCopyFilesBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E910273906E5008200902A10 = {
+			fileRef = E910270D06E4FDDE00902A10;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		E910273A06E5008200902A10 = {
+			fileRef = E910270E06E4FDDE00902A10;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		E910273B06E5008200902A10 = {
+			fileRef = E910270F06E4FDDE00902A10;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		E910273C06E5008200902A10 = {
+			fileRef = E910271006E4FDDE00902A10;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		E910273D06E5008200902A10 = {
+			fileRef = E910271106E4FDDF00902A10;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		E910273E06E5008200902A10 = {
+			fileRef = E910271206E4FDDF00902A10;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		E910273F06E5008200902A10 = {
+			fileRef = E910271306E4FDDF00902A10;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		E910274006E5008200902A10 = {
+			fileRef = E910271406E4FDDF00902A10;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		E910274106E5008200902A10 = {
+			fileRef = E910271506E4FDDF00902A10;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
 		E9282BCF06490DCD0045C0B1 = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
@@ -476,14 +663,6 @@
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.objc;
 			path = DFSampaConverter.m;
-			refType = 4;
-			sourceTree = "<group>";
-		};
-		E9282BEE06490EBA0045C0B1 = {
-			fileEncoding = 4;
-			isa = PBXFileReference;
-			lastKnownFileType = text.plist;
-			path = SampaConvert.plist;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -654,9 +833,9 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				E910262206E4F36800902A10,
 				E9C8AF1806D69CA90075AE8B,
 				E9C8AF1906D69CA90075AE8B,
-				E9C8AF1A06D69CA90075AE8B,
 			);
 			isa = PBXCopyFilesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -701,19 +880,6 @@
 			refType = 4;
 			sourceTree = "<group>";
 		};
-		E9C8AD8C06D69B110075AE8B = {
-			isa = PBXFileReference;
-			lastKnownFileType = wrapper.framework;
-			path = libxml.framework;
-			refType = 4;
-			sourceTree = "<group>";
-		};
-		E9C8AD8D06D69B110075AE8B = {
-			fileRef = E9C8AD8C06D69B110075AE8B;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
 		E9C8AE6106D69B900075AE8B = {
 			isa = PBXFileReference;
 			lastKnownFileType = wrapper.framework;
@@ -748,12 +914,6 @@
 		};
 		E9C8AF1906D69CA90075AE8B = {
 			fileRef = E9C8AE6206D69B900075AE8B;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		E9C8AF1A06D69CA90075AE8B = {
-			fileRef = E9C8AD8C06D69B110075AE8B;
 			isa = PBXBuildFile;
 			settings = {
 			};

@@ -45,5 +45,9 @@
 			</array>
 		</dict>
 	</array>
+	<key>CFBundleHelpBookFolder</key>
+	<string>Hesperides Help</string>
+	<key>CFBundleHelpBookName</key>
+	<string>Hesperides Help</string>
 </dict>
 </plist>

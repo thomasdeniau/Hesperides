@@ -11,8 +11,10 @@ NSString *DFHistoryCapacity=@"DFHistoryCapacity";
 {
 	if (self = [super init])
 	{
-		capacity = [[[NSUserDefaults standardUserDefaults] objectForKey:DFHistoryCapacity] intValue];
 		currentItem = -1;
+		NSClassFromString(@"DFController");
+		// be sure that that class has been initialized to have the defaults set up correctly
+		capacity = [[[NSUserDefaults standardUserDefaults] objectForKey:DFHistoryCapacity] intValue];
 	}
 	return self;
 }
@@ -23,7 +25,6 @@ NSString *DFHistoryCapacity=@"DFHistoryCapacity";
 	const unichar right[1] = { NSRightArrowFunctionKey };
 	[forwardItem setKeyEquivalent:[NSString stringWithCharacters:right length:1]];
 	[backItem setKeyEquivalent:[NSString stringWithCharacters:left length:1]];
-
 }
 
 -(void)displayEntry:(NSDictionary *)info
