@@ -278,6 +278,14 @@ xmlParserInputPtr xmlMyExternalEntityLoader(const char *URL, const char *ID, xml
 	return newnode;
 }
 
+// new impl.
+// DFWord class
+// htmlString
+// xmlNode
+// xmlString
+// array of regexes for paren. etc.
+// addMeaning:, DFLanguage built-in, NSCoding support
+
 -(NSDictionary *)infoForKey:(NSString *)key language:(DFLanguage)language
 {
 	return [[dict objectAtIndex:language] objectForKey:key];

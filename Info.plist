@@ -6,6 +6,10 @@
 	<string>English</string>
 	<key>CFBundleExecutable</key>
 	<string>Hesperides</string>
+	<key>CFBundleHelpBookFolder</key>
+	<string>Hesperides Help</string>
+	<key>CFBundleHelpBookName</key>
+	<string>Hesperides Help</string>
 	<key>CFBundleIconFile</key>
 	<string>Hesperides</string>
 	<key>CFBundleIdentifier</key>
@@ -13,9 +17,9 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundlePackageType</key>
-	<string>????</string>
+	<string>APPL</string>
 	<key>CFBundleSignature</key>
-	<string>????</string>
+	<string>Nhpr</string>
 	<key>CFBundleVersion</key>
 	<string>10</string>
 	<key>NSMainNibFile</key>
@@ -45,9 +49,5 @@
 			</array>
 		</dict>
 	</array>
-	<key>CFBundleHelpBookFolder</key>
-	<string>Hesperides Help</string>
-	<key>CFBundleHelpBookName</key>
-	<string>Hesperides Help</string>
 </dict>
 </plist>

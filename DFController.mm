@@ -200,7 +200,6 @@ id sharedInstance = nil;
 				error:(NSString **)error
 {
     NSString  *pboardString=nil;
-	char *tengwarResult;
     NSAttributedString *newString;
     NSArray *types;
 	NSDictionary *dic=[NSDictionary dictionary];
@@ -208,7 +207,7 @@ id sharedInstance = nil;
     types = [pboard types];
 	
     if (![types containsObject:NSStringPboardType] && ![types containsObject:NSRTFPboardType]) {
-        *error = NSLocalizedString(@"Error: couldn't transcript text.",								   
+        *error = NSLocalizedString(@"Error: couldn't transcribe text.",								   
 								   @"There is no text available here.");
         return;
     }
@@ -223,11 +222,15 @@ id sharedInstance = nil;
 	
 	if (pboardString)
 	{
-		//NSLog(@"%@",pboardString);
-		tengwarResult = (char*) narmacil->Roman2Tengwar([pboardString UTF8String]);
-		newString = [[NSAttributedString alloc] initWithString:[NSString stringWithCString:tengwarResult]
+		CFIndex size = CFStringGetMaximumSizeForEncoding([pboardString length],kCFStringEncodingISOLatin1);
+		char *cString = (char *)calloc(size+1, sizeof(char));
+		CFStringGetCString((CFStringRef)pboardString,cString,size+1,kCFStringEncodingISOLatin1);
+		char *tengwarResult = (char*) narmacil->Roman2Tengwar(cString);
+		NSString* tengText = (NSString *)CFStringCreateWithCString(NULL,tengwarResult,kCFStringEncodingISOLatin1);
+		newString = [[NSAttributedString alloc] initWithString:tengText
 												attributes:[NSDictionary dictionaryWithObject:[[fontPopup selectedItem] representedObject]
 																					   forKey:NSFontAttributeName]];
+		[tengText release];
 	
 		types = [NSArray arrayWithObject:NSRTFPboardType];
 		[pboard declareTypes:types owner:nil];
@@ -316,10 +319,19 @@ id sharedInstance = nil;
 #pragma mark -- tengwar --
 	
 	[self fontChanged:fontPopup];
-	if (language == DFSindarin)
+	
+	if ((language == DFSindarin) && [key canBeConvertedToEncoding:NSISOLatin1StringEncoding])
 	{
-		char *tengwarResult = (char*) narmacil->Roman2Tengwar([key UTF8String]);
-		[tengwar setString:[NSString stringWithCString:tengwarResult]];
+		NSString *tengText;
+		CFIndex size = CFStringGetMaximumSizeForEncoding([key length],kCFStringEncodingISOLatin1);
+		char *cString = (char *)calloc(size+1, sizeof(char));
+		CFStringGetCString((CFStringRef)key,cString,size+1,kCFStringEncodingISOLatin1);
+		char *tengwarResult = (char*) narmacil->Roman2Tengwar(cString);
+		tengText = (NSString *)CFStringCreateWithCString(NULL,tengwarResult,kCFStringEncodingISOLatin1);
+		[tengwar setString:tengText];
+		[tengText release];			
+
+		free(cString);
 	} else [tengwar setString:@""];
 
 	[tabView selectTabViewItemAtIndex:language];
