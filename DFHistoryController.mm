@@ -12,7 +12,7 @@ NSString *DFHistoryCapacity=@"DFHistoryCapacity";
 	if (self = [super init])
 	{
 		currentItem = -1;
-		NSClassFromString(@"DFController");
+		[NSClassFromString(@"DFController") initialize];
 		// be sure that that class has been initialized to have the defaults set up correctly
 		capacity = [[[NSUserDefaults standardUserDefaults] objectForKey:DFHistoryCapacity] intValue];
 	}

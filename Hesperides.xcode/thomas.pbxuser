@@ -8,7 +8,7 @@
 		};
 	};
 	29B97313FDCFA39411CA2CEA = {
-		activeBuildStyle = 4A9504CCFFE6A4B311CA0CBA;
+		activeBuildStyle = 4A9504CDFFE6A4B311CA0CBA;
 		activeExecutable = E90E719406452D910014F8AB;
 		activeTarget = 8D1107260486CEB800E47090;
 		addToTargets = (
@@ -1023,6 +1023,27 @@
 			E910279506E5071C00902A10 = E910279506E5071C00902A10;
 			E910279606E5075100902A10 = E910279606E5075100902A10;
 			E910279706E5075100902A10 = E910279706E5075100902A10;
+			E910279806E5082200902A10 = E910279806E5082200902A10;
+			E910279D06E5084600902A10 = E910279D06E5084600902A10;
+			E910279E06E5084600902A10 = E910279E06E5084600902A10;
+			E910279F06E508F200902A10 = E910279F06E508F200902A10;
+			E91027A006E508F200902A10 = E91027A006E508F200902A10;
+			E91027A106E5090300902A10 = E91027A106E5090300902A10;
+			E91027A206E5090300902A10 = E91027A206E5090300902A10;
+			E91027A306E5091900902A10 = E91027A306E5091900902A10;
+			E91027A406E5091900902A10 = E91027A406E5091900902A10;
+			E91027A506E5091E00902A10 = E91027A506E5091E00902A10;
+			E91027A606E5091E00902A10 = E91027A606E5091E00902A10;
+			E91027A706E5094300902A10 = E91027A706E5094300902A10;
+			E91027A806E5094300902A10 = E91027A806E5094300902A10;
+			E91027A906E5094300902A10 = E91027A906E5094300902A10;
+			E91027AA06E5094300902A10 = E91027AA06E5094300902A10;
+			E91027AB06E5095600902A10 = E91027AB06E5095600902A10;
+			E91027AC06E5095600902A10 = E91027AC06E5095600902A10;
+			E91027AD06E5098200902A10 = E91027AD06E5098200902A10;
+			E91027AE06E5098300902A10 = E91027AE06E5098300902A10;
+			E91027AF06E509A500902A10 = E91027AF06E509A500902A10;
+			E91027B006E509A500902A10 = E91027B006E509A500902A10;
 			E943C38506E47ACC008399D0 = E943C38506E47ACC008399D0;
 			E943C38F06E47B74008399D0 = E943C38F06E47B74008399D0;
 			E943C3A606E4818D008399D0 = E943C3A606E4818D008399D0;
@@ -1468,7 +1489,7 @@
 		isa = PBXTextBookmark;
 		name = "DFHistoryController.mm: 71";
 		rLen = 0;
-		rLoc = 1773;
+		rLoc = 1788;
 		rType = 0;
 		vrLen = 1083;
 		vrLoc = 1011;
@@ -1488,7 +1509,7 @@
 		isa = PBXTextBookmark;
 		name = "DFHistoryController.mm: 71";
 		rLen = 0;
-		rLoc = 1773;
+		rLoc = 1788;
 		rType = 0;
 		vrLen = 1083;
 		vrLoc = 1011;
@@ -1548,7 +1569,7 @@
 		isa = PBXTextBookmark;
 		name = "DFHistoryController.mm: 71";
 		rLen = 0;
-		rLoc = 1773;
+		rLoc = 1788;
 		rType = 0;
 		vrLen = 1084;
 		vrLoc = 1010;
@@ -1558,7 +1579,7 @@
 		isa = PBXTextBookmark;
 		name = "DFHistoryController.mm: 71";
 		rLen = 0;
-		rLoc = 1773;
+		rLoc = 1788;
 		rType = 0;
 		vrLen = 1083;
 		vrLoc = 1011;
@@ -1608,7 +1629,7 @@
 		isa = PBXTextBookmark;
 		name = "DFHistoryController.mm: 71";
 		rLen = 0;
-		rLoc = 1773;
+		rLoc = 1788;
 		rType = 0;
 		vrLen = 1084;
 		vrLoc = 1010;
@@ -1628,7 +1649,7 @@
 		isa = PBXTextBookmark;
 		name = "DFHistoryController.mm: 16";
 		rLen = 0;
-		rLoc = 423;
+		rLoc = 438;
 		rType = 0;
 		vrLen = 1202;
 		vrLoc = 0;
@@ -1685,7 +1706,7 @@
 		isa = PBXTextBookmark;
 		name = "DFHistoryController.mm: 15";
 		rLen = 0;
-		rLoc = 300;
+		rLoc = 319;
 		rType = 0;
 		vrLen = 1185;
 		vrLoc = 0;
@@ -1695,7 +1716,7 @@
 		isa = PBXTextBookmark;
 		name = "DFHistoryController.mm: 15";
 		rLen = 0;
-		rLoc = 300;
+		rLoc = 319;
 		rType = 0;
 		vrLen = 326;
 		vrLoc = 236;
@@ -1705,7 +1726,7 @@
 		isa = PBXTextBookmark;
 		name = "DFHistoryController.mm: 25";
 		rLen = 0;
-		rLoc = 624;
+		rLoc = 658;
 		rType = 0;
 		vrLen = 1185;
 		vrLoc = 0;
@@ -1725,7 +1746,7 @@
 		isa = PBXTextBookmark;
 		name = "DFHistoryController.mm: 25";
 		rLen = 0;
-		rLoc = 624;
+		rLoc = 658;
 		rType = 0;
 		vrLen = 1185;
 		vrLoc = 0;
@@ -1755,7 +1776,7 @@
 		isa = PBXTextBookmark;
 		name = "DFHistoryController.mm: 15";
 		rLen = 0;
-		rLoc = 300;
+		rLoc = 319;
 		rType = 0;
 		vrLen = 326;
 		vrLoc = 236;
@@ -1765,7 +1786,7 @@
 		isa = PBXTextBookmark;
 		name = "DFHistoryController.mm: 15";
 		rLen = 0;
-		rLoc = 300;
+		rLoc = 319;
 		rType = 0;
 		vrLen = 326;
 		vrLoc = 236;
@@ -1775,7 +1796,7 @@
 		isa = PBXTextBookmark;
 		name = "DFHistoryController.mm: 15";
 		rLen = 0;
-		rLoc = 300;
+		rLoc = 319;
 		rType = 0;
 		vrLen = 326;
 		vrLoc = 236;
@@ -1795,7 +1816,7 @@
 		isa = PBXTextBookmark;
 		name = "DFHistoryController.mm: 15";
 		rLen = 0;
-		rLoc = 300;
+		rLoc = 319;
 		rType = 0;
 		vrLen = 326;
 		vrLoc = 236;
@@ -1815,7 +1836,7 @@
 		isa = PBXTextBookmark;
 		name = "DFHistoryController.mm: 15";
 		rLen = 0;
-		rLoc = 300;
+		rLoc = 319;
 		rType = 0;
 		vrLen = 326;
 		vrLoc = 236;
@@ -1835,7 +1856,7 @@
 		isa = PBXTextBookmark;
 		name = "DFHistoryController.mm: 15";
 		rLen = 0;
-		rLoc = 300;
+		rLoc = 319;
 		rType = 0;
 		vrLen = 326;
 		vrLoc = 236;
@@ -1855,7 +1876,7 @@
 		isa = PBXTextBookmark;
 		name = "DFHistoryController.mm: 15";
 		rLen = 0;
-		rLoc = 300;
+		rLoc = 319;
 		rType = 0;
 		vrLen = 326;
 		vrLoc = 236;
@@ -1875,7 +1896,7 @@
 		isa = PBXTextBookmark;
 		name = "DFHistoryController.mm: 15";
 		rLen = 0;
-		rLoc = 300;
+		rLoc = 319;
 		rType = 0;
 		vrLen = 326;
 		vrLoc = 236;
@@ -1895,7 +1916,7 @@
 		isa = PBXTextBookmark;
 		name = "DFHistoryController.mm: 15";
 		rLen = 0;
-		rLoc = 300;
+		rLoc = 319;
 		rType = 0;
 		vrLen = 326;
 		vrLoc = 236;
@@ -1915,7 +1936,7 @@
 		isa = PBXTextBookmark;
 		name = "DFHistoryController.mm: 15";
 		rLen = 0;
-		rLoc = 300;
+		rLoc = 319;
 		rType = 0;
 		vrLen = 326;
 		vrLoc = 236;
@@ -1935,7 +1956,7 @@
 		isa = PBXTextBookmark;
 		name = "DFHistoryController.mm: 15";
 		rLen = 0;
-		rLoc = 300;
+		rLoc = 319;
 		rType = 0;
 		vrLen = 326;
 		vrLoc = 236;
@@ -1981,7 +2002,7 @@
 		isa = PBXTextBookmark;
 		name = "DFHistoryController.mm: 15";
 		rLen = 0;
-		rLoc = 300;
+		rLoc = 319;
 		rType = 0;
 		vrLen = 326;
 		vrLoc = 236;
@@ -2009,7 +2030,7 @@
 		isa = PBXTextBookmark;
 		name = "DFHistoryController.mm: 15";
 		rLen = 0;
-		rLoc = 300;
+		rLoc = 319;
 		rType = 0;
 		vrLen = 326;
 		vrLoc = 236;
@@ -2043,7 +2064,7 @@
 		isa = PBXTextBookmark;
 		name = "DFHistoryController.mm: 15";
 		rLen = 0;
-		rLoc = 300;
+		rLoc = 319;
 		rType = 0;
 		vrLen = 326;
 		vrLoc = 236;
@@ -2063,7 +2084,7 @@
 		isa = PBXTextBookmark;
 		name = "DFHistoryController.mm: 15";
 		rLen = 0;
-		rLoc = 300;
+		rLoc = 319;
 		rType = 0;
 		vrLen = 326;
 		vrLoc = 236;
@@ -2083,7 +2104,7 @@
 		isa = PBXTextBookmark;
 		name = "DFHistoryController.mm: 15";
 		rLen = 0;
-		rLoc = 300;
+		rLoc = 319;
 		rType = 0;
 		vrLen = 326;
 		vrLoc = 236;
@@ -2103,7 +2124,7 @@
 		isa = PBXTextBookmark;
 		name = "DFHistoryController.mm: 15";
 		rLen = 0;
-		rLoc = 300;
+		rLoc = 319;
 		rType = 0;
 		vrLen = 326;
 		vrLoc = 236;
@@ -2159,7 +2180,7 @@
 		isa = PBXTextBookmark;
 		name = "DFHistoryController.mm: 15";
 		rLen = 0;
-		rLoc = 300;
+		rLoc = 319;
 		rType = 0;
 		vrLen = 326;
 		vrLoc = 236;
@@ -2179,7 +2200,7 @@
 		isa = PBXTextBookmark;
 		name = "DFHistoryController.mm: 15";
 		rLen = 0;
-		rLoc = 300;
+		rLoc = 319;
 		rType = 0;
 		vrLen = 326;
 		vrLoc = 236;
@@ -2189,7 +2210,7 @@
 		isa = PBXTextBookmark;
 		name = "DFHistoryController.mm: 15";
 		rLen = 0;
-		rLoc = 300;
+		rLoc = 319;
 		rType = 0;
 		vrLen = 326;
 		vrLoc = 236;
@@ -2209,7 +2230,7 @@
 		isa = PBXTextBookmark;
 		name = "DFHistoryController.mm: 15";
 		rLen = 0;
-		rLoc = 300;
+		rLoc = 319;
 		rType = 0;
 		vrLen = 326;
 		vrLoc = 236;
@@ -2229,7 +2250,7 @@
 		isa = PBXTextBookmark;
 		name = "DFHistoryController.mm: 15";
 		rLen = 0;
-		rLoc = 300;
+		rLoc = 319;
 		rType = 0;
 		vrLen = 326;
 		vrLoc = 236;
@@ -2239,7 +2260,7 @@
 		isa = PBXTextBookmark;
 		name = "DFHistoryController.mm: 15";
 		rLen = 0;
-		rLoc = 300;
+		rLoc = 319;
 		rType = 0;
 		vrLen = 326;
 		vrLoc = 236;
@@ -2259,7 +2280,7 @@
 		isa = PBXTextBookmark;
 		name = "DFHistoryController.mm: 15";
 		rLen = 0;
-		rLoc = 300;
+		rLoc = 319;
 		rType = 0;
 		vrLen = 326;
 		vrLoc = 236;
@@ -2279,7 +2300,7 @@
 		isa = PBXTextBookmark;
 		name = "DFHistoryController.mm: 15";
 		rLen = 0;
-		rLoc = 300;
+		rLoc = 319;
 		rType = 0;
 		vrLen = 326;
 		vrLoc = 236;
@@ -2299,7 +2320,7 @@
 		isa = PBXTextBookmark;
 		name = "DFHistoryController.mm: 15";
 		rLen = 0;
-		rLoc = 300;
+		rLoc = 319;
 		rType = 0;
 		vrLen = 326;
 		vrLoc = 236;
@@ -2319,7 +2340,7 @@
 		isa = PBXTextBookmark;
 		name = "DFHistoryController.mm: 15";
 		rLen = 0;
-		rLoc = 300;
+		rLoc = 319;
 		rType = 0;
 		vrLen = 326;
 		vrLoc = 236;
@@ -2339,7 +2360,7 @@
 		isa = PBXTextBookmark;
 		name = "DFHistoryController.mm: 15";
 		rLen = 0;
-		rLoc = 300;
+		rLoc = 319;
 		rType = 0;
 		vrLen = 326;
 		vrLoc = 236;
@@ -2359,7 +2380,7 @@
 		isa = PBXTextBookmark;
 		name = "DFHistoryController.mm: 15";
 		rLen = 0;
-		rLoc = 300;
+		rLoc = 319;
 		rType = 0;
 		vrLen = 326;
 		vrLoc = 236;
@@ -2379,7 +2400,7 @@
 		isa = PBXTextBookmark;
 		name = "DFHistoryController.mm: 15";
 		rLen = 0;
-		rLoc = 300;
+		rLoc = 319;
 		rType = 0;
 		vrLen = 326;
 		vrLoc = 236;
@@ -2389,7 +2410,7 @@
 		isa = PBXTextBookmark;
 		name = "DFHistoryController.mm: 15";
 		rLen = 0;
-		rLoc = 300;
+		rLoc = 319;
 		rType = 0;
 		vrLen = 326;
 		vrLoc = 236;
@@ -2409,7 +2430,7 @@
 		isa = PBXTextBookmark;
 		name = "DFHistoryController.mm: 15";
 		rLen = 0;
-		rLoc = 300;
+		rLoc = 319;
 		rType = 0;
 		vrLen = 326;
 		vrLoc = 236;
@@ -2419,7 +2440,7 @@
 		isa = PBXTextBookmark;
 		name = "DFHistoryController.mm: 15";
 		rLen = 0;
-		rLoc = 300;
+		rLoc = 319;
 		rType = 0;
 		vrLen = 326;
 		vrLoc = 236;
@@ -2529,7 +2550,7 @@
 		isa = PBXTextBookmark;
 		name = "DFHistoryController.mm: 15";
 		rLen = 0;
-		rLoc = 300;
+		rLoc = 319;
 		rType = 0;
 		vrLen = 326;
 		vrLoc = 236;
@@ -2549,7 +2570,7 @@
 		isa = PBXTextBookmark;
 		name = "DFHistoryController.mm: 15";
 		rLen = 0;
-		rLoc = 300;
+		rLoc = 319;
 		rType = 0;
 		vrLen = 326;
 		vrLoc = 236;
@@ -2597,7 +2618,7 @@
 		isa = PBXTextBookmark;
 		name = "DFHistoryController.mm: 15";
 		rLen = 0;
-		rLoc = 300;
+		rLoc = 319;
 		rType = 0;
 		vrLen = 326;
 		vrLoc = 236;
@@ -2617,7 +2638,7 @@
 		isa = PBXTextBookmark;
 		name = "DFHistoryController.mm: 15";
 		rLen = 0;
-		rLoc = 300;
+		rLoc = 319;
 		rType = 0;
 		vrLen = 326;
 		vrLoc = 236;
@@ -2737,7 +2758,7 @@
 		isa = PBXTextBookmark;
 		name = "DFHistoryController.mm: 15";
 		rLen = 0;
-		rLoc = 300;
+		rLoc = 319;
 		rType = 0;
 		vrLen = 326;
 		vrLoc = 236;
@@ -2757,7 +2778,7 @@
 		isa = PBXTextBookmark;
 		name = "DFHistoryController.mm: 15";
 		rLen = 0;
-		rLoc = 300;
+		rLoc = 319;
 		rType = 0;
 		vrLen = 326;
 		vrLoc = 236;
@@ -2847,7 +2868,7 @@
 		isa = PBXTextBookmark;
 		name = "DFHistoryController.mm: 15";
 		rLen = 0;
-		rLoc = 300;
+		rLoc = 319;
 		rType = 0;
 		vrLen = 326;
 		vrLoc = 236;
@@ -2877,7 +2898,7 @@
 		isa = PBXTextBookmark;
 		name = "DFHistoryController.mm: 15";
 		rLen = 0;
-		rLoc = 300;
+		rLoc = 319;
 		rType = 0;
 		vrLen = 326;
 		vrLoc = 236;
@@ -2907,7 +2928,7 @@
 		isa = PBXTextBookmark;
 		name = "DFHistoryController.mm: 15";
 		rLen = 0;
-		rLoc = 300;
+		rLoc = 319;
 		rType = 0;
 		vrLen = 326;
 		vrLoc = 236;
@@ -2927,7 +2948,7 @@
 		isa = PBXTextBookmark;
 		name = "DFHistoryController.mm: 15";
 		rLen = 0;
-		rLoc = 300;
+		rLoc = 319;
 		rType = 0;
 		vrLen = 326;
 		vrLoc = 236;
@@ -2947,7 +2968,7 @@
 		isa = PBXTextBookmark;
 		name = "DFHistoryController.mm: 15";
 		rLen = 0;
-		rLoc = 300;
+		rLoc = 319;
 		rType = 0;
 		vrLen = 326;
 		vrLoc = 236;
@@ -2967,7 +2988,7 @@
 		isa = PBXTextBookmark;
 		name = "DFHistoryController.mm: 15";
 		rLen = 0;
-		rLoc = 300;
+		rLoc = 319;
 		rType = 0;
 		vrLen = 326;
 		vrLoc = 236;
@@ -2987,7 +3008,7 @@
 		isa = PBXTextBookmark;
 		name = "DFHistoryController.mm: 15";
 		rLen = 0;
-		rLoc = 300;
+		rLoc = 319;
 		rType = 0;
 		vrLen = 326;
 		vrLoc = 236;
@@ -3007,9 +3028,219 @@
 		isa = PBXTextBookmark;
 		name = "DFHistoryController.mm: 15";
 		rLen = 0;
-		rLoc = 300;
+		rLoc = 319;
 		rType = 0;
 		vrLen = 326;
+		vrLoc = 236;
+	};
+	E910279806E5082200902A10 = {
+		fRef = E943C37906E479EB008399D0;
+		isa = PBXTextBookmark;
+		name = "DFHistoryController.mm: 15";
+		rLen = 0;
+		rLoc = 319;
+		rType = 0;
+		vrLen = 326;
+		vrLoc = 236;
+	};
+	E910279D06E5084600902A10 = {
+		fRef = E910271506E4FDDF00902A10;
+		isa = PBXTextBookmark;
+		name = "transcription.html: 31";
+		rLen = 0;
+		rLoc = 1084;
+		rType = 0;
+		vrLen = 1084;
+		vrLoc = 0;
+	};
+	E910279E06E5084600902A10 = {
+		fRef = E943C37906E479EB008399D0;
+		isa = PBXTextBookmark;
+		name = "DFHistoryController.mm: 15";
+		rLen = 0;
+		rLoc = 319;
+		rType = 0;
+		vrLen = 326;
+		vrLoc = 236;
+	};
+	E910279F06E508F200902A10 = {
+		fRef = E910271506E4FDDF00902A10;
+		isa = PBXTextBookmark;
+		name = "transcription.html: 31";
+		rLen = 0;
+		rLoc = 1084;
+		rType = 0;
+		vrLen = 1084;
+		vrLoc = 0;
+	};
+	E91027A006E508F200902A10 = {
+		fRef = E943C37906E479EB008399D0;
+		isa = PBXTextBookmark;
+		name = "DFHistoryController.mm: 15";
+		rLen = 0;
+		rLoc = 319;
+		rType = 0;
+		vrLen = 326;
+		vrLoc = 236;
+	};
+	E91027A106E5090300902A10 = {
+		fRef = E910271506E4FDDF00902A10;
+		isa = PBXTextBookmark;
+		name = "transcription.html: 31";
+		rLen = 0;
+		rLoc = 1084;
+		rType = 0;
+		vrLen = 1084;
+		vrLoc = 0;
+	};
+	E91027A206E5090300902A10 = {
+		fRef = E943C37906E479EB008399D0;
+		isa = PBXTextBookmark;
+		name = "DFHistoryController.mm: 15";
+		rLen = 0;
+		rLoc = 319;
+		rType = 0;
+		vrLen = 326;
+		vrLoc = 236;
+	};
+	E91027A306E5091900902A10 = {
+		fRef = E910271506E4FDDF00902A10;
+		isa = PBXTextBookmark;
+		name = "transcription.html: 31";
+		rLen = 0;
+		rLoc = 1084;
+		rType = 0;
+		vrLen = 1084;
+		vrLoc = 0;
+	};
+	E91027A406E5091900902A10 = {
+		fRef = E943C37906E479EB008399D0;
+		isa = PBXTextBookmark;
+		name = "DFHistoryController.mm: 15";
+		rLen = 0;
+		rLoc = 319;
+		rType = 0;
+		vrLen = 326;
+		vrLoc = 236;
+	};
+	E91027A506E5091E00902A10 = {
+		fRef = E910271506E4FDDF00902A10;
+		isa = PBXTextBookmark;
+		name = "transcription.html: 31";
+		rLen = 0;
+		rLoc = 1084;
+		rType = 0;
+		vrLen = 1084;
+		vrLoc = 0;
+	};
+	E91027A606E5091E00902A10 = {
+		fRef = E943C37906E479EB008399D0;
+		isa = PBXTextBookmark;
+		name = "DFHistoryController.mm: 15";
+		rLen = 0;
+		rLoc = 319;
+		rType = 0;
+		vrLen = 326;
+		vrLoc = 236;
+	};
+	E91027A706E5094300902A10 = {
+		fRef = E910271506E4FDDF00902A10;
+		isa = PBXTextBookmark;
+		name = "transcription.html: 31";
+		rLen = 0;
+		rLoc = 1084;
+		rType = 0;
+		vrLen = 1084;
+		vrLoc = 0;
+	};
+	E91027A806E5094300902A10 = {
+		fRef = E910271506E4FDDF00902A10;
+		isa = PBXTextBookmark;
+		name = "transcription.html: 31";
+		rLen = 0;
+		rLoc = 1084;
+		rType = 0;
+		vrLen = 1084;
+		vrLoc = 0;
+	};
+	E91027A906E5094300902A10 = {
+		fRef = E943C37906E479EB008399D0;
+		isa = PBXTextBookmark;
+		name = "DFHistoryController.mm: 15";
+		rLen = 0;
+		rLoc = 319;
+		rType = 0;
+		vrLen = 1204;
+		vrLoc = 0;
+	};
+	E91027AA06E5094300902A10 = {
+		fRef = E943C37906E479EB008399D0;
+		isa = PBXTextBookmark;
+		name = "DFHistoryController.mm: 15";
+		rLen = 0;
+		rLoc = 319;
+		rType = 0;
+		vrLen = 345;
+		vrLoc = 236;
+	};
+	E91027AB06E5095600902A10 = {
+		fRef = E943C37906E479EB008399D0;
+		isa = PBXTextBookmark;
+		name = "Class controller = NSClassFromString(@\"DFController\");";
+		rLen = 53;
+		rLoc = 300;
+		rType = 0;
+		vrLen = 1204;
+		vrLoc = 0;
+	};
+	E91027AC06E5095600902A10 = {
+		fRef = E943C37906E479EB008399D0;
+		isa = PBXTextBookmark;
+		name = "DFHistoryController.mm: 15";
+		rLen = 0;
+		rLoc = 303;
+		rType = 0;
+		vrLen = 345;
+		vrLoc = 236;
+	};
+	E91027AD06E5098200902A10 = {
+		fRef = E943C37906E479EB008399D0;
+		isa = PBXTextBookmark;
+		name = "DFHistoryController.mm: 15";
+		rLen = 0;
+		rLoc = 348;
+		rType = 0;
+		vrLen = 1210;
+		vrLoc = 0;
+	};
+	E91027AE06E5098300902A10 = {
+		fRef = E943C37906E479EB008399D0;
+		isa = PBXTextBookmark;
+		name = "DFHistoryController.mm: 15";
+		rLen = 0;
+		rLoc = 301;
+		rType = 0;
+		vrLen = 351;
+		vrLoc = 236;
+	};
+	E91027AF06E509A500902A10 = {
+		fRef = E943C37906E479EB008399D0;
+		isa = PBXTextBookmark;
+		name = "DFHistoryController.mm: 15";
+		rLen = 0;
+		rLoc = 346;
+		rType = 0;
+		vrLen = 1198;
+		vrLoc = 0;
+	};
+	E91027B006E509A500902A10 = {
+		fRef = E943C37906E479EB008399D0;
+		isa = PBXTextBookmark;
+		name = "DFHistoryController.mm: 15";
+		rLen = 0;
+		rLoc = 301;
+		rType = 0;
+		vrLen = 339;
 		vrLoc = 236;
 	};
 	E9282BCF06490DCD0045C0B1 = {
@@ -3068,8 +3299,8 @@
 	E943C37906E479EB008399D0 = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {866, 1161}}";
-			sepNavSelRange = "{300, 0}";
-			sepNavVisRect = "{{0, 126}, {459, 183}}";
+			sepNavSelRange = "{346, 0}";
+			sepNavVisRect = "{{0, 0}, {589, 593}}";
 			sepNavWindowFrame = "{{15, 183}, {750, 558}}";
 		};
 	};
@@ -3746,7 +3977,7 @@
 		isa = PBXTextBookmark;
 		name = "DFHistoryController.mm: 18";
 		rLen = 0;
-		rLoc = 555;
+		rLoc = 570;
 		rType = 0;
 		vrLen = 889;
 		vrLoc = 0;
@@ -3766,7 +3997,7 @@
 		isa = PBXTextBookmark;
 		name = "DFHistoryController.mm: 18";
 		rLen = 0;
-		rLoc = 555;
+		rLoc = 570;
 		rType = 0;
 		vrLen = 889;
 		vrLoc = 0;
