@@ -60,11 +60,11 @@
 	{
 		if (useRegexp != DFPlainSearch)
 		{
-			selectWord = ([re findInString:[item valueForKeyPath:@"id"]] != nil);
+			selectWord = ([re findInString:[item valueForKeyPath:@"identifier"]] != nil);
 		}
 		else
 		{
-			selectWord = ([[item valueForKeyPath:@"id"] rangeOfString:searchString options:NSAnchoredSearch].location != NSNotFound);
+			selectWord = ([[item valueForKeyPath:@"identifier"] rangeOfString:searchString options:NSAnchoredSearch].location != NSNotFound);
 		}
 		if (selectWord)
 		{

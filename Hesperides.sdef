@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dictionary SYSTEM "file://localhost/System/Library/DTDs/sdef.dtd">
+<dictionary title="Hesperides">
+  <suite name="Hesperides Suite" code="DFsc"
+    description="Types and Classes for Hesperides">
+    <classes>
+		<class name="application" code="capp" description="" inherits="application">
+			<cocoa class="NSApplication"/>
+			<elements>
+				<element type="sindarin entry" description="Sindarin Words" access="r">
+					<cocoa method="sindarinWords" />
+					<accessor style="name" />
+					<accessor style="index" />
+					<accessor style="range" />
+					<accessor style="relative" />
+					<accessor style="test" />
+				</element>
+				<element type="english entry" description="English Words" access="r">
+					<cocoa method="englishWords" />
+					<accessor style="name" />
+					<accessor style="index" />
+					<accessor style="range" />
+					<accessor style="relative" />
+					<accessor style="test" />
+				</element>
+			</elements>
+		</class>
+		<class name="sindarin entry" code="DFsW" description="A Sindarin word" plural="sindarin entries">
+		    <cocoa class="DFWord" />
+			 <properties>
+				<property type="string" name="name" code="pnam" access="r" description="the word itself">
+					<cocoa method="identifier" />
+				</property>
+				<property type="list of string" name="translations" code="DFtr" access="r" description="meanings of this word">
+					<cocoa method="translations" />
+				</property>
+				<property type="string" name="xml definition" code="DFxd" access="r" description="TEI data about this word (merging all meanings)">
+					<cocoa method="xmlString" />
+				</property>
+				<property type="list of string" name="separate xml definitions" code="DFxs" access="r" description="TEI data for each meaning of this word">
+					<cocoa method="xmlMeanings" />
+				</property>
+				<property type="string" name="html definition" code="DFxh" access="r" description="HTML content displayed by Hesperides">
+					<cocoa method="htmlString" />
+				</property>
+			</properties> 
+		</class>
+		<class name="english entry" code="DFeW" description="An English word" plural="english entries">
+		    <cocoa class="DFWord" />
+			 <properties>
+				<property type="string" name="name" code="pnam" access="r" description="the word itself">
+					<cocoa method="identifier" />
+				</property>
+				<property type="list of string" name="translations" code="DFtr" access="r" description="meanings of this word">
+					<cocoa method="translations" />
+				</property>
+				<property type="string" name="xml definition" code="DFxd" access="r" description="TEI data about this word (merging all meanings)">
+					<cocoa method="xmlString" />
+				</property>
+				<property type="list of string" name="separate xml definitions" code="DFxs" access="r" description="TEI data for each meaning of this word">
+					<cocoa method="xmlMeanings" />
+				</property>
+				<property type="string" name="html definition" code="DFxh" access="r" description="HTML content displayed by Hesperides">
+					<cocoa method="htmlString" />
+				</property>
+			</properties> 
+					</class>
+	</classes>
+	
+		<types>
+		<enumeration name="language" code="DFlE">
+			<enumerator name="sindarin" code="DFls" description="This word is a Sindarin one"/>
+			<enumerator name="english" code="DFle" description="This word is an English one"/>
+		</enumeration>
+		</types>
+  </suite>
+</dictionary>

@@ -26,6 +26,8 @@
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
+	<key>NSAppleScriptEnabled</key>
+	<string>YES</string>
 	<key>NSServices</key>
 	<array>
 		<dict>

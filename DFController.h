@@ -53,12 +53,7 @@
 	NSArray *fonts;
 	DFDictionaryParser *dictionary;
 	
-	xsltStylesheetPtr xslt;
-	
 	CTranscription *narmacil;
-	//DFSampaConverter *converter;
-	
-	AGRegex *leftparen, *rightparen, *leftcomma;
 }
 
 - (IBAction)display:(id)sender;

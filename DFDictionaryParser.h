@@ -19,6 +19,7 @@
 #include <libxml/parserInternals.h>
 
 @class MacPADSocket;
+@class DFWord;
 
 typedef enum _DFLanguage { DFSindarin, DFEnglish } DFLanguage;
 
@@ -33,13 +34,20 @@ typedef enum _DFLanguage { DFSindarin, DFEnglish } DFLanguage;
 	MacPADSocket *pad;
 	xmlDocPtr doc;
 	NSString *lexiconVersion;
+	
+	xsltStylesheetPtr xslt;
 }
 
--(NSString *) lexiconVersion;
--(xmlNodePtr) nodeForKey:(NSString *)key language:(DFLanguage)language;
--(xmlDocPtr) indexVersion:(NSString *)version withDoc:(xmlDocPtr)theDoc;
--(xmlDocPtr)parsePath:(NSString *)path;
++(DFDictionaryParser *)sharedParser;
 
--(NSDictionary *)infoForKey:(NSString *)key language:(DFLanguage)language;
+-(NSString *) lexiconVersion;
+-(xmlDocPtr) indexVersion:(NSString *)version withDoc:(xmlDocPtr)theDoc;
+-(xmlDocPtr) parsePath:(NSString *)path;
+-(xmlDocPtr) dictionary;
+-(xsltStylesheetPtr)transformStylesheet;
+
+-(DFWord *)word:(NSString *)key language:(DFLanguage)language;
+-(DFWord *)englishWord:(NSString *)key;
+-(DFWord *)sindarinWord:(NSString *)key;
 
 @end

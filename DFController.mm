@@ -16,7 +16,7 @@
 #import "DFAutoUpdater.h"
 #import "DFHistoryController.h"
 #import "DFDictionaryParser.h"
-#import "sampa.h"
+#import "DFWord.h"
 
 NSString *DFAutomaticCheck = @"DFAutomaticCheck";
 NSString *DFSearchModeDefault = @"DFSearchMode";
@@ -44,12 +44,7 @@ id sharedInstance = nil;
 			
 			//converter=[[DFSampaConverter alloc] init];
 			
-			leftparen=[[AGRegex alloc] initWithPattern:@"\\(\\s+" options:AGRegexMultiline];
-			rightparen=[[AGRegex alloc] initWithPattern:@"\\s+\\)" options:AGRegexMultiline];
-			leftcomma=[[AGRegex alloc] initWithPattern:@"\\s+," options:AGRegexMultiline];
-			
 			dictionary = [[DFDictionaryParser alloc] init];
-			xsltRegisterSampaModule();
 			
 #pragma mark -- create Application Support/Hesperides
 			
@@ -59,13 +54,6 @@ id sharedInstance = nil;
 			{
 				[fm createDirectoryAtPath:appSupportPath attributes:nil];
 			}
-			
-#pragma mark -- Parse XSLT --
-			
-			NSString *xslPath=[[NSBundle mainBundle] pathForResource:@"entry" ofType:@"xsl"];
-			
-			xslt=xsltParseStylesheetFile((xmlChar*)[xslPath UTF8String]);
-			// we don't check for errors... assume the dictionary and XSL are correct
 			
 #pragma mark -- Modes & Fonts --
 			
@@ -88,15 +76,6 @@ id sharedInstance = nil;
 {
 	//[converter release];
 	[dictionary release];
-	
-	[leftparen release];
-	[rightparen release];
-	[leftcomma release];
-	
-	xsltFreeStylesheet(xslt);
-	
-	xsltCleanupGlobals();
-	xmlCleanupParser();
 	
 	delete narmacil;
 	
@@ -186,6 +165,11 @@ id sharedInstance = nil;
 	[self fontChanged:fontPopup];
 	
 	narmacil->LoadMode([[[modePopup itemWithTitle:@"Sindarin Classic"] representedObject] UTF8String]);
+	
+	[engList setSortDescriptors:[NSArray arrayWithObject:[[[NSSortDescriptor alloc] initWithKey:@"identifier" 
+																					   ascending:YES 		
+																						selector:@selector(caseInsensitiveCompare:)] 
+		autorelease]]];
 	
 	[sindController bind:@"contentArray" toObject:dictionary withKeyPath:@"sindIndex" options:nil];
 	[engController bind:@"contentArray" toObject:dictionary withKeyPath:@"engIndex" options:nil];
@@ -302,21 +286,7 @@ id sharedInstance = nil;
 
 -(void)displayWord:(NSString *)key language:(DFLanguage)language silent:(BOOL)silent;
 {	
-	const char *params[3];
-	params[0] = "print";
-	params[1] = "'no'";
-	params[2] = NULL;
-	
-	xmlNodePtr node=[dictionary nodeForKey:key language:language];
-	
-	xmlDocPtr nDoc=xmlNewDoc((xmlChar*)"1.0");
-	xmlDocPtr result;
-	xmlChar *resCharTab=NULL;
-	NSString *resString;
-	
-	int resSize=0;
-
-#pragma mark -- tengwar --
+	DFWord *word=[dictionary word:key language:language];
 	
 	[self fontChanged:fontPopup];
 	
@@ -337,57 +307,10 @@ id sharedInstance = nil;
 	[tabView selectTabViewItemAtIndex:language];
 	
 	[((language == DFSindarin)?sindController:engController) setSelectedObjects:
-			[NSArray arrayWithObject:[dictionary infoForKey:key	language:language]]];
+		[NSArray arrayWithObject:[NSDictionary dictionaryWithObject:key forKey:@"identifier"]]];
 	if (! silent) [historyController addEntry:key language:language];
 	
-	xmlDocSetRootElement(nDoc, node);
-	// we create a new document with only a div0 node containing relevant entries
-
-#pragma mark -- SAMPA conversion --
-	
-/*	
-		
- LEGACY CODE
- (manual SAMPA conversion)
- xmlChar *pronPath =  (xmlChar *) "//pron";
-	xmlXPathContextPtr context;
-	xmlNodeSetPtr items;
-	int i;
-	
- context = xmlXPathNewContext(nDoc);
-	items = xmlXPathEvalExpression(pronPath,context)->nodesetval;
-	xmlXPathFreeContext(context);
-	
-	for (i=0; i<items->nodeNr;i++)
-	{
-		xmlNodePtr item=items->nodeTab[i];
-		xmlNodePtr parent=item->parent;
-		xmlBufferPtr buffer=xmlBufferCreate();
-		xmlNodeBufGetContent(buffer,item);
-		
-		NSString *newString=[[NSString alloc] initWithUTF8String:(const char*)xmlBufferContent(buffer)];
-		
-		xmlUnlinkNode(item);
-		xmlFreeNode(item);
-		
-		xmlNewChild (parent, NULL,(const xmlChar*)"pron", (const xmlChar*)[[converter convertString:newString] UTF8String]);
-		[newString release];
-	}
- 
- */
-	
-#pragma mark -- final generation --
-	
-	// to pass it to xslt
-	result = xsltApplyStylesheet(xslt, nDoc, params);
-	xmlFreeDoc(nDoc);
-	xsltSaveResultToString(&resCharTab, &resSize, result, xslt);
-	
-	resString = [[[NSString alloc] initWithData:[NSData dataWithBytesNoCopy:resCharTab length:resSize] encoding:NSISOLatin1StringEncoding] autorelease];
-	resString = [leftparen replaceWithString:@"(" inString:resString];
-	resString = [rightparen replaceWithString:@")" inString:resString];
-	resString = [leftcomma replaceWithString:@"," inString:resString];
-	[[webView mainFrame] loadHTMLString:resString 
+	[[webView mainFrame] loadHTMLString:[word htmlString] 
 								baseURL: [NSURL URLWithString:@""]];
 	
 }
@@ -396,7 +319,7 @@ id sharedInstance = nil;
 {
 	DFLanguage language=(DFLanguage)[tabView indexOfTabViewItem:[tabView selectedTabViewItem]];
 	int row=[(language == DFSindarin)?sindList:engList selectedRow];
-	if (row != -1) [self displayWord:[[[(language == DFSindarin)?sindController:engController arrangedObjects] objectAtIndex:row] objectForKey:@"id"] language:language silent:NO];
+	if (row != -1) [self displayWord:[[[(language == DFSindarin)?sindController:engController arrangedObjects] objectAtIndex:row] objectForKey:@"identifier"] language:language silent:NO];
 }
 
 #pragma mark -- Cross - references --
@@ -476,4 +399,23 @@ resizeSubviewsWithOldSize:(NSSize)oldSize
 }
 
 
+-(BOOL)application:(NSApplication *)sender delegateHandlesKey:(NSString *)key
+{
+	//NSLog(@"Asked %@",key);
+	if ([key isEqualToString:@"sindarinWords"]) return YES;
+	if ([key isEqualToString:@"englishWords"]) return YES;
+	return NO;
+}
+
+-(NSArray *)sindarinWords
+{
+	//NSLog(@"In SindarinWords !!!!!");
+	return [[[dictionary valueForKey:@"dict"] objectAtIndex:DFSindarin] allValues];
+}
+
+-(NSArray *)englishWords
+{
+	//NSLog(@"In EnglishWords !!!!!");
+	return [[[dictionary valueForKey:@"dict"] objectAtIndex:DFEnglish] allValues];
+}
 @end

@@ -7,11 +7,14 @@
 	objects = {
 		080E96DDFE201D6D7F000001 = {
 			children = (
+				E99A95EB074756B100D882B9,
 				E9A0E1BF067A43F8000EB2C0,
 				E9282E2E06498AE30045C0B1,
 				E9E7D2C30674D5D3003788F5,
 				E9E7D4F40674D97A003788F5,
 				E9E7D4F50674D97A003788F5,
+				E9516AA407468FF800F7E63A,
+				E9516AA507468FF800F7E63A,
 				E9CE2D5D06453BA3006DD78D,
 				E9CE2D5C06453BA3006DD78D,
 				E9CE2D7506454D55006DD78D,
@@ -129,6 +132,7 @@
 			projectDirPath = "";
 			targets = (
 				8D1107260486CEB800E47090,
+				E9DD6FDE07479C73005278CB,
 			);
 		};
 		29B97314FDCFA39411CA2CEA = {
@@ -167,6 +171,9 @@
 		};
 		29B97317FDCFA39411CA2CEA = {
 			children = (
+				E9DD702807479DC7005278CB,
+				E9DD702907479DC7005278CB,
+				E9DD702A07479DC7005278CB,
 				E910270C06E4FDDE00902A10,
 				E9EECBE20685B59600C5843E,
 				E9282E3306498D3D0045C0B1,
@@ -302,6 +309,7 @@
 				8D11072E0486CEB800E47090,
 				E99A06F10646A17F004036FF,
 				E910273806E5004E00902A10,
+				E9DD704507479E0F005278CB,
 			);
 			buildRules = (
 			);
@@ -326,6 +334,7 @@
 				WRAPPER_EXTENSION = app;
 			};
 			dependencies = (
+				E9DD703707479DEF005278CB,
 			);
 			isa = PBXNativeTarget;
 			name = Hesperides;
@@ -351,6 +360,7 @@
 				E9A0E1BC067A43F2000EB2C0,
 				E9EECBE80685D4D300C5843E,
 				E943C37C06E479EB008399D0,
+				E9516AA607468FF800F7E63A,
 			);
 			isa = PBXHeadersBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -377,6 +387,9 @@
 				E9CB13B40654F9E8008B9774,
 				E9CB145806552CC0008B9774,
 				E9EECBE30685B59600C5843E,
+				E99A95EC074756B100D882B9,
+				E9DD702C07479DC7005278CB,
+				E9DD702D07479DC7005278CB,
 			);
 			isa = PBXResourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -408,6 +421,7 @@
 				E9A0E1BB067A43F2000EB2C0,
 				E9EECBE90685D4D300C5843E,
 				E943C37B06E479EB008399D0,
+				E9516AA707468FF800F7E63A,
 			);
 			isa = PBXSourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -828,6 +842,34 @@
 			settings = {
 			};
 		};
+		E9516AA407468FF800F7E63A = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			path = DFWord.h;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		E9516AA507468FF800F7E63A = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.objc;
+			path = DFWord.m;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		E9516AA607468FF800F7E63A = {
+			fileRef = E9516AA407468FF800F7E63A;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		E9516AA707468FF800F7E63A = {
+			fileRef = E9516AA507468FF800F7E63A;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
 		E99A06F10646A17F004036FF = {
 			buildActionMask = 2147483647;
 			dstPath = "";
@@ -839,6 +881,20 @@
 			);
 			isa = PBXCopyFilesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E99A95EB074756B100D882B9 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = text;
+			path = Hesperides.sdef;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		E99A95EC074756B100D882B9 = {
+			fileRef = E99A95EB074756B100D882B9;
+			isa = PBXBuildFile;
+			settings = {
+			};
 		};
 		E9A0E1B9067A43F2000EB2C0 = {
 			fileEncoding = 30;
@@ -1081,6 +1137,104 @@
 		};
 		E9CE2D7806454D55006DD78D = {
 			fileRef = E9CE2D7606454D55006DD78D;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		E9DD6FDD07479C73005278CB = {
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Hesperides.sdef",
+			);
+			isa = PBXShellScriptBuildPhase;
+			outputPaths = (
+				"${SRCROOT}/Hesperides.scriptSuite",
+				"${SRCROOT}/Hesperides.scriptTerminology",
+				"${SRCROOT}/Hesperides.r",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#!/bin/sh\ncd ${SRCROOT}\nversion=\"-V 10.3\"\n\nsource=\"Hesperides.sdef\"\ninclude=\"-i /Developer/Examples/Script*Definitions/NSCoreSuite.sdef\"\noutput=`/Developer/Tools/sdp -f ast $version $include $source 2>&1`\nif [ ${#output} -gt 0 ] ; then\n    echo $output\n    exit 1\nfi";
+		};
+		E9DD6FDE07479C73005278CB = {
+			buildPhases = (
+				E9DD6FDD07479C73005278CB,
+			);
+			buildSettings = {
+				OPTIMIZATION_CFLAGS = "";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = "Script Definition";
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = "-Wmost -Wno-four-char-constants -Wno-unknown-pragmas";
+			};
+			dependencies = (
+			);
+			isa = PBXAggregateTarget;
+			name = "Script Definition";
+			productName = "Script Definition";
+		};
+		E9DD702807479DC7005278CB = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.rez;
+			path = HesperidesScripting.r;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		E9DD702907479DC7005278CB = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = text.xml;
+			path = HesperidesSuite.scriptSuite;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		E9DD702A07479DC7005278CB = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = text.xml;
+			path = HesperidesSuite.scriptTerminology;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		E9DD702C07479DC7005278CB = {
+			fileRef = E9DD702907479DC7005278CB;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		E9DD702D07479DC7005278CB = {
+			fileRef = E9DD702A07479DC7005278CB;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		E9DD703607479DEF005278CB = {
+			containerPortal = 29B97313FDCFA39411CA2CEA;
+			isa = PBXContainerItemProxy;
+			proxyType = 1;
+			remoteGlobalIDString = E9DD6FDE07479C73005278CB;
+			remoteInfo = "Script Definition";
+		};
+		E9DD703707479DEF005278CB = {
+			isa = PBXTargetDependency;
+			target = E9DD6FDE07479C73005278CB;
+			targetProxy = E9DD703607479DEF005278CB;
+		};
+		E9DD704507479E0F005278CB = {
+			buildActionMask = 2147483647;
+			files = (
+				E9DD704907479E29005278CB,
+			);
+			isa = PBXRezBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E9DD704907479E29005278CB = {
+			fileRef = E9DD702807479DC7005278CB;
 			isa = PBXBuildFile;
 			settings = {
 			};
