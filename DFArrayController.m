@@ -32,7 +32,7 @@
 
 - (NSArray *)arrangeObjects:(NSArray *)objects 
 {
-	BOOL useRegexp = [[[NSUserDefaults standardUserDefaults] objectForKey:DFUseRegexp] boolValue];
+	DFSearchMode useRegexp = [[[NSUserDefaults standardUserDefaults] objectForKey:DFSearchModeDefault] intValue];
 	AGRegex *re=nil;
 	
     if ((searchString == nil) || ([searchString isEqualToString:@""])) {
@@ -43,28 +43,36 @@
     NSEnumerator *objectsEnumerator = [objects objectEnumerator];
     id item;
 	
-	if (! useRegexp)
-	{	
-		while (item = [objectsEnumerator nextObject]) 
-		{
-			if ([[item valueForKeyPath:@"id"] rangeOfString:searchString options:NSAnchoredSearch].location != NSNotFound) 
-			{
-				[filteredObjects addObject:item];
-			}
-		}
-	}
-	else
+	switch (useRegexp)
 	{
-		re=[AGRegex regexWithPattern:searchString];
-		while (item = [objectsEnumerator nextObject]) 
+		case DFSubstringRegexes:
+			re=[AGRegex regexWithPattern:searchString];
+			break;
+		case DFWholeRegexes:
+			re=[AGRegex regexWithPattern:[NSString stringWithFormat:@"^%@$",searchString]];
+			break;
+		default:
+			re=nil;
+	}
+		
+	BOOL selectWord;
+	while (item = [objectsEnumerator nextObject]) 
+	{
+		if (useRegexp != DFPlainSearch)
 		{
-			if ([re findInString:[item valueForKeyPath:@"id"]] != nil) 
-			{
-				[filteredObjects addObject:item];
-			}
+			selectWord = ([re findInString:[item valueForKeyPath:@"id"]] != nil);
+		}
+		else
+		{
+			selectWord = ([[item valueForKeyPath:@"id"] rangeOfString:searchString options:NSAnchoredSearch].location != NSNotFound);
+		}
+		if (selectWord)
+		{
+			[filteredObjects addObject:item];
 		}
 	}
 	
     return [super arrangeObjects:filteredObjects];
 }
+
 @end

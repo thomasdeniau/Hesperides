@@ -20,9 +20,14 @@
 
 @class MacPADSocket;
 
+typedef enum _DFLanguage { DFSindarin, DFEnglish } DFLanguage;
+
+
 @interface DFDictionaryParser : NSObject 
 {
 	NSMutableDictionary *sindarinDict;
+	NSMutableDictionary *engDict;
+	
 	NSMutableArray *sindIndex;
 	NSArray *engIndex;
 	
@@ -33,6 +38,6 @@
 }
 
 -(NSString *) lexiconVersion;
--(xmlNodePtr) nodeForKey:(NSString *)key;
+-(xmlNodePtr) nodeForKey:(NSString *)key language:(DFLanguage)language;
 
 @end

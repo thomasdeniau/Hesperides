@@ -78,6 +78,7 @@ xmlParserInputPtr xmlMyExternalEntityLoader(const char *URL, const char *ID, xml
 	
 	lexiconVersion = [[self mostRecent:[dic allKeys]] retain];
 	path=[dic objectForKey:lexiconVersion];
+		NSLog(@"%d",time(NULL));
 	if (! path) return NULL;
 	else return xmlParseFile([path UTF8String]);
 }
@@ -86,6 +87,7 @@ xmlParserInputPtr xmlMyExternalEntityLoader(const char *URL, const char *ID, xml
 -(void)dealloc
 {
 	[sindarinDict release];
+	[engDict release];
 	[sindIndex release];
 	[engIndex release];
 	[pad release];
@@ -122,6 +124,9 @@ xmlParserInputPtr xmlMyExternalEntityLoader(const char *URL, const char *ID, xml
 		xmlSetExternalEntityLoader(xmlMyExternalEntityLoader);
 		
 		doc=[self mostRecentDict:dicts];
+		
+			NSLog(@"%d",time(NULL));
+			
 		// we don't check for errors... assume the dictionary and XSL are correct
 		
 #pragma mark -- Tree generation --
@@ -131,9 +136,11 @@ xmlParserInputPtr xmlMyExternalEntityLoader(const char *URL, const char *ID, xml
 		xmlXPathFreeContext(context);
 		
 		sindarinDict = [[NSMutableDictionary alloc] initWithCapacity:items->nodeNr];
+		engDict = [[NSMutableDictionary alloc] initWithCapacity:items->nodeNr*2]; // avg 2 translations/word
+	
 		sindIndex=[[NSMutableArray alloc] initWithCapacity:items->nodeNr];
 		NSMutableArray *tEngIndex=[[NSMutableArray alloc] initWithCapacity:items->nodeNr];
-		
+	
 		for (i=0; i<items->nodeNr;i++)
 		{
 			xmlNodePtr item=items->nodeTab[i];
@@ -164,8 +171,7 @@ xmlParserInputPtr xmlMyExternalEntityLoader(const char *URL, const char *ID, xml
 			{
 				xmlNodePtr newnode=xmlNewNode(NULL,(const xmlChar*)"div0");
 				xmlAddChild(newnode,item);
-				[sindIndex addObject:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:itemId,itemId,NULL] 
-																 forKeys:[NSArray arrayWithObjects:@"id",@"sind",NULL]]];
+				[sindIndex addObject:[NSDictionary dictionaryWithObject:itemId forKey:@"id"]];
 				[sindarinDict setObject:[NSData dataWithBytesNoCopy:newnode length:sizeof(newnode)] forKey:itemId];
 			}
 			
@@ -187,11 +193,22 @@ xmlParserInputPtr xmlMyExternalEntityLoader(const char *URL, const char *ID, xml
 			{
 				for(j=0;j<trans->nodeNr;j++)
 				{
-					item = trans->nodeTab[j];
-					xmlItem = xmlGetProp(item,(const xmlChar*)"level1"); // xmlItem is the xmlChar* containing the translation
+					xmlNodePtr eItem = trans->nodeTab[j];
+					xmlItem = xmlGetProp(eItem,(const xmlChar*)"level1"); // xmlItem is the xmlChar* containing the translation
 					NSString *engId=[NSString stringWithUTF8String:(const char*)xmlItem];
-					[tEngIndex addObject:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:engId,itemId,NULL] 
-																	 forKeys:[NSArray arrayWithObjects:@"id",@"sind",NULL]]];
+
+					if ([engDict objectForKey:engId] != nil)
+					{
+						xmlAddChild((xmlNodePtr)[[engDict objectForKey:engId] bytes],xmlCopyNode(item,1));
+					}
+					else
+					{
+						xmlNodePtr newnode=xmlNewNode(NULL,(const xmlChar*)"div0");
+						xmlAddChild(newnode,xmlCopyNode(item,1));
+						[tEngIndex addObject:[NSDictionary dictionaryWithObject:engId forKey:@"id"]];
+						[engDict setObject:[NSData dataWithBytesNoCopy:newnode length:sizeof(newnode)] forKey:engId];
+					}
+
 					xmlFree(xmlItem);
 				}
 			}
@@ -203,7 +220,7 @@ xmlParserInputPtr xmlMyExternalEntityLoader(const char *URL, const char *ID, xml
 																												selector:@selector(caseInsensitiveCompare:)] autorelease]]] retain];
 		// sort it, and, by the way, make it immutable
 		[tEngIndex release];
-		
+			NSLog(@"%d",time(NULL));
 	}
 	return self;
 }
@@ -214,9 +231,9 @@ xmlParserInputPtr xmlMyExternalEntityLoader(const char *URL, const char *ID, xml
 	return lexiconVersion;
 }
 
--(xmlNodePtr)nodeForKey:(NSString *)key
+-(xmlNodePtr) nodeForKey:(NSString *)key language:(DFLanguage)language;
 {
-	return (xmlNodePtr)[[sindarinDict objectForKey:key] bytes];
+	return (xmlNodePtr)[[((language == DFSindarin) ? sindarinDict : engDict) objectForKey:key] bytes];
 }
 
 @end

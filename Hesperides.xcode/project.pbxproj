@@ -56,10 +56,10 @@
 //104
 		1058C7A0FEA54F0111CA2CBB = {
 			children = (
-				E9282D580649263D0045C0B1,
+				E9C8AE6106D69B900075AE8B,
+				E9C8AE6206D69B900075AE8B,
+				E9C8AD8C06D69B110075AE8B,
 				E9FA53E00646D8710027A64B,
-				E99A09980646AB0A004036FF,
-				E99A099F0646B152004036FF,
 				1058C7A1FEA54F0111CA2CBB,
 			);
 			isa = PBXGroup;
@@ -68,8 +68,7 @@
 			sourceTree = "<group>";
 		};
 		1058C7A1FEA54F0111CA2CBB = {
-			fallbackIsa = PBXFileReference;
-			isa = PBXFrameworkReference;
+			isa = PBXFileReference;
 			lastKnownFileType = wrapper.framework;
 			name = Cocoa.framework;
 			path = /System/Library/Frameworks/Cocoa.framework;
@@ -217,8 +216,7 @@
 			sourceTree = "<group>";
 		};
 		29B97324FDCFA39411CA2CEA = {
-			fallbackIsa = PBXFileReference;
-			isa = PBXFrameworkReference;
+			isa = PBXFileReference;
 			lastKnownFileType = wrapper.framework;
 			name = AppKit.framework;
 			path = /System/Library/Frameworks/AppKit.framework;
@@ -226,8 +224,7 @@
 			sourceTree = "<absolute>";
 		};
 		29B97325FDCFA39411CA2CEA = {
-			fallbackIsa = PBXFileReference;
-			isa = PBXFrameworkReference;
+			isa = PBXFileReference;
 			lastKnownFileType = wrapper.framework;
 			name = Foundation.framework;
 			path = /System/Library/Frameworks/Foundation.framework;
@@ -263,8 +260,6 @@
 //4A3
 //4A4
 		4A9504CCFFE6A4B311CA0CBA = {
-			buildRules = (
-			);
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
 				DEBUGGING_SYMBOLS = YES;
@@ -279,8 +274,6 @@
 			name = Development;
 		};
 		4A9504CDFFE6A4B311CA0CBA = {
-			buildRules = (
-			);
 			buildSettings = {
 				COPY_PHASE_STRIP = YES;
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
@@ -306,12 +299,11 @@
 				8D11072C0486CEB800E47090,
 				8D11072E0486CEB800E47090,
 				E99A06F10646A17F004036FF,
-				E99A06F70646A1C1004036FF,
 			);
 			buildRules = (
 			);
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = /Users/thomas/Documents/Dev/Hesperides;
+				FRAMEWORK_SEARCH_PATHS = "/Users/thomas/Documents/Dev/Hesperides /Users/thomas/hesperides/trunk";
 				GCC_ENABLE_TRIGRAPHS = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -427,10 +419,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D11072F0486CEB800E47090,
-				E99A09990646AB0A004036FF,
-				E99A09A00646B153004036FF,
 				E9FA53E10646D8710027A64B,
-				E9282D590649263D0045C0B1,
+				E9C8AD8D06D69B110075AE8B,
+				E9C8AE6306D69B900075AE8B,
+				E9C8AE6406D69B900075AE8B,
 			);
 			isa = PBXFrameworksBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -494,32 +486,13 @@
 		E9282BFD064912A30045C0B1 = {
 			fileEncoding = 30;
 			isa = PBXFileReference;
-			lastKnownFileType = text.plist.xml;
+			lastKnownFileType = text.xml;
 			path = dict8.xml;
 			refType = 4;
 			sourceTree = "<group>";
 		};
 		E9282BFE064912A30045C0B1 = {
 			fileRef = E9282BFD064912A30045C0B1;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		E9282D580649263D0045C0B1 = {
-			isa = PBXFileReference;
-			lastKnownFileType = wrapper.framework;
-			path = AGRegex.framework;
-			refType = 4;
-			sourceTree = "<group>";
-		};
-		E9282D590649263D0045C0B1 = {
-			fileRef = E9282D580649263D0045C0B1;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		E9282DC206492AFB0045C0B1 = {
-			fileRef = E9282D580649263D0045C0B1;
 			isa = PBXBuildFile;
 			settings = {
 			};
@@ -647,61 +620,14 @@
 		E99A06F10646A17F004036FF = {
 			buildActionMask = 2147483647;
 			dstPath = "";
-			dstSubfolderSpec = 7;
-			files = (
-			);
-			isa = PBXCopyFilesBuildPhase;
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E99A06F70646A1C1004036FF = {
-			buildActionMask = 2147483647;
-			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				E9282DC206492AFB0045C0B1,
-				E99A09D10646B157004036FF,
-				E99A099C0646AB52004036FF,
+				E9C8AF1806D69CA90075AE8B,
+				E9C8AF1906D69CA90075AE8B,
+				E9C8AF1A06D69CA90075AE8B,
 			);
 			isa = PBXCopyFilesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E99A09980646AB0A004036FF = {
-			isa = PBXFileReference;
-			lastKnownFileType = wrapper.framework;
-			path = libxslt.framework;
-			refType = 4;
-			sourceTree = "<group>";
-		};
-		E99A09990646AB0A004036FF = {
-			fileRef = E99A09980646AB0A004036FF;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		E99A099C0646AB52004036FF = {
-			fileRef = E99A09980646AB0A004036FF;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		E99A099F0646B152004036FF = {
-			isa = PBXFileReference;
-			lastKnownFileType = wrapper.framework;
-			path = libxml.framework;
-			refType = 4;
-			sourceTree = "<group>";
-		};
-		E99A09A00646B153004036FF = {
-			fileRef = E99A099F0646B152004036FF;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		E99A09D10646B157004036FF = {
-			fileRef = E99A099F0646B152004036FF;
-			isa = PBXBuildFile;
-			settings = {
-			};
 		};
 		E9A0E1B9067A43F2000EB2C0 = {
 			fileEncoding = 30;
@@ -742,6 +668,63 @@
 			name = SAMPA;
 			refType = 4;
 			sourceTree = "<group>";
+		};
+		E9C8AD8C06D69B110075AE8B = {
+			isa = PBXFileReference;
+			lastKnownFileType = wrapper.framework;
+			path = libxml.framework;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		E9C8AD8D06D69B110075AE8B = {
+			fileRef = E9C8AD8C06D69B110075AE8B;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		E9C8AE6106D69B900075AE8B = {
+			isa = PBXFileReference;
+			lastKnownFileType = wrapper.framework;
+			path = AGRegex.framework;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		E9C8AE6206D69B900075AE8B = {
+			isa = PBXFileReference;
+			lastKnownFileType = wrapper.framework;
+			path = libxslt.framework;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		E9C8AE6306D69B900075AE8B = {
+			fileRef = E9C8AE6106D69B900075AE8B;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		E9C8AE6406D69B900075AE8B = {
+			fileRef = E9C8AE6206D69B900075AE8B;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		E9C8AF1806D69CA90075AE8B = {
+			fileRef = E9C8AE6106D69B900075AE8B;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		E9C8AF1906D69CA90075AE8B = {
+			fileRef = E9C8AE6206D69B900075AE8B;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		E9C8AF1A06D69CA90075AE8B = {
+			fileRef = E9C8AD8C06D69B110075AE8B;
+			isa = PBXBuildFile;
+			settings = {
+			};
 		};
 		E9CB13B30654F9E8008B9774 = {
 			fileEncoding = 4;
@@ -1024,7 +1007,7 @@
 		E9FA53990646BB6B0027A64B = {
 			fileEncoding = 30;
 			isa = PBXFileReference;
-			lastKnownFileType = text.plist.xml;
+			lastKnownFileType = text.xml;
 			path = entry.xsl;
 			refType = 4;
 			sourceTree = "<group>";
@@ -1038,7 +1021,7 @@
 		E9FA53A10646C9A70027A64B = {
 			fileEncoding = 30;
 			isa = PBXFileReference;
-			lastKnownFileType = text.plist.xml;
+			lastKnownFileType = text.xml;
 			path = xmldict.dtd;
 			refType = 4;
 			sourceTree = "<group>";

@@ -11,7 +11,14 @@
 
 #import <Foundation/Foundation.h>
 
-extern NSString *DFUseRegexp;
+extern NSString *DFSearchModeDefault;
+
+typedef enum _DFSearchMode 
+{
+	DFPlainSearch,
+	DFSubstringRegexes,
+	DFWholeRegexes
+} DFSearchMode;
 
 @interface DFArrayController : NSArrayController {
 	

@@ -18,7 +18,7 @@
 #import "sampa.h"
 
 NSString *DFAutomaticCheck = @"DFAutomaticCheck";
-NSString *DFUseRegexp = @"DFUseRegexp";
+NSString *DFSearchModeDefault = @"DFSearchMode";
 
 @implementation DFController
 
@@ -100,24 +100,30 @@ NSString *DFUseRegexp = @"DFUseRegexp";
 	[[engSearchField cell] setSendsWholeSearchString:([sender state]==NSOnState)];
 }
 
--(void)applicationDidFinishLaunching:(NSNotification *)n
++(void) initialize
 {
-	NSDictionary *initial=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:[NSNumber numberWithBool:NO],[NSNumber numberWithBool:NO],nil]
-													  forKeys:[NSArray arrayWithObjects:DFAutomaticCheck,DFUseRegexp,nil]];
+	NSDictionary *initial=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:[NSNumber numberWithBool:NO],[NSNumber numberWithInt:0],nil]
+													  forKeys:[NSArray arrayWithObjects:DFAutomaticCheck,DFSearchModeDefault,nil]];
 	[[NSUserDefaults standardUserDefaults] registerDefaults:initial];
 	[[NSUserDefaultsController sharedUserDefaultsController] setInitialValues:initial];
-	
+}
+
+-(void)applicationDidFinishLaunching:(NSNotification *)n
+{
 	NSNumber *check=[[NSUserDefaults standardUserDefaults] objectForKey:DFAutomaticCheck];
 	if (check && [check boolValue])
 	{
 		[updater checkForUpdates:self];
 	}
 	
-	NSNumber *regex=[[NSUserDefaults standardUserDefaults] objectForKey:DFUseRegexp];
-	if (regex && [regex boolValue])
+	NSNumber *regex=[[NSUserDefaults standardUserDefaults] objectForKey:DFSearchModeDefault];
+	if (regex)
 	{
-		[[sindSearchField cell] setSendsWholeSearchString:[regex boolValue]];
-		[[engSearchField cell] setSendsWholeSearchString:[regex boolValue]];
+		if ([regex intValue] == DFPlainSearch)
+		{
+			[[sindSearchField cell] setSendsWholeSearchString:[regex boolValue]];
+			[[engSearchField cell] setSendsWholeSearchString:[regex boolValue]];
+		}		
 	}
 }
 
@@ -271,14 +277,14 @@ NSString *DFUseRegexp = @"DFUseRegexp";
 
 #pragma mark -- XSLT & displaying --
 
--(void)displaySindarinWord:(NSString *)key
+-(void)displayWord:(NSString *)key language:(DFLanguage)language;
 {	
 	const char *params[3];
 	params[0] = "print";
 	params[1] = "'no'";
 	params[2] = NULL;
 	
-	xmlNodePtr node=[dictionary nodeForKey:key];
+	xmlNodePtr node=[dictionary nodeForKey:key language:language];
 	xmlDocPtr nDoc=xmlNewDoc((xmlChar*)"1.0");
 	xmlDocPtr result;
 	xmlChar *resCharTab=NULL;
@@ -349,7 +355,7 @@ NSString *DFUseRegexp = @"DFUseRegexp";
 {
 	BOOL sind=([tabView indexOfTabViewItem:[tabView selectedTabViewItem]]==0);
 	int row=[sind?sindList:engList selectedRow];
-	if (row != -1) [self displaySindarinWord:[[[sind?sindController:engController arrangedObjects] objectAtIndex:row] objectForKey:@"sind"]];
+	if (row != -1) [self displayWord:[[[sind?sindController:engController arrangedObjects] objectAtIndex:row] objectForKey:@"id"] language:(sind?DFSindarin:DFEnglish)];
 }
 
 #pragma mark -- Cross - references --
@@ -381,7 +387,7 @@ NSString *DFUseRegexp = @"DFUseRegexp";
 			{
 				word=(NSString *)CFURLCreateStringByReplacingPercentEscapes(kCFAllocatorDefault,(CFStringRef)word,CFSTR(""));
 				[listener ignore];
-				[self displaySindarinWord:word];
+				[self displayWord:word language:DFSindarin];
 				[word release];
 			}
 				else [listener ignore];
