@@ -6,7 +6,9 @@
 //  Copyright (c) 2004 Nousoft. All rights reserved.
 //
 
-// This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version. Hesperides comes with ABSOLUTELY NO WARRANTY.
+// This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public 
+// License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version. 
+// Hesperides comes with ABSOLUTELY NO WARRANTY.
 
 #import "DFController.h"
 #import "DFArrayController.h"
@@ -62,6 +64,8 @@ id sharedInstance = nil;
 			fonts = [[[NSBundle mainBundle] pathsForResourcesOfType:@"ttf" inDirectory:nil] arrayByAddingObjectsFromArray:
 				[fm filesWithPathExtension:@"ttf" inDomain:kApplicationSupportFolderType subFolder:@"Hesperides"]];
 			
+			modeLanguages = [[NSDictionary alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"KnownModules" ofType:@"plist"]];
+			
 			narmacil = new CTranscription;
 			
 			// all the code for this is actually in awakeFromNib
@@ -76,6 +80,7 @@ id sharedInstance = nil;
 {
 	//[converter release];
 	[dictionary release];
+	[modeLanguages release];
 	
 	delete narmacil;
 	
@@ -206,15 +211,9 @@ id sharedInstance = nil;
 	
 	if (pboardString)
 	{
-		CFIndex size = CFStringGetMaximumSizeForEncoding([pboardString length],kCFStringEncodingISOLatin1);
-		char *cString = (char *)calloc(size+1, sizeof(char));
-		CFStringGetCString((CFStringRef)pboardString,cString,size+1,kCFStringEncodingISOLatin1);
-		char *tengwarResult = (char*) narmacil->Roman2Tengwar(cString);
-		NSString* tengText = (NSString *)CFStringCreateWithCString(NULL,tengwarResult,kCFStringEncodingISOLatin1);
-		newString = [[NSAttributedString alloc] initWithString:tengText
+		newString = [[NSAttributedString alloc] initWithString:[self transcribeWord:pboardString fromLanguage:DFUnknown]
 												attributes:[NSDictionary dictionaryWithObject:[[fontPopup selectedItem] representedObject]
 																					   forKey:NSFontAttributeName]];
-		[tengText release];
 	
 		types = [NSArray arrayWithObject:NSRTFPboardType];
 		[pboard declareTypes:types owner:nil];
@@ -224,7 +223,6 @@ id sharedInstance = nil;
 	}
 	
     return;
-	
 }
 
 #pragma mark -- Load Font --
@@ -282,6 +280,36 @@ id sharedInstance = nil;
 	[self display:self];
 }
 
+-(NSString *)transcribeWord:(NSString *)word fromLanguage:(DFLanguage)language;
+{
+
+	if (! [word canBeConvertedToEncoding:NSISOLatin1StringEncoding]) return nil;
+	
+	NSString *path = [[modePopup selectedItem] representedObject];
+	NSString *mode = [[path lastPathComponent] stringByDeletingPathExtension];
+	NSString *lang=nil;
+	if ((language != DFUnknown) && ((lang=[modeLanguages objectForKey:mode])))
+	{
+		if (([lang isEqualToString:@"English"] && (language == DFSindarin))
+			|| ([lang isEqualToString:@"Sindarin"] && (language == DFEnglish)))
+		{
+			[modePopup selectItemWithTitle:(language==DFEnglish)?@"English":@"Sindarin"];
+			[self modeChanged:modePopup];
+		}
+	}
+	
+	NSString *tengText;
+	CFIndex size = CFStringGetMaximumSizeForEncoding([word length],kCFStringEncodingISOLatin1);
+	char *cString = (char *)calloc(size+1, sizeof(char));
+	CFStringGetCString((CFStringRef)word,cString,size+1,kCFStringEncodingISOLatin1);
+	char *tengwarResult = (char*) narmacil->Roman2Tengwar(cString);
+	tengText = (NSString *)CFStringCreateWithCString(NULL,tengwarResult,kCFStringEncodingISOLatin1);
+
+	free(cString);
+
+	return [tengText autorelease];			
+}
+
 #pragma mark -- XSLT & displaying --
 
 -(void)displayWord:(NSString *)key language:(DFLanguage)language silent:(BOOL)silent;
@@ -290,20 +318,7 @@ id sharedInstance = nil;
 	
 	[self fontChanged:fontPopup];
 	
-	if ((language == DFSindarin) && [key canBeConvertedToEncoding:NSISOLatin1StringEncoding])
-	{
-		NSString *tengText;
-		CFIndex size = CFStringGetMaximumSizeForEncoding([key length],kCFStringEncodingISOLatin1);
-		char *cString = (char *)calloc(size+1, sizeof(char));
-		CFStringGetCString((CFStringRef)key,cString,size+1,kCFStringEncodingISOLatin1);
-		char *tengwarResult = (char*) narmacil->Roman2Tengwar(cString);
-		tengText = (NSString *)CFStringCreateWithCString(NULL,tengwarResult,kCFStringEncodingISOLatin1);
-		[tengwar setString:tengText];
-		[tengText release];			
-
-		free(cString);
-	} else [tengwar setString:@""];
-
+	[tengwar setString:[self transcribeWord:key	fromLanguage:language]];
 	[tabView selectTabViewItemAtIndex:language];
 	
 	[((language == DFSindarin)?sindController:engController) setSelectedObjects:

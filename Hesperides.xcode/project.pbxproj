@@ -7,14 +7,11 @@
 	objects = {
 		080E96DDFE201D6D7F000001 = {
 			children = (
-				E99A95EB074756B100D882B9,
+				E9BA8C8807590B3500B9AC27,
 				E9A0E1BF067A43F8000EB2C0,
 				E9282E2E06498AE30045C0B1,
 				E9E7D2C30674D5D3003788F5,
-				E9E7D4F40674D97A003788F5,
-				E9E7D4F50674D97A003788F5,
-				E9516AA407468FF800F7E63A,
-				E9516AA507468FF800F7E63A,
+				E9BA8C8B07590B3D00B9AC27,
 				E9CE2D5D06453BA3006DD78D,
 				E9CE2D5C06453BA3006DD78D,
 				E9CE2D7506454D55006DD78D,
@@ -171,14 +168,11 @@
 		};
 		29B97317FDCFA39411CA2CEA = {
 			children = (
-				E9DD702807479DC7005278CB,
-				E9DD702907479DC7005278CB,
-				E9DD702A07479DC7005278CB,
+				E9BA8C8E07590B5C00B9AC27,
+				E9BA8C9107590B6600B9AC27,
 				E910270C06E4FDDE00902A10,
 				E9EECBE20685B59600C5843E,
-				E9282E3306498D3D0045C0B1,
 				E9CB13B30654F9E8008B9774,
-				E9282F62064998B70045C0B1,
 				E9282BFD064912A30045C0B1,
 				E9FA55D40647E3330027A64B,
 				E9FA53990646BB6B0027A64B,
@@ -361,6 +355,7 @@
 				E9EECBE80685D4D300C5843E,
 				E943C37C06E479EB008399D0,
 				E9516AA607468FF800F7E63A,
+				E9BA8C710759087000B9AC27,
 			);
 			isa = PBXHeadersBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -390,6 +385,8 @@
 				E99A95EC074756B100D882B9,
 				E9DD702C07479DC7005278CB,
 				E9DD702D07479DC7005278CB,
+				E9BA8BCD0758FEB800B9AC27,
+				E9BA8BD50759004300B9AC27,
 			);
 			isa = PBXResourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -422,6 +419,7 @@
 				E9EECBE90685D4D300C5843E,
 				E943C37B06E479EB008399D0,
 				E9516AA707468FF800F7E63A,
+				E9BA8C720759087000B9AC27,
 			);
 			isa = PBXSourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -885,7 +883,7 @@
 		E99A95EB074756B100D882B9 = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
-			lastKnownFileType = text;
+			lastKnownFileType = text.xml;
 			path = Hesperides.sdef;
 			refType = 4;
 			sourceTree = "<group>";
@@ -933,6 +931,107 @@
 			);
 			isa = PBXGroup;
 			name = SAMPA;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		E9BA8BCC0758FEB800B9AC27 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file;
+			path = English.mod;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		E9BA8BCD0758FEB800B9AC27 = {
+			fileRef = E9BA8BCC0758FEB800B9AC27;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		E9BA8BD40759004300B9AC27 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = text.plist;
+			path = KnownModules.plist;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		E9BA8BD50759004300B9AC27 = {
+			fileRef = E9BA8BD40759004300B9AC27;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		E9BA8C6F0759087000B9AC27 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			path = DFTranscribeCommand.h;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		E9BA8C700759087000B9AC27 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.objcpp;
+			path = DFTranscribeCommand.mm;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		E9BA8C710759087000B9AC27 = {
+			fileRef = E9BA8C6F0759087000B9AC27;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		E9BA8C720759087000B9AC27 = {
+			fileRef = E9BA8C700759087000B9AC27;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		E9BA8C8807590B3500B9AC27 = {
+			children = (
+				E9BA8C6F0759087000B9AC27,
+				E9BA8C700759087000B9AC27,
+				E99A95EB074756B100D882B9,
+			);
+			isa = PBXGroup;
+			name = "Apple Script";
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		E9BA8C8B07590B3D00B9AC27 = {
+			children = (
+				E9E7D4F40674D97A003788F5,
+				E9E7D4F50674D97A003788F5,
+				E9516AA407468FF800F7E63A,
+				E9516AA507468FF800F7E63A,
+			);
+			isa = PBXGroup;
+			name = "Model-";
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		E9BA8C8E07590B5C00B9AC27 = {
+			children = (
+				E9BA8BD40759004300B9AC27,
+				E9BA8BCC0758FEB800B9AC27,
+				E9282E3306498D3D0045C0B1,
+				E9282F62064998B70045C0B1,
+			);
+			isa = PBXGroup;
+			name = Modules;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		E9BA8C9107590B6600B9AC27 = {
+			children = (
+				E9DD702807479DC7005278CB,
+				E9DD702907479DC7005278CB,
+				E9DD702A07479DC7005278CB,
+			);
+			isa = PBXGroup;
+			name = Scripting;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -1163,7 +1262,6 @@
 				E9DD6FDD07479C73005278CB,
 			);
 			buildSettings = {
-				OPTIMIZATION_CFLAGS = "";
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "";
 				OTHER_REZFLAGS = "";

@@ -24,6 +24,11 @@
 					<accessor style="test" />
 				</element>
 			</elements>
+			<responds-to-commands>
+				<responds-to name="transcribe">
+					<cocoa method="" />
+				</responds-to>
+			</responds-to-commands>
 		</class>
 		<class name="sindarin entry" code="DFsW" description="A Sindarin word" plural="sindarin entries">
 		    <cocoa class="DFWord" />
@@ -66,11 +71,18 @@
 			</properties> 
 					</class>
 	</classes>
-	
+	<commands>
+		<command name="transcribe" code="DFscTran" description="Transcribe a word into Tengwar (using Narmacil)">
+			<parameter name="from language" code="Tlng" optional="optional" type="language" description="The language of the word to be transcribed (to auto-select a mode)"/>
+			<parameter name="word" code="Twrd" type="string" description="The word to transcribe" />
+			<cocoa class="DFTranscribeCommand" />
+		</command>
+	</commands>
 		<types>
 		<enumeration name="language" code="DFlE">
 			<enumerator name="sindarin" code="DFls" description="This word is a Sindarin one"/>
 			<enumerator name="english" code="DFle" description="This word is an English one"/>
+			<enumerator name="unknown" code="DFlu" description="The language of this word is unknown"/>
 		</enumeration>
 		</types>
   </suite>
