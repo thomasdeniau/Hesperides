@@ -12,6 +12,10 @@
 #import "MacPADSocket.h"
 #import "NSFileManager-DFExtensions.h"
 
+NSString *DFDictionaryIndexedVersion=@"DFDictionaryIndexedVersion";
+NSString *DFDictionaryCache = @"DFDictionaryCache";
+NSString *DFDictionaryIndex = @"DFDictionaryIndex";
+
 xmlExternalEntityLoader defaultLoader = NULL;
 
 xmlParserInputPtr xmlMyExternalEntityLoader(const char *URL, const char *ID, xmlParserCtxtPtr ctxt) 
@@ -57,6 +61,16 @@ xmlParserInputPtr xmlMyExternalEntityLoader(const char *URL, const char *ID, xml
 	return [versions objectAtIndex:maxI];
 }
 
+-(xmlDocPtr)parsePath:(NSString *)path
+{
+	defaultLoader = xmlGetExternalEntityLoader();
+	xmlSubstituteEntitiesDefault(1);
+	xmlLoadExtDtdDefaultValue = 1;
+	xmlSetExternalEntityLoader(xmlMyExternalEntityLoader);
+	
+	return xmlParseFile([path UTF8String]);
+}
+
 -(xmlDocPtr)mostRecentDict:(NSArray *)dicts
 {
 	NSString *path;
@@ -76,20 +90,33 @@ xmlParserInputPtr xmlMyExternalEntityLoader(const char *URL, const char *ID, xml
 		}
 	}
 	
-	lexiconVersion = [[self mostRecent:[dic allKeys]] retain];
-	path=[dic objectForKey:lexiconVersion];
-		NSLog(@"%d",time(NULL));
+	lexiconVersion = [self mostRecent:[dic allKeys]];
+	path = [dic objectForKey:lexiconVersion];
+	
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	
 	if (! path) return NULL;
-	else return xmlParseFile([path UTF8String]);
+	
+	xmlDocPtr theDoc = [self parsePath:path];
+	
+	NSString *indexedVersion = [defaults objectForKey:DFDictionaryIndexedVersion];
+	if (!indexedVersion || ![lexiconVersion isEqualToString:indexedVersion])
+		[self indexVersion:lexiconVersion withDoc:theDoc];
+	
+	index=[[defaults objectForKey:DFDictionaryIndex] copy];
+	engIndex=[index objectAtIndex:DFEnglish];
+	sindIndex = [index objectAtIndex:DFSindarin];
+	
+	dict=[[defaults objectForKey:DFDictionaryCache] copy];
+
+	return theDoc;
 }
 
 
 -(void)dealloc
 {
-	[sindarinDict release];
-	[engDict release];
-	[sindIndex release];
-	[engIndex release];
+	[index release];
+	[dict release];
 	[pad release];
 	
 	xmlFreeDoc(doc);
@@ -108,121 +135,114 @@ xmlParserInputPtr xmlMyExternalEntityLoader(const char *URL, const char *ID, xml
 		
 #pragma mark -- Parse Dic --
 		
-		xmlChar *entryPath = (xmlChar *) "//entry";
-		xmlChar *transPath = (xmlChar *) "//sense/trans[@lang = 'en']/def/index";
-				
-		xmlNodeSetPtr items;
-		xmlXPathContextPtr context;
-		int i;
-		
 		NSArray *dicts= [[[NSBundle mainBundle] pathsForResourcesOfType:@"xml" inDirectory:nil] arrayByAddingObjectsFromArray:
 			[fm filesWithPathExtension:@"xml" inDomain:kApplicationSupportFolderType subFolder:@"Hesperides"]];
 		
-		defaultLoader = xmlGetExternalEntityLoader();
-		xmlSubstituteEntitiesDefault(1);
-		xmlLoadExtDtdDefaultValue = 1;
-		xmlSetExternalEntityLoader(xmlMyExternalEntityLoader);
+		//NSLog(@"Loading index : %d",time(NULL));
+		doc=[self mostRecentDict:dicts];		
+		//NSLog(@"Index loaded : %d",time(NULL));
 		
-		doc=[self mostRecentDict:dicts];
-		
-			NSLog(@"%d",time(NULL));
-			
 		// we don't check for errors... assume the dictionary and XSL are correct
-		
-#pragma mark -- Tree generation --
-		
-		context = xmlXPathNewContext(doc);
-		items = xmlXPathEvalExpression(entryPath,context)->nodesetval;
-		xmlXPathFreeContext(context);
-		
-		sindarinDict = [[NSMutableDictionary alloc] initWithCapacity:items->nodeNr];
-		engDict = [[NSMutableDictionary alloc] initWithCapacity:items->nodeNr*2]; // avg 2 translations/word
-	
-		sindIndex=[[NSMutableArray alloc] initWithCapacity:items->nodeNr];
-		NSMutableArray *tEngIndex=[[NSMutableArray alloc] initWithCapacity:items->nodeNr];
-	
-		for (i=0; i<items->nodeNr;i++)
-		{
-			xmlNodePtr item=items->nodeTab[i];
-			xmlDocPtr nDoc=xmlNewDoc((const xmlChar*)"1.0");
-			xmlNodeSetPtr trans;
-			int j;
-			
-			item->next = NULL;
-			item->prev=NULL;
-			// isolate this node
-			
-			xmlChar* xmlItem = xmlGetProp(item,(const xmlChar*)"id");
-			xmlChar *nItem = xmlGetProp(item,(const xmlChar*)"n");
-			
-			NSString* itemId=[NSString stringWithUTF8String:(const char*)xmlItem];
-			
-			// strip out .1, .2, etc.
-			if (nItem && [itemId length]>2 && [itemId characterAtIndex:[itemId length]-2]=='.') 
-				itemId=[itemId substringToIndex:[itemId length]-2];
-			
-			
-			if (nItem && *nItem>'1') 
-				// if we have already seen this word
-				xmlAddChild((xmlNodePtr)[[sindarinDict objectForKey:itemId] bytes],item);
-			// just add this meaning of the word to an existing div0 node stored in sindarinDict
-			else
-				// this is the first time we see this word
-			{
-				xmlNodePtr newnode=xmlNewNode(NULL,(const xmlChar*)"div0");
-				xmlAddChild(newnode,item);
-				[sindIndex addObject:[NSDictionary dictionaryWithObject:itemId forKey:@"id"]];
-				[sindarinDict setObject:[NSData dataWithBytesNoCopy:newnode length:sizeof(newnode)] forKey:itemId];
-			}
-			
-			xmlFree(xmlItem);
-			xmlFree(nItem);
-			
-#pragma mark -- English Index --
-			
-			// we now have to check for english translations and fill engIndex with references
-			// to the relevant sindarin words
-			
-			// execute xpath to locate translations
-			xmlDocSetRootElement(nDoc, xmlCopyNode(item,1));
-			context=xmlXPathNewContext(nDoc);
-			trans = xmlXPathEvalExpression(transPath,context)->nodesetval;
-			xmlXPathFreeContext(context);
-			
-			if (trans)
-			{
-				for(j=0;j<trans->nodeNr;j++)
-				{
-					xmlNodePtr eItem = trans->nodeTab[j];
-					xmlItem = xmlGetProp(eItem,(const xmlChar*)"level1"); // xmlItem is the xmlChar* containing the translation
-					NSString *engId=[NSString stringWithUTF8String:(const char*)xmlItem];
-
-					if ([engDict objectForKey:engId] != nil)
-					{
-						xmlAddChild((xmlNodePtr)[[engDict objectForKey:engId] bytes],xmlCopyNode(item,1));
-					}
-					else
-					{
-						xmlNodePtr newnode=xmlNewNode(NULL,(const xmlChar*)"div0");
-						xmlAddChild(newnode,xmlCopyNode(item,1));
-						[tEngIndex addObject:[NSDictionary dictionaryWithObject:engId forKey:@"id"]];
-						[engDict setObject:[NSData dataWithBytesNoCopy:newnode length:sizeof(newnode)] forKey:engId];
-					}
-
-					xmlFree(xmlItem);
-				}
-			}
-			
-			xmlFreeDoc(nDoc);
-		}
-		engIndex=[[tEngIndex sortedArrayUsingDescriptors:[NSArray arrayWithObject:[[[NSSortDescriptor alloc] initWithKey:@"id" 
-																											   ascending:YES 
-																												selector:@selector(caseInsensitiveCompare:)] autorelease]]] retain];
-		// sort it, and, by the way, make it immutable
-		[tEngIndex release];
-			NSLog(@"%d",time(NULL));
 	}
 	return self;
+}
+
+-(xmlDocPtr) indexVersion:(NSString *)version withDoc:(xmlDocPtr)theDoc;
+{
+	//NSLog(@"Building index : %d",time(NULL));
+	
+	xmlChar *entryPath = (xmlChar *) "//entry";
+	xmlChar *transPath = (xmlChar *) "//sense/trans[@lang = 'en']/def/index";
+			
+	xmlNodeSetPtr items;
+	xmlXPathContextPtr context;
+	int i;
+			
+	context = xmlXPathNewContext(theDoc);
+	items = xmlXPathEvalExpression(entryPath,context)->nodesetval;
+	xmlXPathFreeContext(context);
+			
+	NSMutableDictionary *ttSindIndex=[[NSMutableDictionary alloc] initWithCapacity:items->nodeNr];
+	NSMutableDictionary *ttEngIndex=[[NSMutableDictionary alloc] initWithCapacity:items->nodeNr]; 
+			
+	for (i=0; i<items->nodeNr;i++)
+	{
+		xmlNodePtr item=items->nodeTab[i];
+		xmlDocPtr nDoc=xmlNewDoc((const xmlChar*)"1.0");
+		xmlNodeSetPtr trans;
+		int j;
+		
+		xmlChar* xmlItem = xmlGetProp(item,(const xmlChar*)"id");
+		xmlChar *nItem = xmlGetProp(item,(const xmlChar*)"n");
+		
+		NSString* itemId=[NSString stringWithUTF8String:(const char*)xmlItem], *shortItemId=itemId;
+		
+		// strip out .1, .2, etc.
+		if (nItem && [itemId length]>2 && [itemId characterAtIndex:[itemId length]-2]=='.') 
+			shortItemId=[itemId substringToIndex:[itemId length]-2];
+		
+		if (nItem && *nItem>'1') 
+			// if we have already seen this word
+			[[[ttSindIndex objectForKey:shortItemId] objectForKey:@"items"] addObject:itemId];
+		else
+			// this is the first time we see this word
+			[ttSindIndex setObject:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:[NSMutableArray arrayWithObject:itemId],shortItemId,NULL] 
+															 forKeys:[NSArray arrayWithObjects:@"items",@"id",NULL]]
+						  forKey:shortItemId];
+		
+		xmlFree(xmlItem);
+		xmlFree(nItem);
+		
+#pragma mark -- English Index --
+				
+		// we now have to check for english translations and fill engIndex with references
+		// to the relevant sindarin words
+		
+		// execute xpath to locate translations
+		xmlDocSetRootElement(nDoc, xmlCopyNode(item,1));
+		context=xmlXPathNewContext(nDoc);
+		trans = xmlXPathEvalExpression(transPath,context)->nodesetval;
+		xmlXPathFreeContext(context);
+		
+		if (trans)
+		{
+			for(j=0;j<trans->nodeNr;j++)
+			{
+				xmlNodePtr eItem = trans->nodeTab[j];
+				xmlItem = xmlGetProp(eItem,(const xmlChar*)"level1"); // xmlItem is the xmlChar* containing the translation
+				NSString *engId=[NSString stringWithUTF8String:(const char*)xmlItem];
+				
+				if ([ttEngIndex objectForKey:engId] != nil)
+				{
+					[[[ttEngIndex objectForKey:engId] objectForKey:@"items"] addObject:itemId];
+				}
+				else
+				{
+					[ttEngIndex setObject:[NSDictionary dictionaryWithObjectsAndKeys:
+												[NSMutableArray arrayWithObject:itemId],@"items",engId,@"id",NULL]
+								  forKey:engId];
+				}
+				
+				xmlFree(xmlItem);
+			}
+		}
+		
+		xmlFreeDoc(nDoc);
+	}
+	
+	NSArray *tEngIndex=[[[ttEngIndex allValues] sortedArrayUsingDescriptors:[NSArray arrayWithObject:[[[NSSortDescriptor alloc] initWithKey:@"id" 
+																															  ascending:YES 
+																															   selector:@selector(caseInsensitiveCompare:)] autorelease]]] retain];
+	NSArray *tSindIndex=[[[ttSindIndex allValues] sortedArrayUsingDescriptors:[NSArray arrayWithObject:[[[NSSortDescriptor alloc] initWithKey:@"id" 
+																																ascending:YES 
+																																 selector:@selector(caseInsensitiveCompare:)] autorelease]]] retain];
+	[[NSUserDefaults standardUserDefaults] setObject:[NSArray arrayWithObjects:ttSindIndex,ttEngIndex,NULL] forKey:DFDictionaryCache];
+	[[NSUserDefaults standardUserDefaults] setObject:[NSArray arrayWithObjects:tSindIndex,tEngIndex,NULL] forKey:DFDictionaryIndex];
+	[[NSUserDefaults standardUserDefaults] setObject:version forKey:DFDictionaryIndexedVersion];
+	
+	//NSLog(@"Index Built : %d",time(NULL));
+			
+	return doc;
 }
 
 
@@ -233,7 +253,33 @@ xmlParserInputPtr xmlMyExternalEntityLoader(const char *URL, const char *ID, xml
 
 -(xmlNodePtr) nodeForKey:(NSString *)key language:(DFLanguage)language;
 {
-	return (xmlNodePtr)[[((language == DFSindarin) ? sindarinDict : engDict) objectForKey:key] bytes];
+	xmlNodePtr newnode=xmlNewNode(NULL,(const xmlChar*)"div0");
+	
+	NSArray *items=[[[dict objectAtIndex:language] objectForKey:key] objectForKey:@"items"];
+	NSEnumerator *itemEnumerator=[items objectEnumerator];
+	NSString *itemId;
+	
+	xmlXPathContextPtr context=xmlXPathNewContext(doc);
+	xmlNodeSetPtr found;
+	
+	while (itemId=[itemEnumerator nextObject])
+	{
+		char *query;
+		asprintf(&query,"//entry[@id='%s']",[itemId UTF8String]);
+			found = xmlXPathEvalExpression((xmlChar *)query,context)->nodesetval;
+			
+			if (found->nodeNr > 0) xmlAddChild(newnode,xmlCopyNode(found->nodeTab[0],1));
+			free(query);
+	}
+	
+	xmlXPathFreeContext(context);
+	
+	return newnode;
+}
+
+-(NSDictionary *)infoForKey:(NSString *)key language:(DFLanguage)language
+{
+	return [[dict objectAtIndex:language] objectForKey:key];
 }
 
 @end

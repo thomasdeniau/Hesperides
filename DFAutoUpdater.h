@@ -18,8 +18,9 @@
 	BOOL padCheckIsLexicon;
 	BOOL isAutomaticCheck;
 	
+	id sender;
 }
 
--(IBAction)checkForUpdates:(id)sender;
+-(IBAction)checkForUpdates:(id)aSender;
 
 @end

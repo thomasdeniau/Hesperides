@@ -11,14 +11,16 @@
 
 #import "DFLexiconDownloader.h"
 #import "NSFileManager-DFExtensions.h"
+#import "DFDictionaryParser.h"
 
 @implementation DFLexiconDownloader
 
--(id)initWithVersion:(NSString *)v
+-(id)initWithVersion:(NSString *)v dictionaryParser:(DFDictionaryParser*)aParser
 {
 	if (self=[super init])
 	{
 		version = [v copy];
+		parser = [aParser retain];
 	}
 	return self;
 }
@@ -26,14 +28,21 @@
 -(void)dealloc
 {
 	[version release];
+	[parser release];
+	[filename release];
 	[super dealloc];
 }
 
-- (void)download:(NSURLDownload *)download decideDestinationWithSuggestedFilename:(NSString *)filename;
+-(NSString *)downloadPath
 {
 	NSString *appSupport=[[NSFileManager defaultManager] findFolder:kApplicationSupportFolderType inDomain:kUserDomain];
-	[download setDestination:[[appSupport stringByAppendingPathComponent:@"Hesperides"] stringByAppendingPathComponent:filename]
-			  allowOverwrite:YES];
+	return [[appSupport stringByAppendingPathComponent:@"Hesperides"] stringByAppendingPathComponent:filename];
+}
+
+- (void)download:(NSURLDownload *)download decideDestinationWithSuggestedFilename:(NSString *)aFilename;
+{
+	filename = [aFilename copy];
+	[download setDestination:[self downloadPath] allowOverwrite:YES];
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
@@ -56,7 +65,7 @@
 
 - (void)download:(NSURLDownload *)download didReceiveDataOfLength:(unsigned)length;
 {
-	[progressBar incrementBy:length/expected];
+	[progressBar incrementBy:length/expected*0.7];
 }
 
 - (BOOL)download:(NSURLDownload *)download shouldDecodeSourceDataOfMIMEType:(NSString *)encodingType;
@@ -66,9 +75,14 @@
 
 - (void)downloadDidFinish:(NSURLDownload *)download;
 {
-	[statusText setStringValue:[NSString stringWithFormat:@"The version %@ of the sindarin lexicon was successfully downloaded. Please restart Hesperides to use it.",version]];
-	[progressBar setDoubleValue:100];
+	xmlDocPtr doc;
 	[download release];
+	[statusText setStringValue:@"Indexing the new lexicon..."];
+	doc=[parser parsePath:[self downloadPath]];
+	[parser indexVersion:version withDoc:doc];
+	xmlFreeDoc(doc);
+	[progressBar setDoubleValue:100.];
+	[statusText setStringValue:[NSString stringWithFormat:@"The version %@ of the sindarin lexicon was successfully downloaded. Please restart Hesperides to use it.",version]];
 }
 
 @end

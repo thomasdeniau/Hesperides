@@ -24,20 +24,22 @@ typedef enum _DFLanguage { DFSindarin, DFEnglish } DFLanguage;
 
 
 @interface DFDictionaryParser : NSObject 
-{
-	NSMutableDictionary *sindarinDict;
-	NSMutableDictionary *engDict;
-	
-	NSMutableArray *sindIndex;
+{	
+	NSArray *index;
 	NSArray *engIndex;
+	NSArray *sindIndex;
 	
+	NSArray *dict;	
 	MacPADSocket *pad;
-
 	xmlDocPtr doc;
 	NSString *lexiconVersion;
 }
 
 -(NSString *) lexiconVersion;
 -(xmlNodePtr) nodeForKey:(NSString *)key language:(DFLanguage)language;
+-(xmlDocPtr) indexVersion:(NSString *)version withDoc:(xmlDocPtr)theDoc;
+-(xmlDocPtr)parsePath:(NSString *)path;
+
+-(NSDictionary *)infoForKey:(NSString *)key language:(DFLanguage)language;
 
 @end

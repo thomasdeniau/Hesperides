@@ -20,12 +20,13 @@
 #include <libxslt/xsltutils.h>
 #include <libxml/parserInternals.h>
 #include "transcription.h"
+#import "DFDictionaryParser.h"
 
 @class DFArrayController;
 @class AGRegex;
-@class DFDictionaryParser;
 @class DFSampaConverter;
 @class DFAutoUpdater;
+@class DFHistoryController;
 
 @interface DFController : NSObject
 {
@@ -46,7 +47,8 @@
 	IBOutlet NSBox *box;
 	
 	IBOutlet DFAutoUpdater *updater;
-		
+	IBOutlet DFHistoryController *historyController;
+	
 	NSArray *modes;
 	NSArray *fonts;
 	DFDictionaryParser *dictionary;
@@ -66,5 +68,8 @@
 
 -(NSFont *)loadFontAtPath:(NSString *)path;
 -(NSString *)lexiconVersion;
+-(DFDictionaryParser *)parser;
+
+-(void)displayWord:(NSString *)key language:(DFLanguage)language silent:(BOOL)silent;
 
 @end

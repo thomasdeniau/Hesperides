@@ -20,6 +20,8 @@
 				E9CB13C306550267008B9774,
 				E9EECBE60685D4D300C5843E,
 				E9EECBE70685D4D300C5843E,
+				E943C37906E479EB008399D0,
+				E943C37A06E479EB008399D0,
 			);
 			isa = PBXGroup;
 			name = Classes;
@@ -347,6 +349,7 @@
 				E9E7D4F60674D97A003788F5,
 				E9A0E1BC067A43F2000EB2C0,
 				E9EECBE80685D4D300C5843E,
+				E943C37C06E479EB008399D0,
 			);
 			isa = PBXHeadersBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -403,6 +406,7 @@
 				E9E7D4F70674D97A003788F5,
 				E9A0E1BB067A43F2000EB2C0,
 				E9EECBE90685D4D300C5843E,
+				E943C37B06E479EB008399D0,
 			);
 			isa = PBXSourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -613,6 +617,34 @@
 		};
 		E9283037064A40630045C0B1 = {
 			fileRef = E9283036064A40630045C0B1;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		E943C37906E479EB008399D0 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.objcpp;
+			path = DFHistoryController.mm;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		E943C37A06E479EB008399D0 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			path = DFHistoryController.h;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		E943C37B06E479EB008399D0 = {
+			fileRef = E943C37906E479EB008399D0;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		E943C37C06E479EB008399D0 = {
+			fileRef = E943C37A06E479EB008399D0;
 			isa = PBXBuildFile;
 			settings = {
 			};

@@ -14,6 +14,7 @@
 #import <AGRegex/AGRegex.h>
 #import "NSFileManager-DFExtensions.h"
 #import "DFAutoUpdater.h"
+#import "DFHistoryController.h"
 #import "DFDictionaryParser.h"
 #import "sampa.h"
 
@@ -93,6 +94,10 @@ NSString *DFSearchModeDefault = @"DFSearchMode";
 	return [dictionary lexiconVersion];
 }
 
+-(DFDictionaryParser *)parser 
+{
+	return dictionary;
+}
 
 -(IBAction)setUseRegexp:(id)sender
 {
@@ -102,8 +107,9 @@ NSString *DFSearchModeDefault = @"DFSearchMode";
 
 +(void) initialize
 {
-	NSDictionary *initial=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:[NSNumber numberWithBool:NO],[NSNumber numberWithInt:0],nil]
-													  forKeys:[NSArray arrayWithObjects:DFAutomaticCheck,DFSearchModeDefault,nil]];
+	NSDictionary *initial=[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:NO],DFAutomaticCheck,
+																	 [NSNumber numberWithInt:0],DFSearchModeDefault,
+																	 [NSNumber numberWithInt:10],DFHistoryCapacity,NULL];
 	[[NSUserDefaults standardUserDefaults] registerDefaults:initial];
 	[[NSUserDefaultsController sharedUserDefaultsController] setInitialValues:initial];
 }
@@ -203,7 +209,7 @@ NSString *DFSearchModeDefault = @"DFSearchMode";
 	
 	if (pboardString)
 	{
-		NSLog(@"%@",pboardString);
+		//NSLog(@"%@",pboardString);
 		tengwarResult = (char*) narmacil->Roman2Tengwar([pboardString UTF8String]);
 		newString = [[NSAttributedString alloc] initWithString:[NSString stringWithCString:tengwarResult]
 												attributes:[NSDictionary dictionaryWithObject:[[fontPopup selectedItem] representedObject]
@@ -236,7 +242,7 @@ NSString *DFSearchModeDefault = @"DFSearchMode";
 													  NULL, kATSOptionFlagsDefault, &container);
 	if (osstatus != noErr) 
 	{
-		NSLog(@"Got error %d loading %@ !!!",osstatus,path);
+		//NSLog(@"Got error %d loading %@ !!!",osstatus,path);
 		return nil;
 	}
 	else {
@@ -277,7 +283,7 @@ NSString *DFSearchModeDefault = @"DFSearchMode";
 
 #pragma mark -- XSLT & displaying --
 
--(void)displayWord:(NSString *)key language:(DFLanguage)language;
+-(void)displayWord:(NSString *)key language:(DFLanguage)language silent:(BOOL)silent;
 {	
 	const char *params[3];
 	params[0] = "print";
@@ -285,6 +291,7 @@ NSString *DFSearchModeDefault = @"DFSearchMode";
 	params[2] = NULL;
 	
 	xmlNodePtr node=[dictionary nodeForKey:key language:language];
+	
 	xmlDocPtr nDoc=xmlNewDoc((xmlChar*)"1.0");
 	xmlDocPtr result;
 	xmlChar *resCharTab=NULL;
@@ -294,25 +301,33 @@ NSString *DFSearchModeDefault = @"DFSearchMode";
 
 #pragma mark -- tengwar --
 	
-	char *tengwarResult = (char*) narmacil->Roman2Tengwar([key UTF8String]);
-	[tengwar setString:[NSString stringWithCString:tengwarResult]];
+	[self fontChanged:fontPopup];
+	if (language == DFSindarin)
+	{
+		char *tengwarResult = (char*) narmacil->Roman2Tengwar([key UTF8String]);
+		[tengwar setString:[NSString stringWithCString:tengwarResult]];
+	} else [tengwar setString:@""];
+
+	[tabView selectTabViewItemAtIndex:language];
 	
-	xmlDocSetRootElement(nDoc, xmlCopyNode(node,1));
+	[((language == DFSindarin)?sindController:engController) setSelectedObjects:
+			[NSArray arrayWithObject:[dictionary infoForKey:key	language:language]]];
+	if (! silent) [historyController addEntry:key language:language];
+	
+	xmlDocSetRootElement(nDoc, node);
 	// we create a new document with only a div0 node containing relevant entries
 
 #pragma mark -- SAMPA conversion --
-
-	
-	/*xmlChar *pronPath =  (xmlChar *) "//pron";
-	xmlXPathContextPtr context;
-	xmlNodeSetPtr items;
-	int i;*/
 	
 /*	
 		
  LEGACY CODE
  (manual SAMPA conversion)
- 
+ xmlChar *pronPath =  (xmlChar *) "//pron";
+	xmlXPathContextPtr context;
+	xmlNodeSetPtr items;
+	int i;
+	
  context = xmlXPathNewContext(nDoc);
 	items = xmlXPathEvalExpression(pronPath,context)->nodesetval;
 	xmlXPathFreeContext(context);
@@ -353,9 +368,9 @@ NSString *DFSearchModeDefault = @"DFSearchMode";
 
 - (IBAction)display:(id)sender
 {
-	BOOL sind=([tabView indexOfTabViewItem:[tabView selectedTabViewItem]]==0);
-	int row=[sind?sindList:engList selectedRow];
-	if (row != -1) [self displayWord:[[[sind?sindController:engController arrangedObjects] objectAtIndex:row] objectForKey:@"id"] language:(sind?DFSindarin:DFEnglish)];
+	DFLanguage language=(DFLanguage)[tabView indexOfTabViewItem:[tabView selectedTabViewItem]];
+	int row=[(language == DFSindarin)?sindList:engList selectedRow];
+	if (row != -1) [self displayWord:[[[(language == DFSindarin)?sindController:engController arrangedObjects] objectAtIndex:row] objectForKey:@"id"] language:language silent:NO];
 }
 
 #pragma mark -- Cross - references --
@@ -387,7 +402,7 @@ NSString *DFSearchModeDefault = @"DFSearchMode";
 			{
 				word=(NSString *)CFURLCreateStringByReplacingPercentEscapes(kCFAllocatorDefault,(CFStringRef)word,CFSTR(""));
 				[listener ignore];
-				[self displayWord:word language:DFSindarin];
+				[self displayWord:word language:DFSindarin silent:NO];
 				[word release];
 			}
 				else [listener ignore];

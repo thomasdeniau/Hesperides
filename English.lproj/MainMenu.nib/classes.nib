@@ -22,6 +22,7 @@
                 engList = NSTableView; 
                 engSearchField = NSSearchField; 
                 fontPopup = NSPopUpButton; 
+                historyController = DFHistoryController; 
                 mainSplitView = NSSplitView; 
                 modePopup = NSPopUpButton; 
                 secondarySplitView = NSSplitView; 
@@ -32,6 +33,18 @@
                 tengwar = NSTextView; 
                 updater = DFAutoUpdater; 
                 webView = WebView; 
+            }; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {
+            ACTIONS = {back = id; forward = id; selectEntry = id; }; 
+            CLASS = DFHistoryController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                backItem = NSMenuItem; 
+                controller = DFController; 
+                forwardItem = NSMenuItem; 
+                menu = NSMenu; 
             }; 
             SUPERCLASS = NSObject; 
         }, 

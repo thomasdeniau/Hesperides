@@ -41,7 +41,7 @@
 								@"A new version of the sindarin lexicon, %@, is available. Do you want Hesperides to download it now ?",
 								@"OK", @"No, thanks", nil, [pad newVersion]) == NSOKButton)
 			{
-				DFLexiconDownloader *downloader=[[DFLexiconDownloader alloc] initWithVersion:[pad newVersion]];
+				DFLexiconDownloader *downloader=[[DFLexiconDownloader alloc] initWithVersion:[pad newVersion] dictionaryParser:[sender parser]];
 				NSURLRequest *request=[NSURLRequest requestWithURL:[NSURL URLWithString:[pad productDownloadURL]]];
 				[NSBundle loadNibNamed:@"DFLexiconDownloader" owner:downloader];
 				[[[NSURLDownload alloc] initWithRequest:request delegate:downloader] autorelease];
@@ -75,11 +75,13 @@
 	}
 }
 
--(IBAction)checkForUpdates:(id)sender;
+-(IBAction)checkForUpdates:(id)aSender;
 {
 	isAutomaticCheck=! [sender isKindOfClass:[NSMenuItem class]];
 	padCheckIsLexicon=FALSE;
 	[pad performCheck];
+	
+	sender = aSender;
 }
 
 
