@@ -63,7 +63,6 @@ xmlParserInputPtr xmlMyExternalEntityLoader(const char *URL, const char *ID, xml
 
 -(xmlDocPtr)parsePath:(NSString *)path
 {
-	defaultLoader = xmlGetExternalEntityLoader();
 	xmlSubstituteEntitiesDefault(1);
 	xmlLoadExtDtdDefaultValue = 1;
 	xmlSetExternalEntityLoader(xmlMyExternalEntityLoader);
@@ -135,6 +134,8 @@ xmlParserInputPtr xmlMyExternalEntityLoader(const char *URL, const char *ID, xml
 		
 #pragma mark -- Parse Dic --
 		
+		defaultLoader = xmlGetExternalEntityLoader();
+			
 		NSArray *dicts= [[[NSBundle mainBundle] pathsForResourcesOfType:@"xml" inDirectory:nil] arrayByAddingObjectsFromArray:
 			[fm filesWithPathExtension:@"xml" inDomain:kApplicationSupportFolderType subFolder:@"Hesperides"]];
 		

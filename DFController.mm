@@ -21,53 +21,67 @@
 NSString *DFAutomaticCheck = @"DFAutomaticCheck";
 NSString *DFSearchModeDefault = @"DFSearchMode";
 
+id sharedInstance = nil;
+
 @implementation DFController
+
++(id)sharedInstance
+{
+	if (sharedInstance) return sharedInstance;
+	else return [[self alloc] init];
+}
 
 -(id)init
 {
-	if (self = [super init])
-	{
-		
-		NSFileManager *fm=[NSFileManager defaultManager];
-		
-		//converter=[[DFSampaConverter alloc] init];
-		
-		leftparen=[[AGRegex alloc] initWithPattern:@"\\(\\s+" options:AGRegexMultiline];
-		rightparen=[[AGRegex alloc] initWithPattern:@"\\s+\\)" options:AGRegexMultiline];
-		leftcomma=[[AGRegex alloc] initWithPattern:@"\\s+," options:AGRegexMultiline];
-
-		dictionary = [[DFDictionaryParser alloc] init];
-		xsltRegisterSampaModule();
-		
-#pragma mark -- create Application Support/Hesperides
-		
-		BOOL isDir;
-		NSString *appSupportPath=[[fm findFolder:kApplicationSupportFolderType inDomain:kUserDomain] stringByAppendingPathComponent:@"Hesperides"];
-		if (! ([fm fileExistsAtPath:appSupportPath isDirectory:&isDir] && isDir))
-		{
-			[fm createDirectoryAtPath:appSupportPath attributes:nil];
-		}
-		
-#pragma mark -- Parse XSLT --
-				
-		NSString *xslPath=[[NSBundle mainBundle] pathForResource:@"entry" ofType:@"xsl"];
-		
-		xslt=xsltParseStylesheetFile((xmlChar*)[xslPath UTF8String]);
-		// we don't check for errors... assume the dictionary and XSL are correct
+	if (sharedInstance) [super dealloc];
 	
+	else
+	{
+		if (self = [super init])
+		{
+			
+			NSFileManager *fm=[NSFileManager defaultManager];
+			
+			//converter=[[DFSampaConverter alloc] init];
+			
+			leftparen=[[AGRegex alloc] initWithPattern:@"\\(\\s+" options:AGRegexMultiline];
+			rightparen=[[AGRegex alloc] initWithPattern:@"\\s+\\)" options:AGRegexMultiline];
+			leftcomma=[[AGRegex alloc] initWithPattern:@"\\s+," options:AGRegexMultiline];
+			
+			dictionary = [[DFDictionaryParser alloc] init];
+			xsltRegisterSampaModule();
+			
+#pragma mark -- create Application Support/Hesperides
+			
+			BOOL isDir;
+			NSString *appSupportPath=[[fm findFolder:kApplicationSupportFolderType inDomain:kUserDomain] stringByAppendingPathComponent:@"Hesperides"];
+			if (! ([fm fileExistsAtPath:appSupportPath isDirectory:&isDir] && isDir))
+			{
+				[fm createDirectoryAtPath:appSupportPath attributes:nil];
+			}
+			
+#pragma mark -- Parse XSLT --
+			
+			NSString *xslPath=[[NSBundle mainBundle] pathForResource:@"entry" ofType:@"xsl"];
+			
+			xslt=xsltParseStylesheetFile((xmlChar*)[xslPath UTF8String]);
+			// we don't check for errors... assume the dictionary and XSL are correct
+			
 #pragma mark -- Modes & Fonts --
-		
-		modes = [[[NSBundle mainBundle] pathsForResourcesOfType:@"mod" inDirectory:nil] arrayByAddingObjectsFromArray:
-			[fm filesWithPathExtension:@"mod" inDomain:kApplicationSupportFolderType subFolder:@"Hesperides"]];
-		fonts = [[[NSBundle mainBundle] pathsForResourcesOfType:@"ttf" inDirectory:nil] arrayByAddingObjectsFromArray:
-			[fm filesWithPathExtension:@"ttf" inDomain:kApplicationSupportFolderType subFolder:@"Hesperides"]];
-		
-		narmacil = new CTranscription;
-		
-		// all the code for this is actually in awakeFromNib
-		
+			
+			modes = [[[NSBundle mainBundle] pathsForResourcesOfType:@"mod" inDirectory:nil] arrayByAddingObjectsFromArray:
+				[fm filesWithPathExtension:@"mod" inDomain:kApplicationSupportFolderType subFolder:@"Hesperides"]];
+			fonts = [[[NSBundle mainBundle] pathsForResourcesOfType:@"ttf" inDirectory:nil] arrayByAddingObjectsFromArray:
+				[fm filesWithPathExtension:@"ttf" inDomain:kApplicationSupportFolderType subFolder:@"Hesperides"]];
+			
+			narmacil = new CTranscription;
+			
+			// all the code for this is actually in awakeFromNib
+			
+		}
+		sharedInstance = self;
 	}
-	return self;
+	return sharedInstance;
 }
 
 -(void)dealloc

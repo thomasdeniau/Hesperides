@@ -72,4 +72,6 @@
 
 -(void)displayWord:(NSString *)key language:(DFLanguage)language silent:(BOOL)silent;
 
++(id)sharedInstance;
+
 @end
