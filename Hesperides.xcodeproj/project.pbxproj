@@ -410,11 +410,11 @@
 				8D11072E0486CEB800E47090 /* Frameworks */,
 				E99A06F10646A17F004036FF /* CopyFiles */,
 				E910273806E5004E00902A10 /* CopyFiles */,
-				E9DD704507479E0F005278CB /* Rez */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				E9955B691170AA3700E62150 /* PBXTargetDependency */,
 			);
 			name = Hesperides;
 			productInstallPath = "$(HOME)/Applications";
@@ -464,16 +464,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXRezBuildPhase section */
-		E9DD704507479E0F005278CB /* Rez */ = {
-			isa = PBXRezBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXRezBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8D11072C0486CEB800E47090 /* Sources */ = {
