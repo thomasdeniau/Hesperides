@@ -1,4 +1,5 @@
 {
-	"English" = "English";
-	"Sindarin" = "Sindarin";
+	English = English;
+	Sindarin = Sindarin;
+	"Sindarin Classic" = Sindarin;
 }
