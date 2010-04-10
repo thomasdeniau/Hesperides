@@ -46,6 +46,10 @@ string trim(string s)
   unsigned int i,j;
   static string res;
 
+	if (s.size() == 0) {
+		return "";
+	}
+
   for(i=0;(i<s.size())&&((s[i]==' ')||(s[i]=='\t'));i++);
   for(j=s.size()-1;(j>=i)&&((s[j]==' ')||(s[j]=='\t'));j--);
 
@@ -410,7 +414,8 @@ char CTranscription::GetRomanDigit(char c)
 
 bool CTranscription::GetNextEntry(char *&b, SOneWayMode mode, int (CTranscription::*HashF)(unsigned char X))
 {
-  unsigned int j,hash;
+  unsigned int hash;
+	std::string::size_type j;
   string str;
 
 #ifdef SPY
@@ -476,7 +481,8 @@ bool CTranscription::GetNextEntry(char *&b, SOneWayMode mode, int (CTranscriptio
 
 void CTranscription::AutoReverse()
 {
-	unsigned int i,j,k,l;
+	unsigned int i,j,l;
+	std::string::size_type k;
 	int hash;
 	char c;
 	string s;
