@@ -70,7 +70,7 @@
 				NSRunAlertPanel(@"No new version available", @"No new version of Hesperides is currently available for download.",@"OK", nil, nil);
 			}
 			padCheckIsLexicon=TRUE;
-			[pad performCheck:[NSURL URLWithString:@"http://mapage.noos.fr/hisweloke/sindar/hesperides/lexicon.plist"] withVersion:[[NSApp delegate] lexiconVersion]];
+			[pad performCheck:[NSURL URLWithString:@"http://www.nousoft.org/lexicon.plist"] withVersion:[[NSApp delegate] lexiconVersion]];
 		}
 	}
 }
