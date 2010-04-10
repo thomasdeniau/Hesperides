@@ -24,6 +24,8 @@
 	<string>12</string>
 	<key>NSAppleScriptEnabled</key>
 	<string>YES</string>
+	<key>OSAScriptingDefinition</key>
+	<string>Hesperides.sdef</string>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>

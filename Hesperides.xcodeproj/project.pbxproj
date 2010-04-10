@@ -38,6 +38,8 @@
 		E9955BE31170AD1600E62150 /* libxslt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E9955BE21170AD1600E62150 /* libxslt.dylib */; };
 		E9955BEB1170AE6300E62150 /* AGRegex.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9955B651170AA2900E62150 /* AGRegex.framework */; };
 		E9955BEE1170AE7600E62150 /* AGRegex.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = E9955B651170AA2900E62150 /* AGRegex.framework */; };
+		E9955E861170FCDF00E62150 /* DFLexiconAccessor.h in Headers */ = {isa = PBXBuildFile; fileRef = E9955E841170FCDF00E62150 /* DFLexiconAccessor.h */; };
+		E9955E871170FCDF00E62150 /* DFLexiconAccessor.m in Sources */ = {isa = PBXBuildFile; fileRef = E9955E851170FCDF00E62150 /* DFLexiconAccessor.m */; };
 		E99A95EC074756B100D882B9 /* Hesperides.sdef in Resources */ = {isa = PBXBuildFile; fileRef = E99A95EB074756B100D882B9 /* Hesperides.sdef */; };
 		E9A0E1BB067A43F2000EB2C0 /* sampa.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E9A0E1B9067A43F2000EB2C0 /* sampa.cpp */; };
 		E9A0E1BC067A43F2000EB2C0 /* sampa.h in Headers */ = {isa = PBXBuildFile; fileRef = E9A0E1BA067A43F2000EB2C0 /* sampa.h */; };
@@ -162,6 +164,8 @@
 		E9955B5F1170AA2900E62150 /* AGRegex.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AGRegex.xcodeproj; path = AGRegex/AGRegex.xcodeproj; sourceTree = "<group>"; };
 		E9955BE01170AD0F00E62150 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = /usr/lib/libxml2.dylib; sourceTree = "<absolute>"; };
 		E9955BE21170AD1600E62150 /* libxslt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxslt.dylib; path = /usr/lib/libxslt.dylib; sourceTree = "<absolute>"; };
+		E9955E841170FCDF00E62150 /* DFLexiconAccessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFLexiconAccessor.h; sourceTree = "<group>"; };
+		E9955E851170FCDF00E62150 /* DFLexiconAccessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFLexiconAccessor.m; sourceTree = "<group>"; };
 		E99A95EB074756B100D882B9 /* Hesperides.sdef */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Hesperides.sdef; sourceTree = "<group>"; };
 		E9A0E1B9067A43F2000EB2C0 /* sampa.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = sampa.cpp; sourceTree = "<group>"; };
 		E9A0E1BA067A43F2000EB2C0 /* sampa.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = sampa.h; sourceTree = "<group>"; };
@@ -286,6 +290,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E99A95EB074756B100D882B9 /* Hesperides.sdef */,
 				E9BA8C8E07590B5C00B9AC27 /* Modules */,
 				E910270C06E4FDDE00902A10 /* Hesperides Help */,
 				E9EECBE20685B59600C5843E /* Hesperides.icns */,
@@ -364,7 +369,6 @@
 			children = (
 				E9BA8C6F0759087000B9AC27 /* DFTranscribeCommand.h */,
 				E9BA8C700759087000B9AC27 /* DFTranscribeCommand.mm */,
-				E99A95EB074756B100D882B9 /* Hesperides.sdef */,
 			);
 			name = "Apple Script";
 			sourceTree = "<group>";
@@ -374,6 +378,8 @@
 			children = (
 				E9E7D4F40674D97A003788F5 /* DFDictionaryParser.h */,
 				E9E7D4F50674D97A003788F5 /* DFDictionaryParser.m */,
+				E9955E841170FCDF00E62150 /* DFLexiconAccessor.h */,
+				E9955E851170FCDF00E62150 /* DFLexiconAccessor.m */,
 				E9516AA407468FF800F7E63A /* DFWord.h */,
 				E9516AA507468FF800F7E63A /* DFWord.m */,
 			);
@@ -427,6 +433,7 @@
 				E943C37C06E479EB008399D0 /* DFHistoryController.h in Headers */,
 				E9516AA607468FF800F7E63A /* DFWord.h in Headers */,
 				E9BA8C710759087000B9AC27 /* DFTranscribeCommand.h in Headers */,
+				E9955E861170FCDF00E62150 /* DFLexiconAccessor.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -540,6 +547,7 @@
 				E943C37B06E479EB008399D0 /* DFHistoryController.mm in Sources */,
 				E9516AA707468FF800F7E63A /* DFWord.m in Sources */,
 				E9BA8C720759087000B9AC27 /* DFTranscribeCommand.mm in Sources */,
+				E9955E871170FCDF00E62150 /* DFLexiconAccessor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -3,87 +3,61 @@
 <dictionary title="Hesperides">
   <suite name="Hesperides Suite" code="DFsc"
     description="Types and Classes for Hesperides">
-    <classes>
-		<class name="application" code="capp" description="" inherits="application">
-			<cocoa class="NSApplication"/>
-			<elements>
-				<element type="sindarin entry" description="Sindarin Words" access="r">
-					<cocoa method="sindarinWords" />
-					<accessor style="name" />
-					<accessor style="index" />
-					<accessor style="range" />
-					<accessor style="relative" />
-					<accessor style="test" />
-				</element>
-				<element type="english entry" description="English Words" access="r">
-					<cocoa method="englishWords" />
-					<accessor style="name" />
-					<accessor style="index" />
-					<accessor style="range" />
-					<accessor style="relative" />
-					<accessor style="test" />
-				</element>
-			</elements>
-			<responds-to-commands>
-				<responds-to name="transcribe">
-					<cocoa method="" />
-				</responds-to>
-			</responds-to-commands>
-		</class>
-		<class name="sindarin entry" code="DFsW" description="A Sindarin word" plural="sindarin entries">
-		    <cocoa class="DFWord" />
-			 <properties>
-				<property type="string" name="name" code="pnam" access="r" description="the word itself">
-					<cocoa method="identifier" />
-				</property>
-				<property type="list of string" name="translations" code="DFtr" access="r" description="meanings of this word">
-					<cocoa method="translations" />
-				</property>
-				<property type="string" name="xml definition" code="DFxd" access="r" description="TEI data about this word (merging all meanings)">
-					<cocoa method="xmlString" />
-				</property>
-				<property type="list of string" name="separate xml definitions" code="DFxs" access="r" description="TEI data for each meaning of this word">
-					<cocoa method="xmlMeanings" />
-				</property>
-				<property type="string" name="html definition" code="DFxh" access="r" description="HTML content displayed by Hesperides">
-					<cocoa method="htmlString" />
-				</property>
-			</properties> 
-		</class>
-		<class name="english entry" code="DFeW" description="An English word" plural="english entries">
-		    <cocoa class="DFWord" />
-			 <properties>
-				<property type="string" name="name" code="pnam" access="r" description="the word itself">
-					<cocoa method="identifier" />
-				</property>
-				<property type="list of string" name="translations" code="DFtr" access="r" description="meanings of this word">
-					<cocoa method="translations" />
-				</property>
-				<property type="string" name="xml definition" code="DFxd" access="r" description="TEI data about this word (merging all meanings)">
-					<cocoa method="xmlString" />
-				</property>
-				<property type="list of string" name="separate xml definitions" code="DFxs" access="r" description="TEI data for each meaning of this word">
-					<cocoa method="xmlMeanings" />
-				</property>
-				<property type="string" name="html definition" code="DFxh" access="r" description="HTML content displayed by Hesperides">
-					<cocoa method="htmlString" />
-				</property>
-			</properties> 
-					</class>
-	</classes>
-	<commands>
-		<command name="transcribe" code="DFscTran" description="Transcribe a word into Tengwar (using Narmacil)">
-			<parameter name="from language" code="Tlng" optional="optional" type="language" description="The language of the word to be transcribed (to auto-select a mode)"/>
-			<parameter name="word" code="Twrd" type="string" description="The word to transcribe" />
-			<cocoa class="DFTranscribeCommand" />
-		</command>
-	</commands>
-		<types>
-		<enumeration name="language" code="DFlE">
-			<enumerator name="sindarin" code="DFls" description="This word is a Sindarin one"/>
-			<enumerator name="english" code="DFle" description="This word is an English one"/>
-			<enumerator name="unknown" code="DFlu" description="The language of this word is unknown"/>
-		</enumeration>
-		</types>
+	<class name="application" code="capp" description="The application's top-level scripting object.">
+		<cocoa class="NSApplication"/>
+		<property type="lexicon" name="english lexicon" code="DFel" access="r" description="the English lexicon">
+			<cocoa key="englishAccessor" />
+		</property>
+		<property type="lexicon" name="sindarin lexicon" code="DFsl" access="r" description="the Sindarin lexicon">
+			<cocoa key="sindarinAccessor" />
+		</property>
+		<responds-to name="transcribe">
+			<cocoa method="" />
+		</responds-to>
+	</class>
+	<class name="lexicon" code="DFeL" description="List of words">
+		<cocoa class="DFLexiconAccessor" />
+		<element type="entry" description="an entry in this lexicon" access="r">
+			<cocoa key="words" />
+			<accessor style="name" />
+			<accessor style="index" />
+			<accessor style="range" />
+			<accessor style="relative" />
+			<accessor style="test" />
+		</element>
+	</class>
+	<class name="entry" code="DFsW" description="A lexicon entry" plural="entries">
+		<cocoa class="DFWord" />
+		<property type="text" name="name" code="pnam" access="r" description="the word itself">
+			<cocoa key="identifier" />
+		</property>
+		<property type="list of text" name="translations" code="DFtr" access="r" description="meanings of this word">
+			<cocoa key="translations" />
+		</property>
+		<property type="text" name="xml definition" code="DFxd" access="r" description="TEI data about this word (merging all meanings)">
+			<cocoa key="xmlString" />
+		</property>
+		<property type="list of text" name="separate xml definitions" code="DFxs" access="r" description="TEI data for each meaning of this word">
+			<cocoa key="xmlMeanings" />
+		</property>
+		<property type="text" name="html definition" code="DFxh" access="r" description="HTML content displayed by Hesperides">
+			<cocoa key="htmlString" />
+		</property>
+	</class>
+	<command name="transcribe" code="DFscTran" description="Transcribe a word into Tengwar (using Narmacil)">
+		<parameter name="from language" code="Tlng" optional="yes" type="language" description="The language of the word to be transcribed (to auto-select a mode)">
+			<cocoa key="from language" />
+		</parameter>
+		<parameter name="word" code="Twrd" type="text" description="The word to transcribe">
+			<cocoa key="word" />
+		</parameter>
+		<result type="text" description="the transcription" />
+		<cocoa class="DFTranscribeCommand" />
+	</command>
+	<enumeration name="language" code="DFlE">
+		<enumerator name="sindarin" code="DFls" description="This word is a Sindarin one"/>
+		<enumerator name="english" code="DFle" description="This word is an English one"/>
+		<enumerator name="unknown" code="DFlu" description="The language of this word is unknown"/>
+	</enumeration>
   </suite>
 </dictionary>

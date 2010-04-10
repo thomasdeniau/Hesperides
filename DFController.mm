@@ -19,6 +19,16 @@
 #import "DFHistoryController.h"
 #import "DFDictionaryParser.h"
 #import "DFWord.h"
+#import "DFLexiconAccessor.h"
+
+#include <libxml/parser.h>
+#include <libxml/xpath.h>
+#include <libxslt/xslt.h>
+#include <libxslt/xsltInternals.h>
+#include <libxslt/transform.h>
+#include <libxslt/xsltutils.h>
+#include <libxml/parserInternals.h>
+#include "transcription.h"
 
 NSString *DFAutomaticCheck = @"DFAutomaticCheck";
 NSString *DFSearchModeDefault = @"DFSearchMode";
@@ -26,6 +36,8 @@ NSString *DFSearchModeDefault = @"DFSearchMode";
 id sharedInstance = nil;
 
 @implementation DFController
+
+@synthesize englishAccessor, sindarinAccessor;
 
 +(id)sharedInstance
 {
@@ -73,6 +85,13 @@ id sharedInstance = nil;
 			
 			// all the code for this is actually in awakeFromNib
 			
+			sindarinAccessor = [[DFLexiconAccessor alloc] init];
+			sindarinAccessor.dictionary = dictionary;
+			sindarinAccessor.language = DFSindarin;
+
+			englishAccessor = [[DFLexiconAccessor alloc] init];
+			englishAccessor.dictionary = dictionary;
+			englishAccessor.language = DFEnglish;
 		}
 		sharedInstance = self;
 	}
@@ -84,8 +103,10 @@ id sharedInstance = nil;
 	//[converter release];
 	[dictionary release];
 	[modeLanguages release];
+	[englishAccessor release];
+	[sindarinAccessor release];
 	
-	delete narmacil;
+	delete (CTranscription *)narmacil;
 	
 	[super dealloc];
 }
@@ -172,7 +193,7 @@ id sharedInstance = nil;
 	
 	[self fontChanged:fontPopup];
 	
-	narmacil->LoadMode([[[modePopup itemWithTitle:@"Sindarin Classic"] representedObject] UTF8String]);
+	((CTranscription *)narmacil)->LoadMode([[[modePopup itemWithTitle:@"Sindarin Classic"] representedObject] UTF8String]);
 	
 	[engList setSortDescriptors:[NSArray arrayWithObject:[[[NSSortDescriptor alloc] initWithKey:@"identifier" 
 																					   ascending:YES 		
@@ -277,7 +298,7 @@ id sharedInstance = nil;
 
 - (IBAction)modeChanged:(id)sender;
 {
-	narmacil->LoadMode([[[sender selectedItem] representedObject] UTF8String]);
+	((CTranscription *)narmacil)->LoadMode([[[sender selectedItem] representedObject] UTF8String]);
 	[self display:self];
 }
 
@@ -302,7 +323,7 @@ id sharedInstance = nil;
 	CFIndex size = CFStringGetMaximumSizeForEncoding([word length],kCFStringEncodingISOLatin1);
 	char *cString = (char *)calloc(size+1, sizeof(char));
 	CFStringGetCString((CFStringRef)word,cString,size+1,kCFStringEncodingISOLatin1);
-	char *tengwarResult = (char*) narmacil->Roman2Tengwar(cString);
+	char *tengwarResult = (char*) ((CTranscription *)narmacil)->Roman2Tengwar(cString);
 	tengText = (NSString *)CFStringCreateWithCString(NULL,tengwarResult,kCFStringEncodingISOLatin1);
 
 	free(cString);
@@ -417,20 +438,9 @@ resizeSubviewsWithOldSize:(NSSize)oldSize
 -(BOOL)application:(NSApplication *)sender delegateHandlesKey:(NSString *)key
 {
 	//NSLog(@"Asked %@",key);
-	if ([key isEqualToString:@"sindarinWords"]) return YES;
-	if ([key isEqualToString:@"englishWords"]) return YES;
+	if ([key isEqualToString:@"sindarinAccessor"]) return YES;
+	if ([key isEqualToString:@"englishAccessor"]) return YES;
 	return NO;
 }
 
--(NSArray *)sindarinWords
-{
-	//NSLog(@"In SindarinWords !!!!!");
-	return [[[dictionary valueForKey:@"dict"] objectAtIndex:DFSindarin] allValues];
-}
-
--(NSArray *)englishWords
-{
-	//NSLog(@"In EnglishWords !!!!!");
-	return [[[dictionary valueForKey:@"dict"] objectAtIndex:DFEnglish] allValues];
-}
 @end

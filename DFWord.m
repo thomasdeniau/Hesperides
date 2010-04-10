@@ -13,7 +13,9 @@
 
 #import "DFWord.h"
 #import "DFDictionaryParser.h"
+#import "DFLexiconAccessor.h"
 #import <AGRegex/AGRegex.h>
+#import "DFController.h"
 
 NSDictionary *substitutions;
 
@@ -211,9 +213,12 @@ NSDictionary *substitutions;
 
 -(NSScriptObjectSpecifier *)objectSpecifier
 {
-	NSNameSpecifier *spec= [[[NSNameSpecifier alloc] initWithContainerClassDescription:(NSScriptClassDescription *)[NSApp classDescription] 
-																	containerSpecifier:nil
-																				   key:((language==DFSindarin)?@"sindarinWords":@"englishWords") 
+	DFLexiconAccessor * parent = (language==DFSindarin)?[[DFController sharedInstance] sindarinAccessor] : [[DFController sharedInstance] englishAccessor];
+	NSScriptObjectSpecifier * parentSpecifier = [parent objectSpecifier];
+	
+	NSNameSpecifier *spec= [[[NSNameSpecifier alloc] initWithContainerClassDescription:[parentSpecifier keyClassDescription]
+																	containerSpecifier: parentSpecifier
+																				   key: @"words" 
 																				  name:identifier] autorelease];
 	//NSLog(@"%@",spec);
 	return spec;

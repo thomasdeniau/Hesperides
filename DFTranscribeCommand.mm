@@ -19,9 +19,8 @@
 -(id)performDefaultImplementation
 {
 	NSDictionary *args=[self evaluatedArguments];
-	[[DFController sharedInstance] transcribeWord:[args objectForKey:@"word"] 
-									 fromLanguage:[DFWord languageFromCode:[[args objectForKey:@"from language"] intValue]]];
-	return nil;
+	return [[DFController sharedInstance] transcribeWord:[args objectForKey:@"word"] 
+											fromLanguage:[DFWord languageFromCode:[[args objectForKey:@"from language"] intValue]]];
 }
 
 @end

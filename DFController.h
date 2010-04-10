@@ -13,14 +13,6 @@
 #import <Cocoa/Cocoa.h>
 #import <WebKit/WebKit.h>
 
-#include <libxml/parser.h>
-#include <libxml/xpath.h>
-#include <libxslt/xslt.h>
-#include <libxslt/xsltInternals.h>
-#include <libxslt/transform.h>
-#include <libxslt/xsltutils.h>
-#include <libxml/parserInternals.h>
-#include "transcription.h"
 #import "DFDictionaryParser.h"
 
 @class DFArrayController;
@@ -28,6 +20,7 @@
 @class DFSampaConverter;
 @class DFAutoUpdater;
 @class DFHistoryController;
+@class DFLexiconAccessor;
 
 @interface DFController : NSObject
 {
@@ -54,7 +47,9 @@
 	NSArray *fonts;
 	DFDictionaryParser *dictionary;
 	
-	CTranscription *narmacil;
+	DFLexiconAccessor * englishAccessor, * sindarinAccessor;
+	
+	void * narmacil;
 	NSDictionary *modeLanguages;
 }
 
@@ -71,5 +66,8 @@
 -(NSString *)transcribeWord:(NSString *)word fromLanguage:(DFLanguage)language;
 
 +(id)sharedInstance;
+
+@property (retain) DFLexiconAccessor * englishAccessor;
+@property (retain) DFLexiconAccessor * sindarinAccessor;
 
 @end
