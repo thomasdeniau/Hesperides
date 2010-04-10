@@ -54,7 +54,10 @@ id sharedInstance = nil;
 			NSString *appSupportPath=[[fm findFolder:kApplicationSupportFolderType inDomain:kUserDomain] stringByAppendingPathComponent:@"Hesperides"];
 			if (! ([fm fileExistsAtPath:appSupportPath isDirectory:&isDir] && isDir))
 			{
-				[fm createDirectoryAtPath:appSupportPath attributes:nil];
+				NSError *error;
+				if (! [fm createDirectoryAtPath:appSupportPath withIntermediateDirectories:FALSE attributes:nil error:&error]) {
+					NSLog(@"Error creating the Hesperides folder in Application Support: %@", error);
+				}
 			}
 			
 #pragma mark -- Modes & Fonts --
@@ -233,18 +236,16 @@ id sharedInstance = nil;
 	CFStringRef fontName=NULL;
 	ATSFontContainerRef container;
 	FSRef fsRef; 
-	FSSpec fsSpec; 
 	ItemCount count;
 	int osstatus = FSPathMakeRef((const UInt8*)[path UTF8String], &fsRef, NULL); 
-	osstatus = FSGetCatalogInfo(&fsRef,kFSCatInfoNone,NULL,NULL,&fsSpec,NULL);
-	osstatus = ATSFontActivateFromFileSpecification ( &fsSpec, kATSFontContextLocal, kATSFontFormatUnspecified, 
-													  NULL, kATSOptionFlagsDefault, &container);
+	
+	osstatus = ATSFontActivateFromFileReference ( &fsRef, kATSFontContextLocal, kATSFontFormatUnspecified, 
+												  NULL, kATSOptionFlagsDefault, &container);
 	if (osstatus != noErr) 
 	{
-		//NSLog(@"Got error %d loading %@ !!!",osstatus,path);
+		NSLog(@"Got error %d loading %@ !!!",osstatus,path);
 		return nil;
-	}
-	else {
+	} else {
 		osstatus = ATSFontFindFromContainer (container, kATSOptionFlagsDefault, 0, NULL,&count);
 		
 		ATSFontRef *ioArray=(ATSFontRef *)malloc(count * sizeof(ATSFontRef));
@@ -282,7 +283,6 @@ id sharedInstance = nil;
 
 -(NSString *)transcribeWord:(NSString *)word fromLanguage:(DFLanguage)language;
 {
-
 	if (! [word canBeConvertedToEncoding:NSISOLatin1StringEncoding]) return nil;
 	
 	NSString *path = [[modePopup selectedItem] representedObject];

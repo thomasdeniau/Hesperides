@@ -26,7 +26,7 @@
 typedef enum _DFLanguage { DFSindarin, DFEnglish, DFUnknown } DFLanguage;
 
 
-@interface DFDictionaryParser : NSObject 
+@interface DFDictionaryParser : NSObject <NSXMLParserDelegate> 
 {	
 	NSArray *index;
 	NSArray *engIndex;

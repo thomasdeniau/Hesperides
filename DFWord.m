@@ -227,7 +227,7 @@ NSDictionary *substitutions;
 		case DFEnglish: return 'DFle'; break;
 		case DFUnknown: return 'DFlu'; break;
 	}
-	return NULL;
+	return 0;
 }
 
 +(DFLanguage)languageFromCode:(int)code

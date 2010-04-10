@@ -53,7 +53,7 @@
 - (void)downloadDidBegin:(NSURLDownload *)download;
 {
 	[download retain];
-	[statusText setStringValue:[NSString stringWithFormat:@"I am currently downloading version %@ of the sindarin lexicon…",version]];
+	[statusText setStringValue:[NSString stringWithFormat:@"I am currently downloading version %@ of the sindarin lexicon‚Ä¶",version]];
 	[progressBar setDoubleValue:0];
 }
 

@@ -120,7 +120,6 @@ xmlChar *wEncodeUTF8PointCode( int code, xmlChar *tmp )
 static
 xmlChar *wSampaConvertFunc( xmlChar *input, xmlChar *aux, int &len )
 {
-	int i = 0;
 	int c;
 	int utf;
 
@@ -187,7 +186,7 @@ xsltExtSampaToUnicode( xmlXPathParserContextPtr ctxt, int nargs )
     }
 	else
 	{
-		int i = 0, j = 0;
+		int i = 0;
 		xmlChar *ret = NULL;
 
 		while (i < xmlStrlen( str ))

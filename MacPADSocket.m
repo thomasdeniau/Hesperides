@@ -79,9 +79,12 @@ enum {
         [self returnError:kMacPADResultMissingValues message:@"MacPAD.url file was not found"];
         return;
     }
-    NSString *contents = [NSString stringWithContentsOfFile:path];
+	
+	NSError * error;
+    NSString *contents = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:&error];
     if (contents == nil) {
         // The file can't be opened
+		NSLog(@"Got error %@ trying to open the MacPAD url file", error);
         [self returnError:kMacPADResultMissingValues message:@"The MacPAD.url file can't be opened"];
         return;
     }

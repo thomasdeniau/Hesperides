@@ -175,7 +175,7 @@
 		E9CB13C206550267008B9774 /* NSFileManager-DFExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSFileManager-DFExtensions.h"; sourceTree = "<group>"; };
 		E9CB13C306550267008B9774 /* NSFileManager-DFExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSFileManager-DFExtensions.m"; sourceTree = "<group>"; };
 		E9CB144F0655293D008B9774 /* DFLexiconDownloader.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = DFLexiconDownloader.h; sourceTree = "<group>"; };
-		E9CB14500655293D008B9774 /* DFLexiconDownloader.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = DFLexiconDownloader.m; sourceTree = "<group>"; };
+		E9CB14500655293D008B9774 /* DFLexiconDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFLexiconDownloader.m; sourceTree = "<group>"; };
 		E9CB145706552CC0008B9774 /* DFLexiconDownloader.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = DFLexiconDownloader.nib; sourceTree = "<group>"; };
 		E9CE2D5C06453BA3006DD78D /* DFController.mm */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.objcpp; path = DFController.mm; sourceTree = "<group>"; };
 		E9CE2D5D06453BA3006DD78D /* DFController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = DFController.h; sourceTree = "<group>"; };
