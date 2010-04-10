@@ -12,7 +12,6 @@
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
-		E910254D06E4F32500902A10 /* libxml.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E910254C06E4F32500902A10 /* libxml.framework */; };
 		E910273906E5008200902A10 /* entries.html in CopyFiles */ = {isa = PBXBuildFile; fileRef = E910270D06E4FDDE00902A10 /* entries.html */; };
 		E910273A06E5008200902A10 /* Hesperides Help idx in CopyFiles */ = {isa = PBXBuildFile; fileRef = E910270E06E4FDDE00902A10 /* Hesperides Help idx */; };
 		E910273B06E5008200902A10 /* hesperides.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = E910270F06E4FDDE00902A10 /* hesperides.png */; };
@@ -35,6 +34,8 @@
 		E943C37C06E479EB008399D0 /* DFHistoryController.h in Headers */ = {isa = PBXBuildFile; fileRef = E943C37A06E479EB008399D0 /* DFHistoryController.h */; };
 		E9516AA607468FF800F7E63A /* DFWord.h in Headers */ = {isa = PBXBuildFile; fileRef = E9516AA407468FF800F7E63A /* DFWord.h */; };
 		E9516AA707468FF800F7E63A /* DFWord.m in Sources */ = {isa = PBXBuildFile; fileRef = E9516AA507468FF800F7E63A /* DFWord.m */; };
+		E9955BE11170AD0F00E62150 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E9955BE01170AD0F00E62150 /* libxml2.dylib */; };
+		E9955BE31170AD1600E62150 /* libxslt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E9955BE21170AD1600E62150 /* libxslt.dylib */; };
 		E99A95EC074756B100D882B9 /* Hesperides.sdef in Resources */ = {isa = PBXBuildFile; fileRef = E99A95EB074756B100D882B9 /* Hesperides.sdef */; };
 		E9A0E1BB067A43F2000EB2C0 /* sampa.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E9A0E1B9067A43F2000EB2C0 /* sampa.cpp */; };
 		E9A0E1BC067A43F2000EB2C0 /* sampa.h in Headers */ = {isa = PBXBuildFile; fileRef = E9A0E1BA067A43F2000EB2C0 /* sampa.h */; };
@@ -43,7 +44,6 @@
 		E9BA8C710759087000B9AC27 /* DFTranscribeCommand.h in Headers */ = {isa = PBXBuildFile; fileRef = E9BA8C6F0759087000B9AC27 /* DFTranscribeCommand.h */; };
 		E9BA8C720759087000B9AC27 /* DFTranscribeCommand.mm in Sources */ = {isa = PBXBuildFile; fileRef = E9BA8C700759087000B9AC27 /* DFTranscribeCommand.mm */; };
 		E9C8AE6306D69B900075AE8B /* AGRegex.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9C8AE6106D69B900075AE8B /* AGRegex.framework */; };
-		E9C8AE6406D69B900075AE8B /* libxslt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9C8AE6206D69B900075AE8B /* libxslt.framework */; };
 		E9C8AF1806D69CA90075AE8B /* AGRegex.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = E9C8AE6106D69B900075AE8B /* AGRegex.framework */; };
 		E9CB13B40654F9E8008B9774 /* MacPAD.url in Resources */ = {isa = PBXBuildFile; fileRef = E9CB13B30654F9E8008B9774 /* MacPAD.url */; };
 		E9CB13BE0654FA78008B9774 /* MacPADSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = E9CB13BC0654FA78008B9774 /* MacPADSocket.h */; };
@@ -111,7 +111,6 @@
 		32CA4F630368D1EE00C91783 /* Hesperides_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Hesperides_Prefix.pch; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* Hesperides.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hesperides.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		E910254C06E4F32500902A10 /* libxml.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = libxml.framework; sourceTree = "<group>"; };
 		E910270D06E4FDDE00902A10 /* entries.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = entries.html; path = "Hesperides Help/entries.html"; sourceTree = SOURCE_ROOT; };
 		E910270E06E4FDDE00902A10 /* Hesperides Help idx */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Hesperides Help idx"; path = "Hesperides Help/Hesperides Help idx"; sourceTree = SOURCE_ROOT; };
 		E910270F06E4FDDE00902A10 /* hesperides.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = hesperides.png; path = "Hesperides Help/hesperides.png"; sourceTree = SOURCE_ROOT; };
@@ -136,6 +135,8 @@
 		E943C37A06E479EB008399D0 /* DFHistoryController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = DFHistoryController.h; sourceTree = "<group>"; };
 		E9516AA407468FF800F7E63A /* DFWord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFWord.h; sourceTree = "<group>"; };
 		E9516AA507468FF800F7E63A /* DFWord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFWord.m; sourceTree = "<group>"; };
+		E9955BE01170AD0F00E62150 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = /usr/lib/libxml2.dylib; sourceTree = "<absolute>"; };
+		E9955BE21170AD1600E62150 /* libxslt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxslt.dylib; path = /usr/lib/libxslt.dylib; sourceTree = "<absolute>"; };
 		E99A95EB074756B100D882B9 /* Hesperides.sdef */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Hesperides.sdef; sourceTree = "<group>"; };
 		E9A0E1B9067A43F2000EB2C0 /* sampa.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = sampa.cpp; sourceTree = "<group>"; };
 		E9A0E1BA067A43F2000EB2C0 /* sampa.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = sampa.h; sourceTree = "<group>"; };
@@ -144,7 +145,6 @@
 		E9BA8C6F0759087000B9AC27 /* DFTranscribeCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFTranscribeCommand.h; sourceTree = "<group>"; };
 		E9BA8C700759087000B9AC27 /* DFTranscribeCommand.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DFTranscribeCommand.mm; sourceTree = "<group>"; };
 		E9C8AE6106D69B900075AE8B /* AGRegex.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AGRegex.framework; sourceTree = "<group>"; };
-		E9C8AE6206D69B900075AE8B /* libxslt.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = libxslt.framework; sourceTree = "<group>"; };
 		E9CB13B30654F9E8008B9774 /* MacPAD.url */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MacPAD.url; sourceTree = "<group>"; };
 		E9CB13BC0654FA78008B9774 /* MacPADSocket.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MacPADSocket.h; sourceTree = "<group>"; };
 		E9CB13BD0654FA78008B9774 /* MacPADSocket.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = MacPADSocket.m; sourceTree = "<group>"; };
@@ -178,8 +178,8 @@
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
 				E9FA53E10646D8710027A64B /* WebKit.framework in Frameworks */,
 				E9C8AE6306D69B900075AE8B /* AGRegex.framework in Frameworks */,
-				E9C8AE6406D69B900075AE8B /* libxslt.framework in Frameworks */,
-				E910254D06E4F32500902A10 /* libxml.framework in Frameworks */,
+				E9955BE11170AD0F00E62150 /* libxml2.dylib in Frameworks */,
+				E9955BE31170AD1600E62150 /* libxslt.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -212,9 +212,7 @@
 			isa = PBXGroup;
 			children = (
 				E9C8AE6106D69B900075AE8B /* AGRegex.framework */,
-				E9C8AE6206D69B900075AE8B /* libxslt.framework */,
 				E9FA53E00646D8710027A64B /* WebKit.framework */,
-				E910254C06E4F32500902A10 /* libxml.framework */,
 				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
 			);
 			name = "Linked Frameworks";
@@ -246,6 +244,8 @@
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 				E9CB145706552CC0008B9774 /* DFLexiconDownloader.nib */,
+				E9955BE01170AD0F00E62150 /* libxml2.dylib */,
+				E9955BE21170AD1600E62150 /* libxslt.dylib */,
 			);
 			name = Hesperides;
 			sourceTree = "<group>";
@@ -557,7 +557,7 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
 				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
-				HEADER_SEARCH_PATHS = "";
+				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = "";
@@ -592,7 +592,7 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
 				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
-				HEADER_SEARCH_PATHS = "";
+				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = "";
@@ -625,7 +625,7 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
 				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
-				HEADER_SEARCH_PATHS = "";
+				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = "";
