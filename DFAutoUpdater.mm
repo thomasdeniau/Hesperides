@@ -57,37 +57,59 @@
 	{
 		if ([[[n userInfo] objectForKey:MacPADNewVersionAvailable] boolValue])
 		{
-			if (NSRunAlertPanel(@"New version available", 
-								@"A new version of the sindarin lexicon, %@, is available. Do you want Hesperides to download it now ?",
-								@"OK", @"No, thanks", nil, [pad newVersion]) == NSOKButton)
+            NSAlert *newVersionAlert = [[NSAlert alloc] init];
+            newVersionAlert.messageText = @"New version available";
+            newVersionAlert.informativeText = [NSString stringWithFormat:@"A new version of the sindarin lexicon, %@, is available. Do you want Hesperides to download it now ?", [pad newVersion]];
+            [newVersionAlert addButtonWithTitle:@"OK"];
+            [newVersionAlert addButtonWithTitle:@"No thanks"];
+
+			if ([newVersionAlert runModal] == NSAlertFirstButtonReturn)
 			{
 				DFLexiconDownloader *downloader=[[DFLexiconDownloader alloc] initWithVersion:[pad newVersion] dictionaryParser:[[DFController sharedInstance] parser]];
 				NSURLRequest *request=[NSURLRequest requestWithURL:[NSURL URLWithString:[pad productDownloadURL]]];
-				[NSBundle loadNibNamed:@"DFLexiconDownloader" owner:downloader];
+                [[NSBundle mainBundle] loadNibNamed:@"DFLexiconDownloader" owner:downloader topLevelObjects:NULL];
 				[[[NSURLDownload alloc] initWithRequest:request delegate:downloader] autorelease];
 			}
+            [newVersionAlert release];
 		}
 		else if (! isAutomaticCheck)
 		{
-			NSRunAlertPanel(@"No new version available", @"No new version of the sindarin lexicon is currently available for download.",@"OK", nil, nil);
+            NSAlert *newVersionAlert = [[NSAlert alloc] init];
+            newVersionAlert.messageText = @"No new version available";
+            newVersionAlert.informativeText = @"No new version of the sindarin lexicon is currently available for download.";
+            [newVersionAlert addButtonWithTitle:@"OK"];
+            [newVersionAlert runModal];
+            [newVersionAlert release];
+
 		}
 	}
 	else
 	{
 		if ([[[n userInfo] objectForKey:MacPADNewVersionAvailable] boolValue])
 		{
-			if (NSRunAlertPanel(@"New version available", 
-								@"A new version of Hesperides, %@, is available. Do you want to download it now ?",
-								@"OK", @"No, thanks", nil, [pad newVersion]) == NSOKButton)
+            NSAlert *newVersionAlert = [[NSAlert alloc] init];
+            newVersionAlert.messageText = @"New version available";
+            newVersionAlert.informativeText = [NSString stringWithFormat:@"A new version of Hesperides, %@, is available. Do you want to download it now ?", [pad newVersion]];
+            [newVersionAlert addButtonWithTitle:@"OK"];
+            [newVersionAlert addButtonWithTitle:@"No thanks"];
+
+			if ([newVersionAlert runModal] == NSAlertFirstButtonReturn)
 			{
 				[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:[pad productDownloadURL]]];
 			}
+            
+            [newVersionAlert release];
 		}
 		else
 		{
 			if (! isAutomaticCheck)
 			{
-				NSRunAlertPanel(@"No new version available", @"No new version of Hesperides is currently available for download.",@"OK", nil, nil);
+                NSAlert *newVersionAlert = [[NSAlert alloc] init];
+                newVersionAlert.messageText = @"No new version available";
+                newVersionAlert.informativeText = @"No new version of Hesperides is currently available for download.";
+                [newVersionAlert addButtonWithTitle:@"OK"];
+                [newVersionAlert runModal];
+                [newVersionAlert release];
 			}
 			padCheckIsLexicon=TRUE;
 			[pad performCheck:[NSURL URLWithString:@"http://www.nousoft.org/lexicon.plist"] withVersion:[[NSApp delegate] lexiconVersion]];
