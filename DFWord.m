@@ -32,7 +32,6 @@
 #import "DFWord.h"
 #import "DFDictionaryParser.h"
 #import "DFLexiconAccessor.h"
-#import <AGRegex/AGRegex.h>
 #import "DFController.h"
 
 NSDictionary *substitutions;
@@ -44,9 +43,9 @@ NSDictionary *substitutions;
 	// same substitutions for all instances...
 	substitutions = [[NSDictionary alloc] initWithObjects:
 		[NSArray arrayWithObjects:
-			[AGRegex regexWithPattern:@"\\(\\s+" options:AGRegexMultiline],
-			[AGRegex regexWithPattern:@"\\s+\\)" options:AGRegexMultiline],
-			[AGRegex regexWithPattern:@"\\s+," options:AGRegexMultiline],NULL]
+         [NSRegularExpression regularExpressionWithPattern:@"\\(\\s+" options:0 error:NULL],
+         [NSRegularExpression regularExpressionWithPattern:@"\\s+\\)" options:0 error:NULL],
+         [NSRegularExpression regularExpressionWithPattern:@"\\s+," options:0 error:NULL],NULL]
 												  forKeys:[NSArray arrayWithObjects:@"(",@")",@",",NULL]];
 }
 
@@ -204,7 +203,7 @@ NSDictionary *substitutions;
 	xmlDocPtr result;
 	xmlChar *resCharTab=NULL;
 	
-	NSString *resString;
+	NSMutableString *resString;
 	
 	int resSize=0;
 		
@@ -216,14 +215,15 @@ NSDictionary *substitutions;
 	xmlFreeDoc(nDoc);
 	
 	xsltSaveResultToString(&resCharTab, &resSize, result, [[DFDictionaryParser sharedParser] transformStylesheet]);
-	resString = [[[NSString alloc] initWithData:[NSData dataWithBytesNoCopy:resCharTab length:resSize] encoding:NSISOLatin1StringEncoding] autorelease];
+	resString = [[[NSMutableString alloc] initWithData:[NSData dataWithBytesNoCopy:resCharTab length:resSize] encoding:NSISOLatin1StringEncoding] autorelease];
 
 	NSString *key;
 	NSEnumerator *anEnumerator = [substitutions keyEnumerator];
 	
 	while (key = [anEnumerator nextObject])
 	{
-		resString = [[substitutions objectForKey:key] replaceWithString:key inString:resString];
+        NSRegularExpression *re = [substitutions objectForKey:key];
+		[re replaceMatchesInString:resString options:0 range:NSMakeRange(0, [resString length]) withTemplate:key];
 	}
 	
 	return resString;

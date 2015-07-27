@@ -1,7 +1,0 @@
---- 
-AGRegex: 
-  squashed: true
-  url: http://source.colloquy.info/svn/trunk/Frameworks/AGRegex
-  type: svn
-  revision: 4565
-  remote: braid/AGRegex

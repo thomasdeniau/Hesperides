@@ -34,7 +34,6 @@
 #import "DFDictionaryParser.h"
 
 @class DFArrayController;
-@class AGRegex;
 @class DFSampaConverter;
 @class DFAutoUpdater;
 @class DFHistoryController;

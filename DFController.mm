@@ -31,7 +31,6 @@
 #import "DFController.h"
 #import "DFArrayController.h"
 // import "DFSampaConverter.h"
-#import <AGRegex/AGRegex.h>
 #import "NSFileManager-DFExtensions.h"
 #import "DFAutoUpdater.h"
 #import "DFHistoryController.h"

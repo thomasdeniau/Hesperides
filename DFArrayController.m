@@ -31,7 +31,6 @@
 #import "DFArrayController.h"
 
 #import <Foundation/NSKeyValueObserving.h>
-#import <AGRegex/AGRegex.h>
 
 @implementation DFArrayController
 
@@ -52,7 +51,7 @@
 - (NSArray *)arrangeObjects:(NSArray *)objects 
 {
 	DFSearchMode useRegexp = [[[NSUserDefaults standardUserDefaults] objectForKey:DFSearchModeDefault] intValue];
-	AGRegex *re=nil;
+	NSRegularExpression *re=nil;
 	
     if ((searchString == nil) || ([searchString isEqualToString:@""])) {
         return [super arrangeObjects:objects];   
@@ -65,10 +64,10 @@
 	switch (useRegexp)
 	{
 		case DFSubstringRegexes:
-			re=[AGRegex regexWithPattern:searchString];
+			re=[NSRegularExpression regularExpressionWithPattern:searchString options:0 error:NULL];
 			break;
 		case DFWholeRegexes:
-			re=[AGRegex regexWithPattern:[NSString stringWithFormat:@"^%@$",searchString]];
+			re=[NSRegularExpression regularExpressionWithPattern:[NSString stringWithFormat:@"^%@$",searchString] options:0 error:NULL];
 			break;
 		default:
 			re=nil;
@@ -79,7 +78,8 @@
 	{
 		if (useRegexp != DFPlainSearch)
 		{
-			selectWord = ([re findInString:[item valueForKeyPath:@"identifier"]] != nil);
+            NSString *identifier = [item valueForKeyPath:@"identifier"];
+			selectWord = ([re numberOfMatchesInString:identifier options:0 range:NSMakeRange(0, identifier.length)] != 0);
 		}
 		else
 		{
