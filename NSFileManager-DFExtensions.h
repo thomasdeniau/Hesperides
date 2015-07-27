@@ -34,7 +34,6 @@
 
 @interface NSFileManager (DFExtensions)
 
--(NSString *)findFolder:(OSType)folder inDomain:(short)domain;
--(NSArray *)filesWithPathExtension:(NSString *)extension inDomain:(OSType)domain subFolder:(NSString *)sub;
+-(NSArray *)filesWithPathExtension:(NSString *)extension inDirectory:(NSSearchPathDirectory)directory subFolder:(NSString *)sub;
 
 @end

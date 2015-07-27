@@ -75,7 +75,7 @@
 - (IBAction)modeChanged:(id)sender;
 - (IBAction)setUseRegexp:(id)sender;
 
--(NSFont *)loadFontAtPath:(NSString *)path;
+-(NSFont *)loadFontAtURL:(NSURL*)url;
 -(NSString *)lexiconVersion;
 -(DFDictionaryParser *)parser;
 

@@ -368,7 +368,8 @@ string CTranscription::duodec2dec(string val)
 
 bool CTranscription::SmartCompare(string left, string right)
 {
-  unsigned int i,j,len1,n, m;
+  unsigned int i,j,len1;
+  int n, m;
   bool b;
 
   if(!UseSmart)
@@ -482,7 +483,7 @@ bool CTranscription::GetNextEntry(char *&b, SOneWayMode mode, int (CTranscriptio
 void CTranscription::AutoReverse()
 {
 	unsigned int i,j,l;
-	std::string::size_type k;
+	int k;
 	int hash;
 	char c;
 	string s;
@@ -598,7 +599,8 @@ void CTranscription::AutoReverse()
 
 void CTranscription::Optimize(SOneWayMode m)
 {
-  unsigned int i,j,k;
+  unsigned int i,j;
+  int k;
 
 #ifdef SPY
   printf("CTranscription::Optimize\n");
@@ -623,7 +625,8 @@ const char *CTranscription::Roman2Tengwar(const char *str)
 {
 	string temp, cislo;
 	static string res;
-	unsigned int i, j, l;
+	unsigned int i, l;
+    int j;
 	int hash;
 	const char *p, *p2, *pend, *pp;
 	char prev, next;
@@ -764,19 +767,20 @@ const char *CTranscription::Roman2Tengwar(const char *str)
 				break;
 			}
 		}
-		if(!letterfound)
+        if(!letterfound) {
 			if(alert)
 			{
 				for(i=0;!IsWhiteChar(p[i]);i++);
 				throw EPatternNotFound(string(p2).substr(0,i).c_str());
 			}
-				else
-				{
-					temp='\xae';//'?'
-					p++;
-					p2++;
-				}
-				res+=temp;
+            else
+            {
+                temp='\xae';//'?'
+                p++;
+                p2++;
+            }
+        }
+        res+=temp;
 #ifdef KYLIX
 		Application.ProcessMessages();
 #endif
@@ -798,7 +802,8 @@ const char *CTranscription::Tengwar2Roman(const char *str)
   static string res;
   unsigned int i, j, l;
   int hash;
-  const char *p, *p2, *pend, *pp;
+  const char *p, *pend, *pp;
+  //  const char *p2;
   char next;
   string prev;
   bool letterfound;
@@ -839,7 +844,7 @@ const char *CTranscription::Tengwar2Roman(const char *str)
       res+=p[0];
       prev=NON_ALPHA_NUM;
       p++;
-      p2++;
+     // p2++;
     }
     if(p>=pend)
       break;
@@ -862,7 +867,7 @@ const char *CTranscription::Tengwar2Roman(const char *str)
       }
       l=pp-p;
       p+=l;
-      p2+=l;
+      //p2+=l;
       if(cislo!="")
       {
         for(j=cislo.size();j>=1;j--)
@@ -915,21 +920,22 @@ const char *CTranscription::Tengwar2Roman(const char *str)
         else
           prev=NON_ALPHA_NUM;
         p+=l;
-        p2+=l;
+        //p2+=l;
         break;
       }
     }
-    if(!letterfound)
-      if(alert)
-      {
-        for(i=0;!IsWhiteChar(p[i]);i++);
-        throw EPatternNotFound(string(p).substr(0,i).c_str());
-      }
-      else
-      {
-        temp="?";
-        p++;
-        p2++;
+      if(!letterfound) {
+          if(alert)
+          {
+            for(i=0;!IsWhiteChar(p[i]);i++);
+            throw EPatternNotFound(string(p).substr(0,i).c_str());
+          }
+          else
+          {
+            temp="?";
+            p++;
+           // p2++;
+          }
       }
     res+=temp;
 #ifdef KYLIX

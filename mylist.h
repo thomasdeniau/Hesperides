@@ -29,7 +29,7 @@ class mylist
     void add(T s);
     void remove(int n);
     void clear();
-    unsigned int find(T s);
+    int find(T s);
     void exchange(int n1, int n2);
 };
 
@@ -134,7 +134,7 @@ void mylist<T>::clear()
 }
 
 template<class T>
-unsigned int mylist<T>::find(T s)
+int mylist<T>::find(T s)
 {
   mynode<T> *location;
   int i, found=-1;

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 42;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -36,8 +36,6 @@
 		E9516AA707468FF800F7E63A /* DFWord.m in Sources */ = {isa = PBXBuildFile; fileRef = E9516AA507468FF800F7E63A /* DFWord.m */; };
 		E9955BE11170AD0F00E62150 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E9955BE01170AD0F00E62150 /* libxml2.dylib */; };
 		E9955BE31170AD1600E62150 /* libxslt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E9955BE21170AD1600E62150 /* libxslt.dylib */; };
-		E9955BEB1170AE6300E62150 /* AGRegex.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9955B651170AA2900E62150 /* AGRegex.framework */; };
-		E9955BEE1170AE7600E62150 /* AGRegex.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = E9955B651170AA2900E62150 /* AGRegex.framework */; };
 		E9955E861170FCDF00E62150 /* DFLexiconAccessor.h in Headers */ = {isa = PBXBuildFile; fileRef = E9955E841170FCDF00E62150 /* DFLexiconAccessor.h */; };
 		E9955E871170FCDF00E62150 /* DFLexiconAccessor.m in Sources */ = {isa = PBXBuildFile; fileRef = E9955E851170FCDF00E62150 /* DFLexiconAccessor.m */; };
 		E99A95EC074756B100D882B9 /* Hesperides.sdef in Resources */ = {isa = PBXBuildFile; fileRef = E99A95EB074756B100D882B9 /* Hesperides.sdef */; };
@@ -72,30 +70,6 @@
 		E9FA55D50647E3330027A64B /* Credits.rtfd in Resources */ = {isa = PBXBuildFile; fileRef = E9FA55D40647E3330027A64B /* Credits.rtfd */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		E9955B641170AA2900E62150 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E9955B5F1170AA2900E62150 /* AGRegex.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 1C6A0C360865E09C009EE6D2;
-			remoteInfo = "AGRegex (Framework)";
-		};
-		E9955B661170AA2900E62150 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E9955B5F1170AA2900E62150 /* AGRegex.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 1C6A0C4C0865E09C009EE6D2;
-			remoteInfo = "RegexTest (Application)";
-		};
-		E9955B681170AA3700E62150 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E9955B5F1170AA2900E62150 /* AGRegex.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 1C6A0C250865E09C009EE6D2;
-			remoteInfo = "AGRegex (Framework)";
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXCopyFilesBuildPhase section */
 		E910273806E5004E00902A10 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -121,7 +95,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				E9955BEE1170AE7600E62150 /* AGRegex.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -161,7 +134,6 @@
 		E943C37A06E479EB008399D0 /* DFHistoryController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = DFHistoryController.h; sourceTree = "<group>"; };
 		E9516AA407468FF800F7E63A /* DFWord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFWord.h; sourceTree = "<group>"; };
 		E9516AA507468FF800F7E63A /* DFWord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFWord.m; sourceTree = "<group>"; };
-		E9955B5F1170AA2900E62150 /* AGRegex.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AGRegex.xcodeproj; path = AGRegex/AGRegex.xcodeproj; sourceTree = "<group>"; };
 		E9955BE01170AD0F00E62150 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = /usr/lib/libxml2.dylib; sourceTree = "<absolute>"; };
 		E9955BE21170AD1600E62150 /* libxslt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxslt.dylib; path = /usr/lib/libxslt.dylib; sourceTree = "<absolute>"; };
 		E9955E841170FCDF00E62150 /* DFLexiconAccessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFLexiconAccessor.h; sourceTree = "<group>"; };
@@ -203,7 +175,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E9955BEB1170AE6300E62150 /* AGRegex.framework in Frameworks */,
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
 				E9FA53E10646D8710027A64B /* WebKit.framework in Frameworks */,
 				E9955BE11170AD0F00E62150 /* libxml2.dylib in Frameworks */,
@@ -265,7 +236,6 @@
 		29B97314FDCFA39411CA2CEA /* Hesperides */ = {
 			isa = PBXGroup;
 			children = (
-				E9955B5F1170AA2900E62150 /* AGRegex.xcodeproj */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
@@ -342,15 +312,6 @@
 				E9282E2606498ACB0045C0B1 /* transcription.cpp */,
 			);
 			name = Narmacil;
-			sourceTree = "<group>";
-		};
-		E9955B601170AA2900E62150 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				E9955B651170AA2900E62150 /* AGRegex.framework */,
-				E9955B671170AA2900E62150 /* RegexTest.app */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		E9A0E1BF067A43F8000EB2C0 /* SAMPA */ = {
@@ -454,7 +415,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				E9955B691170AA3700E62150 /* PBXTargetDependency */,
 			);
 			name = Hesperides;
 			productInstallPath = "$(HOME)/Applications";
@@ -467,40 +427,24 @@
 /* Begin PBXProject section */
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0640;
+			};
 			buildConfigurationList = E9955A841170930000E62150 /* Build configuration list for PBXProject "Hesperides" */;
-			compatibilityVersion = "Xcode 2.4";
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				en,
+			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* Hesperides */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = E9955B601170AA2900E62150 /* Products */;
-					ProjectRef = E9955B5F1170AA2900E62150 /* AGRegex.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				8D1107260486CEB800E47090 /* Hesperides */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		E9955B651170AA2900E62150 /* AGRegex.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = AGRegex.framework;
-			remoteRef = E9955B641170AA2900E62150 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		E9955B671170AA2900E62150 /* RegexTest.app */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
-			path = RegexTest.app;
-			remoteRef = E9955B661170AA2900E62150 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		8D1107290486CEB800E47090 /* Resources */ = {
@@ -553,14 +497,6 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTargetDependency section */
-		E9955B691170AA3700E62150 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "AGRegex (Framework)";
-			targetProxy = E9955B681170AA3700E62150 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
 /* Begin PBXVariantGroup section */
 		089C165CFE840E0CC02AAC07 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
@@ -596,14 +532,9 @@
 		E9955A7E117092FF00E62150 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ONLY_ACTIVE_ARCH_PRE_XCODE_3_1)";
+				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUGGING_SYMBOLS = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					/Users/thomas/Documents/Dev/Hesperides,
-					/Users/thomas/hesperides/trunk,
-					/Users/thomas/Documents/Dev/Hesperides/trunk,
-				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_ENABLE_TRIGRAPHS = NO;
@@ -618,7 +549,8 @@
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = "";
-				ONLY_ACTIVE_ARCH_PRE_XCODE_3_1 = "$(NATIVE_ARCH_ACTUAL)";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = Hesperides;
@@ -636,14 +568,8 @@
 		E9955A7F117092FF00E62150 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1)";
-				ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1 = "x86_64 i386 ppc";
+				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					/Users/thomas/Documents/Dev/Hesperides,
-					/Users/thomas/hesperides/trunk,
-					/Users/thomas/Documents/Dev/Hesperides/trunk,
-				);
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_ENABLE_TRIGRAPHS = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
@@ -656,6 +582,7 @@
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = "";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = Hesperides;

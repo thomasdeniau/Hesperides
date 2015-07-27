@@ -55,7 +55,7 @@
 
 -(NSString *)downloadPath
 {
-	NSString *appSupport=[[NSFileManager defaultManager] findFolder:kApplicationSupportFolderType inDomain:kUserDomain];
+	NSString *appSupport= NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES)[0];
 	return [[appSupport stringByAppendingPathComponent:@"Hesperides"] stringByAppendingPathComponent:filename];
 }
 
@@ -83,7 +83,7 @@
 	[progressBar setDoubleValue:0];
 }
 
-- (void)download:(NSURLDownload *)download didReceiveDataOfLength:(unsigned)length;
+- (void)download:(NSURLDownload *)download didReceiveDataOfLength:(NSUInteger)length;
 {
 	[progressBar incrementBy:length/expected*0.7];
 }

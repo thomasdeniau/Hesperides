@@ -160,7 +160,7 @@ static void
 xsltExtSampaToUnicode( xmlXPathParserContextPtr ctxt, int nargs )
 {
 	xmlXPathObjectPtr obj;
-    xmlChar *str;
+    xmlChar *str = NULL;
 
     if ((nargs != 1) || (ctxt->value == NULL)) 
 	{

@@ -34,29 +34,15 @@
 
 @implementation NSFileManager(DFExtensions)
 
--(NSString *)findFolder:(OSType)folder inDomain:(short)domain
+
+-(NSArray *)filesWithPathExtension:(NSString *)extension inDirectory:(NSSearchPathDirectory)directory subFolder:(NSString *)sub;
 {
-	CFStringRef     appSupportPath=nil;
-	CFURLRef        appSupportURL=nil;
-	FSRef           appSupportRef;
-	OSErr           err;
-
-	err = FSFindFolder(domain, folder, kDontCreateFolder, &appSupportRef);
-	if (err == noErr) appSupportURL = CFURLCreateFromFSRef(kCFAllocatorSystemDefault, &appSupportRef);
-	if (appSupportURL)  appSupportPath = CFURLCopyFileSystemPath(appSupportURL, kCFURLPOSIXPathStyle);
-
-	return (NSString *)appSupportPath;
-}
-
--(NSArray *)filesWithPathExtension:(NSString *)extension inDomain:(OSType)domain subFolder:(NSString *)sub;
-{
-	OSType domains[3]={kUserDomain, kLocalDomain, kNetworkDomain};
 	NSMutableArray *files=[NSMutableArray array];
-	int i;
+    NSArray *folders = NSSearchPathForDirectoriesInDomains(directory, NSAllDomainsMask, YES);
 
-	for (i=0;i<3;i++)
+	for (NSString *folder in folders)
 	{
-		NSString *path = [[self findFolder:domain inDomain:domains[i]] stringByAppendingPathComponent:sub];
+		NSString *path = [folder stringByAppendingPathComponent:sub];
 		
 		NSDirectoryEnumerator *e=[[NSFileManager defaultManager] enumeratorAtPath:path];
 		NSString *file;

@@ -33,7 +33,7 @@
 
 @class DFDictionaryParser;
 
-@interface DFLexiconDownloader : NSWindowController
+@interface DFLexiconDownloader : NSWindowController <NSURLDownloadDelegate>
 {
     IBOutlet id progressBar;
     IBOutlet id statusText;

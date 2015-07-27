@@ -13,7 +13,7 @@ class EPatternNotFound: public exception
     string str;
   public:
     EPatternNotFound(const string &what):str(what){}
-    const char *what()
+    const char *what() const _NOEXCEPT
     {
       return str.c_str();
     }
@@ -26,7 +26,7 @@ class EUnknownFormat: public exception
     string str;
   public:
     EUnknownFormat(const string &what):str(what){}
-    const char *what()
+    const char *what() const _NOEXCEPT
     {
       return str.c_str();
     }
@@ -39,7 +39,7 @@ class EConvertError: public exception
     string str;
   public:
     EConvertError(const string &what):str(what){}
-    const char *what()
+    const char *what() const _NOEXCEPT
     {
       return str.c_str();
     }
@@ -52,7 +52,7 @@ class EAbort: public exception
     string str;
   public:
     EAbort(const string &what):str(what){}
-    const char *what()
+    const char *what() const _NOEXCEPT
     {
       return str.c_str();
     }
@@ -65,7 +65,7 @@ class EFileNotFound: public exception
     string str;
   public:
     EFileNotFound(const string &what):str(what){}
-    const char *what()
+    const char *what() const _NOEXCEPT
     {
       return str.c_str();
     }

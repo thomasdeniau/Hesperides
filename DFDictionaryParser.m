@@ -176,7 +176,7 @@ static id sharedParser=nil;
 			defaultLoader = xmlGetExternalEntityLoader();
 			
 			NSArray *dicts= [[[NSBundle mainBundle] pathsForResourcesOfType:@"xml" inDirectory:nil] arrayByAddingObjectsFromArray:
-				[fm filesWithPathExtension:@"xml" inDomain:kApplicationSupportFolderType subFolder:@"Hesperides"]];
+				[fm filesWithPathExtension:@"xml" inDirectory:NSApplicationSupportDirectory subFolder:@"Hesperides"]];
 			
 			//NSLog(@"Loading index : %d",time(NULL));
 			doc=[self mostRecentDict:dicts];		

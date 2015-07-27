@@ -16,7 +16,7 @@
 
 -(NSScriptObjectSpecifier *)objectSpecifier
 {
-	NSNameSpecifier *spec= [[[NSPropertySpecifier alloc] initWithContainerClassDescription:(NSScriptClassDescription *)[NSApp classDescription] 
+	NSPropertySpecifier *spec= [[[NSPropertySpecifier alloc] initWithContainerClassDescription:(NSScriptClassDescription *)[NSApp classDescription]
 																	containerSpecifier:nil
 																				   key:((language==DFSindarin)?@"sindarinAccessor":@"englishAccessor")] autorelease];
 	NSLog(@"%@",spec);

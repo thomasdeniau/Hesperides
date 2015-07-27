@@ -47,6 +47,8 @@
 #include <libxml/parserInternals.h>
 #include "transcription.h"
 
+#import <CoreText/CTFontManager.h>
+
 NSString *DFAutomaticCheck = @"DFAutomaticCheck";
 NSString *DFSearchModeDefault = @"DFSearchMode";
 
@@ -80,7 +82,7 @@ id sharedInstance = nil;
 #pragma mark -- create Application Support/Hesperides
 			
 			BOOL isDir;
-			NSString *appSupportPath=[[fm findFolder:kApplicationSupportFolderType inDomain:kUserDomain] stringByAppendingPathComponent:@"Hesperides"];
+			NSString *appSupportPath=[NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES)[0] stringByAppendingPathComponent:@"Hesperides"];
 			if (! ([fm fileExistsAtPath:appSupportPath isDirectory:&isDir] && isDir))
 			{
 				NSError *error;
@@ -92,9 +94,9 @@ id sharedInstance = nil;
 #pragma mark -- Modes & Fonts --
 			
 			modes = [[[NSBundle mainBundle] pathsForResourcesOfType:@"mod" inDirectory:nil] arrayByAddingObjectsFromArray:
-				[fm filesWithPathExtension:@"mod" inDomain:kApplicationSupportFolderType subFolder:@"Hesperides"]];
-			fonts = [[[NSBundle mainBundle] pathsForResourcesOfType:@"ttf" inDirectory:nil] arrayByAddingObjectsFromArray:
-				[fm filesWithPathExtension:@"ttf" inDomain:kApplicationSupportFolderType subFolder:@"Hesperides"]];
+				[fm filesWithPathExtension:@"mod" inDirectory:NSApplicationSupportDirectory subFolder:@"Hesperides"]];
+			fonts = [[[NSBundle mainBundle] URLsForResourcesWithExtension:@"ttf" subdirectory:nil] arrayByAddingObjectsFromArray:
+				[fm filesWithPathExtension:@"ttf" inDirectory:NSApplicationSupportDirectory subFolder:@"Hesperides"]];
 			
 			modeLanguages = [[NSDictionary alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"KnownModules" ofType:@"plist"]];
 			
@@ -187,10 +189,10 @@ id sharedInstance = nil;
 		[m setRepresentedObject:s];
 		[[modePopup menu] addItem:m];
 	}
-	e= [fonts objectEnumerator];
-	while (s=[e nextObject]) 
+
+    for (NSURL *fontURL in fonts)
 	{
-		NSFont *f=[self loadFontAtPath:s];
+        NSFont *f=[self loadFontAtURL:fontURL];
 		if (f)
 		{
 			NSMenuItem *m=[[NSMenuItem alloc] initWithTitle:[f displayName] 
@@ -268,37 +270,36 @@ id sharedInstance = nil;
 
 #pragma mark -- Load Font --
 
--(NSFont *)loadFontAtPath:(NSString *)path
+-(NSFont *)loadFontAtURL:(NSURL*)url
 {
-	NSFont *f=nil;
-	CFStringRef fontName=NULL;
-	ATSFontContainerRef container;
-	FSRef fsRef; 
-	ItemCount count;
-	int osstatus = FSPathMakeRef((const UInt8*)[path UTF8String], &fsRef, NULL); 
-	
-	osstatus = ATSFontActivateFromFileReference ( &fsRef, kATSFontContextLocal, kATSFontFormatUnspecified, 
-												  NULL, kATSOptionFlagsDefault, &container);
-	if (osstatus != noErr) 
-	{
-		NSLog(@"Got error %d loading %@ !!!",osstatus,path);
-		return nil;
-	} else {
-		osstatus = ATSFontFindFromContainer (container, kATSOptionFlagsDefault, 0, NULL,&count);
-		
-		ATSFontRef *ioArray=(ATSFontRef *)malloc(count * sizeof(ATSFontRef));
-		osstatus = ATSFontFindFromContainer (container, kATSOptionFlagsDefault, count, ioArray,&count);
-		osstatus = ATSFontGetName (ioArray[0], kATSOptionFlagsDefault, &fontName);
-		
-		if (fontName) f = [NSFont fontWithName:(NSString*)fontName size:24];
-		if ((osstatus != noErr) || !f)
-		{
-			NSRunAlertPanel(@"Unavailable Font",@"Sorry, Hesperides can't load the font %@ ! Your font file may be invalid.",
-							@"OK",nil,nil,fontName?(NSString *)fontName:[path lastPathComponent]);
-			return nil;
-		}
-		else return f;
-	}
+    NSArray *descriptors = [(NSArray*)CTFontManagerCreateFontDescriptorsFromURL((CFURLRef)url) autorelease];
+    NSFont *f = nil;
+    NSString *fontName = nil;
+    if ([descriptors count] > 0) {
+        NSFontDescriptor *descriptor = descriptors[0];
+        fontName = [descriptor objectForKey:NSFontFamilyAttribute];
+        f = [NSFont fontWithDescriptor:descriptor size:24];
+        if (f == nil) {
+            CFErrorRef error = NULL;
+            if (!CTFontManagerRegisterFontsForURL((CFURLRef)url, kCTFontManagerScopeUser, &error)) {
+                NSLog(@"Got error %@ loading %@ !!!", error, url);
+                CFRelease(error);
+            } else {
+                f = [NSFont fontWithDescriptor:descriptors[0] size:24];
+            }
+        }
+    }
+    
+    if (f == nil) {
+        NSAlert *alert = [[NSAlert alloc] init];
+        alert.messageText = @"Unavailable Font";
+        alert.informativeText = [NSString stringWithFormat:@"Sorry, Hesperides can't load the font %@ ! Your font file may be invalid.", fontName?(NSString *)fontName:[url lastPathComponent]];
+        [alert addButtonWithTitle:@"OK"];
+        [alert runModal];
+        [alert release];
+    }
+    
+    return f;
 }
 
 - (IBAction)fontChanged:(id)sender;
