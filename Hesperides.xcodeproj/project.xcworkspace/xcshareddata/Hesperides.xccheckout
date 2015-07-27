@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>60F04CD0-4202-4A52-9AF4-E8A20B32E888</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Hesperides</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>D11026E01E7866C7E3098B0A41FE75695AD310EB</key>
+		<string>https://github.com/thomasdeniau/Hesperides.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Hesperides.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>D11026E01E7866C7E3098B0A41FE75695AD310EB</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/thomasdeniau/Hesperides.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>D11026E01E7866C7E3098B0A41FE75695AD310EB</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>D11026E01E7866C7E3098B0A41FE75695AD310EB</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Hesperides</string>
+		</dict>
+	</array>
+</dict>
+</plist>
