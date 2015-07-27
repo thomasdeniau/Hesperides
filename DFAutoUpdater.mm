@@ -112,7 +112,7 @@
                 [newVersionAlert release];
 			}
 			padCheckIsLexicon=TRUE;
-			[pad performCheck:[NSURL URLWithString:@"http://www.nousoft.org/lexicon.plist"] withVersion:[[NSApp delegate] lexiconVersion]];
+			[pad performCheck:[NSURL URLWithString:@"http://www.deniau.org/hesperides/lexicon.plist"] withVersion:[[NSApp delegate] lexiconVersion]];
 		}
 	}
 }
