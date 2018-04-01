@@ -5,7 +5,7 @@
 //  Created by Thomas Deniau on Mon Jun 07 2004.
 
 
-// Copyright (c) 2004-2015, Thomas Deniau
+// Copyright (c) 2004-2018, Thomas Deniau
 // All rights reserved.
 //
 // Redistribution and use in source and binary forms, with or without

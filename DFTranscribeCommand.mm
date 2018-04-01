@@ -3,10 +3,8 @@
 //  Hesperides
 //
 //  Created by Thomas Deniau on 27/11/04.
-//  Copyright 2004 Nousoft. All rights reserved.
-//
 
-// Copyright (c) 2004-2015, Thomas Deniau
+// Copyright (c) 2004-2018, Thomas Deniau
 // All rights reserved.
 //
 // Redistribution and use in source and binary forms, with or without

@@ -3,7 +3,7 @@
 //  Hesperides
 //
 //  Created by Thomas Deniau on 10/04/10.
-//  Copyright 2010 Nousoft. All rights reserved.
+//  Copyright 2010-2018 Thomas Deniau. All rights reserved.
 //
 
 #import <Cocoa/Cocoa.h>
