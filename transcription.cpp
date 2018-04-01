@@ -36,14 +36,14 @@ int pos(char c, char *str)
   char *p=strchr(str, c);
 
   if(p)
-    return p-str;
+    return (int)(p-str);
   else
     return -1;
 }
 
 string trim(string s)
 {
-  unsigned int i,j;
+  unsigned long i,j;
   static string res;
 
 	if (s.size() == 0) {
@@ -195,12 +195,12 @@ int CTranscription::RomanHash(unsigned char c)
 
 int CTranscription::TengHash(unsigned char c)
 {
-   int n;
+   size_t n;
 
    for(unsigned int i=0;i<equivs.count();i++)
    {
      n=equivs[i].find(c);
-     if(n>=0)
+     if(n != std::string::npos)
        return Ord(equivs[i][0]);
    }
    return Ord(c);
@@ -349,7 +349,7 @@ string CTranscription::dec2duodec(string val)
 
 string CTranscription::duodec2dec(string val)
 {
-  int i, n, digit;
+  long i, n, digit;
   string res;
 
   n=0;
@@ -368,8 +368,8 @@ string CTranscription::duodec2dec(string val)
 
 bool CTranscription::SmartCompare(string left, string right)
 {
-  unsigned int i,j,len1;
-  int n, m;
+  unsigned int i,j;
+  size_t len1;
   bool b;
 
   if(!UseSmart)
@@ -386,9 +386,9 @@ bool CTranscription::SmartCompare(string left, string right)
       b=false;
       for(j=0;j<equivs.count();j++)
       {
-        n=equivs[j].find(left[i]);
-        m=equivs[j].find(right[i]);
-        if((n>=0)&&(m>=0))
+        size_t n=equivs[j].find(left[i]);
+        size_t m=equivs[j].find(right[i]);
+        if((n != string::npos) && (m != string::npos))
         {
           b=true;
           break;
@@ -483,7 +483,6 @@ bool CTranscription::GetNextEntry(char *&b, SOneWayMode mode, int (CTranscriptio
 void CTranscription::AutoReverse()
 {
 	unsigned int i,j,l;
-	int k;
 	int hash;
 	char c;
 	string s;
@@ -508,14 +507,14 @@ void CTranscription::AutoReverse()
 				//find last tengwa in dest and find corresponding letter in src
 				//and place it into id
 				c=0;
-				for(k=(*mode.r2t.dest[i])[j].size()-1;k>=0;k--)
+				for(long k=(*mode.r2t.dest[i])[j].size()-1;k>=0;k--)
 					if(!IsTehta((*mode.r2t.dest[i])[j][k]))
 					{
 						c=(*mode.r2t.dest[i])[j][k];
 						break;
 					}
 						found=false;
-				for(k=0;k<256;k++)
+				for(long k=0;k<256;k++)
 				{
 					for(l=0;l<mode.r2t.src[k]->count();l++)
 						if(((*mode.r2t.dest[k])[l]==string(1,c))&&
@@ -543,7 +542,7 @@ void CTranscription::AutoReverse()
 							hash=TengHash(c);
 							//choose from what starts with my letter
 							//I want just the letter itself, not the longer words
-							for(k=0;k<mode.t2r.src[hash]->count();k++)
+							for(int k=0;k<mode.t2r.src[hash]->count();k++)
 								if((*mode.t2r.src[hash])[k]==string(1,c))
 								{
 									s=(*mode.t2r.dest[hash])[k];
@@ -558,14 +557,14 @@ void CTranscription::AutoReverse()
 							//find last tengwa in dest and find corresponding letter in src
 							//and place it into id
 							c=0;
-							for(k=(*mode.r2t.dest[i])[j].size()-1;k>=0;k--)
+							for(long k=(*mode.r2t.dest[i])[j].size()-1;k>=0;k--)
 								if(!IsTehta((*mode.r2t.dest[i])[j][k]))
 								{
 									c=(*mode.r2t.dest[i])[j][k];
 									break;
 								}
 									found=false;
-							for(k=0;k<256;k++)
+							for(int k=0;k<256;k++)
 							{
 								for(l=0;l<mode.r2t.src[k]->count();l++)
 									if(((*mode.r2t.dest[k])[l]==string(1,c))&&
@@ -585,7 +584,7 @@ void CTranscription::AutoReverse()
 							//erase the duplicate fields that might have emerged
 							for(i=0;i<256;i++)
 								for(j=0;j<mode.t2r.src[i]->count();j++)
-									for(k=mode.t2r.src[i]->count()-1; k>j; k--)
+									for(int k=mode.t2r.src[i]->count()-1; k>j; k--)
 										if(((*mode.t2r.src[i])[k]==(*mode.t2r.src[i])[j])&&
 										   ((*mode.t2r.prev[i])[k]==(*mode.t2r.prev[i])[j]))
 										{
@@ -625,8 +624,7 @@ const char *CTranscription::Roman2Tengwar(const char *str)
 {
 	string temp, cislo;
 	static string res;
-	unsigned int i, l;
-    int j;
+	unsigned int i;
 	int hash;
 	const char *p, *p2, *pend, *pp;
 	char prev, next;
@@ -634,15 +632,13 @@ const char *CTranscription::Roman2Tengwar(const char *str)
 #ifdef DEBUG
 	int tstart, tstop;
 #endif
-	int len;
 	string testentry, str2;
-	unsigned int entrylen;
 	
 #ifdef SPY
 	fprintf(stderr,"CTranscription::Roman2Tengwar\n");
 #endif
 	p2=str;
-	len=strlen(str);
+	size_t len=strlen(str);
 #ifdef DEBUG
 	tstart=time(NULL);
 #endif
@@ -681,14 +677,14 @@ const char *CTranscription::Roman2Tengwar(const char *str)
 				cislo+=pp[0];
 				pp++;
 			}
-			l=pp-p;
+			long l=pp-p;
 			p+=l;
 			p2+=l;
 			if(cislo!="")
 			{
 				if(!decimal)
 					cislo=dec2duodec(cislo);
-				for(j=cislo.size()-1;j>=0;j--)
+				for(long j=cislo.size()-1;j>=0;j--)
 				{
 					temp+=GetTengwarDigit(cislo[j]);
 					if((lsd)&&(j==cislo.size()-1))//least sign. digit
@@ -731,13 +727,13 @@ const char *CTranscription::Roman2Tengwar(const char *str)
 		hash=Ord(p[0]);
 		for(i=0;i<mode.r2t.src[hash]->count();i++)
 		{
-			entrylen=(*mode.r2t.src[hash])[i].size();
+			size_t entrylen=(*mode.r2t.src[hash])[i].size();
 			testentry="";
-			for(j=0;j<entrylen;j++)
+			for(size_t j=0;j<entrylen;j++)
 				testentry+=p[j];
 			if((*mode.r2t.src[hash])[i]==testentry)
 			{
-				l=(*mode.r2t.src[hash])[i].size();
+				size_t l=(*mode.r2t.src[hash])[i].size();
 				if((*mode.r2t.next[hash])[i]!="")
 				{
 					next=(*mode.r2t.next[hash])[i][0];
@@ -800,7 +796,7 @@ const char *CTranscription::Tengwar2Roman(const char *str)
 {
   string temp, cislo;
   static string res;
-  unsigned int i, j, l;
+  unsigned int i, j;
   int hash;
   const char *p, *pend, *pp;
   //  const char *p2;
@@ -810,14 +806,12 @@ const char *CTranscription::Tengwar2Roman(const char *str)
 #ifdef DEBUG
   int tstart, tstop;
 #endif
-  int len;
   string testentry;
-  unsigned int entrylen;
 
 #ifdef SPY
   printf("CTranscription::Tengwar2Roman\n");
 #endif
-  len=strlen(str);
+  size_t len=strlen(str);
 #ifdef DEBUG
   tstart=time(NULL);
 #endif
@@ -865,12 +859,12 @@ const char *CTranscription::Tengwar2Roman(const char *str)
         prev=pp[0];
         pp++;
       }
-      l=pp-p;
+      long l=pp-p;
       p+=l;
       //p2+=l;
       if(cislo!="")
       {
-        for(j=cislo.size();j>=1;j--)
+        for(long j=cislo.size();j>=1;j--)
           temp+=GetRomanDigit(cislo[j]);
         if(!decimal)
           temp=duodec2dec(temp);
@@ -887,13 +881,13 @@ const char *CTranscription::Tengwar2Roman(const char *str)
     hash=TengHash(p[0]);//Ord(p[0]);
     for(i=0;i<mode.t2r.src[hash]->count();i++)
     {
-      entrylen=(*mode.t2r.src[hash])[i].size();
+      size_t entrylen=(*mode.t2r.src[hash])[i].size();
       testentry="";
       for(j=0;j<entrylen;j++)
         testentry+=p[j];
       if(SmartCompare((*mode.t2r.src[hash])[i],testentry))
       {
-        l=(*mode.t2r.src[hash])[i].size();
+        size_t l=(*mode.t2r.src[hash])[i].size();
         if((*mode.t2r.next[hash])[i]!="")
         {
           next=(*mode.t2r.next[hash])[i][0];
@@ -958,7 +952,9 @@ const char *CTranscription::Tengwar2Roman(const char *str)
 
 void CTranscription::LoadMode(const char *filename)
 {
-  int i, l, entries, r2tentries, t2rentries, head;
+  int entries;
+  size_t head, i;
+  long l, r2tentries, t2rentries;
   FILE *f;
   char *b, *origb=0;
   bool version1;
