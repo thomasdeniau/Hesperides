@@ -372,7 +372,7 @@ id sharedInstance = nil;
 - (IBAction)display:(id)sender
 {
 	DFLanguage language=(DFLanguage)[tabView indexOfTabViewItem:[tabView selectedTabViewItem]];
-	int row=[(language == DFSindarin)?sindList:engList selectedRow];
+	NSInteger row=[(language == DFSindarin)?sindList:engList selectedRow];
 	if (row != -1) [self displayWord:[[[(language == DFSindarin)?sindController:engController arrangedObjects] objectAtIndex:row] objectForKey:@"identifier"] language:language silent:NO];
 }
 

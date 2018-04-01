@@ -275,9 +275,9 @@ enum {
     NSArray *partsB = [self splitVersion:versionB];
     
     NSString *partA, *partB;
-    int i, n, typeA, typeB, intA, intB;
+    int i, typeA, typeB, intA, intB;
     
-    n = MIN([partsA count], [partsB count]);
+    NSUInteger n = MIN([partsA count], [partsB count]);
     for (i = 0; i < n; ++i) {
         partA = [partsA objectAtIndex:i];
         partB = [partsB objectAtIndex:i];
@@ -357,7 +357,7 @@ enum {
 {
     NSString *character;
     NSMutableString *s;
-    int i, n, oldType, newType;
+    int i, oldType, newType;
     NSMutableArray *parts = [NSMutableArray array];
     if ([version length] == 0) {
         // Nothing to do here
@@ -365,7 +365,7 @@ enum {
     }
     s = [[[version substringToIndex:1] mutableCopy] autorelease];
     oldType = [self getCharType:s];
-    n = [version length] - 1;
+    NSUInteger n = [version length] - 1;
     for (i = 1; i <= n; ++i) {
         character = [version substringWithRange:NSMakeRange(i, 1)];
         newType = [self getCharType:character];

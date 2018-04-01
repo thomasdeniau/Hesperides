@@ -38,7 +38,7 @@
     IBOutlet id progressBar;
     IBOutlet id statusText;
 	
-	unsigned int expected;
+	long long expected;
 	
 	NSString *version;
 	NSString *filename;

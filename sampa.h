@@ -51,7 +51,7 @@ extern "C" {
 
 #define SAMPA_NS_URI "http://www.jrrvf.com/hisweloke/sindar/sampa"
 
-XSLTPUBFUN void XSLTCALL xsltRegisterSampaModule();
+XSLTPUBFUN void XSLTCALL xsltRegisterSampaModule(void);
 
 #ifdef __cplusplus
 }
