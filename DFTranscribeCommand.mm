@@ -38,7 +38,8 @@
 {
 	NSDictionary *args=[self evaluatedArguments];
 	return [[DFController sharedInstance] transcribeWord:[args objectForKey:@"word"] 
-											fromLanguage:[DFWord languageFromCode:[[args objectForKey:@"from language"] intValue]]];
+											fromLanguage:[DFWord languageFromCode:[[args objectForKey:@"from language"] intValue]]
+                                                   error:NULL];
 }
 
 @end

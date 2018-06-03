@@ -80,7 +80,7 @@
 -(DFDictionaryParser *)parser;
 
 -(void)displayWord:(NSString *)key language:(DFLanguage)language silent:(BOOL)silent;
--(NSString *)transcribeWord:(NSString *)word fromLanguage:(DFLanguage)language;
+-(NSString *)transcribeWord:(NSString *)word fromLanguage:(DFLanguage)language error:(NSError**)error;
 
 +(id)sharedInstance;
 

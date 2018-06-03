@@ -228,8 +228,8 @@ id sharedInstance = nil;
 #pragma mark -- Transcribe Service --
 
 - (void)transcript:(NSPasteboard *)pboard
-			 userData:(NSString *)userData
-				error:(NSString **)error
+          userData:(NSString *)userData
+             error:(NSString **)errorString
 {
     NSString  *pboardString=nil;
     NSAttributedString *newString;
@@ -239,7 +239,7 @@ id sharedInstance = nil;
     types = [pboard types];
 	
     if (![types containsObject:NSStringPboardType] && ![types containsObject:NSRTFPboardType]) {
-        *error = NSLocalizedString(@"Error: couldn't transcribe text.",								   
+        *errorString = NSLocalizedString(@"Error: couldn't transcribe text.",
 								   @"There is no text available here.");
         return;
     }
@@ -254,13 +254,19 @@ id sharedInstance = nil;
 	
 	if (pboardString)
 	{
-		newString = [[NSAttributedString alloc] initWithString:[self transcribeWord:pboardString fromLanguage:DFUnknown]
-												attributes:[NSDictionary dictionaryWithObject:[[fontPopup selectedItem] representedObject]
-																					   forKey:NSFontAttributeName]];
-	
+		NSError *error = nil;
+		NSString *transcribedString = [self transcribeWord:pboardString fromLanguage:DFUnknown error:&error];
+		if (transcribedString == nil) {
+			*errorString = error.localizedDescription;
+			return;
+		}
+		newString = [[NSAttributedString alloc] initWithString:transcribedString
+													attributes:[NSDictionary dictionaryWithObject:[[fontPopup selectedItem] representedObject]
+																						   forKey:NSFontAttributeName]];
+
 		types = [NSArray arrayWithObject:NSRTFPboardType];
 		[pboard declareTypes:types owner:nil];
-	
+
 		[pboard setData:[newString RTFFromRange:NSMakeRange(0,[newString length]) documentAttributes:dic] forType:NSRTFPboardType];
 		[newString release];
 	}
@@ -320,10 +326,14 @@ id sharedInstance = nil;
 	[self display:self];
 }
 
--(NSString *)transcribeWord:(NSString *)word fromLanguage:(DFLanguage)language;
+-(NSString *)transcribeWord:(NSString *)word fromLanguage:(DFLanguage)language error:(NSError**)error
 {
-	if (! [word canBeConvertedToEncoding:NSISOLatin1StringEncoding]) return nil;
-	
+	if (! [word canBeConvertedToEncoding:NSISOLatin1StringEncoding]){
+		NSDictionary *userInfo = @{NSLocalizedDescriptionKey: NSLocalizedString(@"This text contains characters which could not be transcribed to Tengwar", @"Error message for non-Latin1 characters"),
+								   NSLocalizedRecoverySuggestionErrorKey:NSLocalizedString(@"Please remove any special characters and try again", @"Recovery suggestion for non-Latin1 characters")};
+		if (error != NULL) *error = [NSError errorWithDomain:@"HesperidesErrorDomain" code:1 userInfo:userInfo];
+		return nil;
+	}
 	NSString *path = [[modePopup selectedItem] representedObject];
 	NSString *mode = [[path lastPathComponent] stringByDeletingPathExtension];
 	NSString *lang=nil;
@@ -357,7 +367,7 @@ id sharedInstance = nil;
 	
 	[self fontChanged:fontPopup];
 	
-	[tengwar setString:[self transcribeWord:key	fromLanguage:language]];
+	[tengwar setString:[self transcribeWord:key	fromLanguage:language error:NULL]];
 	[tabView selectTabViewItemAtIndex:language];
 	
 	[((language == DFSindarin)?sindController:engController) setSelectedObjects:
